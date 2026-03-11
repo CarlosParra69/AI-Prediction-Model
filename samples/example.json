@@ -1,0 +1,61 @@
+{
+  "samples": [
+    {
+      "language": "french",
+      "learner_background": "normal",
+      "questions": [
+        {"question_type": "mcq", "answer_text": "B", "time_spent_sec": 25, "max_points": 1, "is_correct": true, "difficulty": 2},
+        {"question_type": "short_answer", "answer_text": "Je pense que la cause est économique.", "time_spent_sec": 70, "max_points": 5, "obtained_points": 4, "difficulty": 3},
+        {"question_type": "essay", "answer_text": "Essai organisé avec quelques erreurs mais bonne cohérence générale.", "time_spent_sec": 350, "max_points": 10, "obtained_points": 7, "difficulty": 4}
+      ]
+    },
+    {
+      "language": "french",
+      "learner_background": "advanced",
+      "questions": [
+        {"question_type": "mcq", "answer_text": "C", "time_spent_sec": 18, "max_points": 1, "is_correct": true, "difficulty": 3},
+        {"question_type": "short_answer", "answer_text": "Selon moi, les facteurs principaux sont sociaux et politiques.", "time_spent_sec": 50, "max_points": 5, "obtained_points": 5, "difficulty": 4},
+        {"question_type": "essay", "answer_text": "Analyse approfondie des causes de la Révolution française, avec références historiques.", "time_spent_sec": 400, "max_points": 10, "obtained_points": 9, "difficulty": 5}
+      ]
+    },
+    {
+      "language": "french",
+      "learner_background": "none",
+      "final_score": 3,
+      "questions": [
+        {"question_type": "mcq", "answer_text": "A", "time_spent_sec": 45, "max_points": 1, "is_correct": false, "difficulty": 1},
+        {"question_type": "short_answer", "answer_text": "Je ne sais pas.", "time_spent_sec": 90, "max_points": 5, "obtained_points": 1, "difficulty": 1},
+        {"question_type": "essay", "answer_text": "Phrases simples.", "time_spent_sec": 200, "max_points": 10, "obtained_points": 2, "difficulty": 2}
+      ]
+    },
+    {
+      "language": "english",
+      "learner_background": "normal",
+      "final_score": 12,
+      "questions": [
+        {"question_type": "mcq", "answer_text": "B", "time_spent_sec": 22, "max_points": 1, "is_correct": true, "difficulty": 2},
+        {"question_type": "short_answer", "answer_text": "I believe the main reason is economic.", "time_spent_sec": 60, "max_points": 5, "obtained_points": 4, "difficulty": 3},
+        {"question_type": "essay", "answer_text": "Well-structured essay with some grammatical errors but clear argument.", "time_spent_sec": 380, "max_points": 10, "obtained_points": 7, "difficulty": 4}
+      ]
+    },
+    {
+      "language": "english",
+      "learner_background": "advanced",
+      "questions": [
+        {"question_type": "mcq", "answer_text": "D", "time_spent_sec": 15, "max_points": 1, "is_correct": true, "difficulty": 3},
+        {"question_type": "short_answer", "answer_text": "The underlying causes can be traced to socio-political factors.", "time_spent_sec": 45, "max_points": 5, "obtained_points": 5, "difficulty": 4},
+        {"question_type": "essay", "answer_text": "Comprehensive analysis of the economic downturn, including statistical evidence and future projections.", "time_spent_sec": 420, "max_points": 10, "obtained_points": 9, "difficulty": 5}
+      ]
+    },
+    {
+      "language": "english",
+      "learner_background": "none",
+      "final_score": 3,
+      "questions": [
+        {"question_type": "mcq", "answer_text": "C", "time_spent_sec": 50, "max_points": 1, "is_correct": false, "difficulty": 1},
+        {"question_type": "short_answer", "answer_text": "I no understand.", "time_spent_sec": 100, "max_points": 5, "obtained_points": 1, "difficulty": 1},
+        {"question_type": "essay", "answer_text": "Very basic text.", "time_spent_sec": 220, "max_points": 10, "obtained_points": 2, "difficulty": 2}
+      ]
+    }
+  ]
+}

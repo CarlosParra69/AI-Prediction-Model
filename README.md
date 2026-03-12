@@ -6,19 +6,8 @@
 
 ### 1. Prerequisites Python 3.12+
 
-#### Opción 1: Instalación Automática (Recomendado)
 
-**Windows:**
-```bash
-setup_windows.bat
-```
-
-**Linux/Mac:**
-```bash
-bash setup_linux_mac.sh
-```
-
-#### Opción 2: Instalación Manual
+#### Instalación Manual
 
 In PowerShell or CMD:
 

@@ -1,0 +1,129 @@
+{
+  "exam_id": "ex-french-priority-001",
+  "candidate_id": "cand-fr-001",
+  "adaptive": true,
+  "questions": [
+    {
+      "question_id": "q_fr_1",
+      "type": "open",
+      "text": "Écrivez un message court sur votre journée.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_3",
+      "type": "mcq",
+      "text": "Quelle est la couleur du ciel lors d'une belle journée?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_2",
+      "type": "open",
+      "text": "Parlez de vos loisirs préférés et pourquoi vous les aimez.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_4",
+      "type": "mcq",
+      "text": "Quel est le contraire du mot 'grand'?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_5",
+      "type": "open",
+      "text": "Décrivez un jour important de votre vie en détail.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_7",
+      "type": "open",
+      "text": "Expliquez comment vous préparez votre repas préféré.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_6",
+      "type": "mcq",
+      "text": "Quel temps faut-il pour aller de Paris à Lyon en train?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_8",
+      "type": "mcq",
+      "text": "Quel est le plus grand cours d'eau en France?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_9",
+      "type": "open",
+      "text": "Décrivez votre environnement de travail ou d'études idéal.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_11",
+      "type": "open",
+      "text": "Racontez une expérience de voyage mémorable.",
+      "language": "fr"
+    }
+  ],
+  "answers": [
+    {
+      "question_id": "q_fr_1",
+      "type": "open",
+      "answer_text": "Aujourd'hui j'ai eu une journée dificile. J'ai travaillé beaucoup et j'étaient très fatigué. Le soir j'ai alé dormir plus tot. Encor demain j'aurais beaucoup de travail",
+      "time_spent_sec": 145
+    },
+    {
+      "question_id": "q_fr_3",
+      "type": "mcq",
+      "answer_text": "bleu",
+      "time_spent_sec": 8
+    },
+    {
+      "question_id": "q_fr_2",
+      "type": "open",
+      "answer_text": "Les loisir que je adore c'est joué le piano et la lecture. Je les aimes parce qu'est tres relaxant et je peux oublier mes problemes. Je fais ca tous les jours pendant une ou deux heures. C'es mon passions",
+      "time_spent_sec": 152
+    },
+    {
+      "question_id": "q_fr_4",
+      "type": "mcq",
+      "answer_text": "petit",
+      "time_spent_sec": 5
+    },
+    {
+      "question_id": "q_fr_5",
+      "type": "open",
+      "answer_text": "Le jours le plus importante dans ma vies c'étaient quand j'ai reçu mon diplôme de licence. Mes parentés était tellement contentes et fieres. On a fait une grande fête avec toute la famile et les amies. C'étaient une moment que je vais jamais oublier parce qu'il representé beacoup pour moi",
+      "time_spent_sec": 198
+    },
+    {
+      "question_id": "q_fr_7",
+      "type": "open",
+      "answer_text": "Pour preparé mon plat favori qui c'est le couscous je commence par prendre les ingridients. Je met l'eau dans un casserolle et je fait bouille. Après j'ajoute la semoule et les legume. Je cuisne pendant vingt minute jusqu'à ce que c'es pret. Finalement j'ajoute de l'huile d'olif et du sel",
+      "time_spent_sec": 167
+    },
+    {
+      "question_id": "q_fr_6",
+      "type": "mcq",
+      "answer_text": "2 heures",
+      "time_spent_sec": 9
+    },
+    {
+      "question_id": "q_fr_8",
+      "type": "mcq",
+      "answer_text": "La Loire",
+      "time_spent_sec": 7
+    },
+    {
+      "question_id": "q_fr_9",
+      "type": "open",
+      "answer_text": "Mon environement ideal pour travailer c'est un place avec beaucoup de naturel et de quietud. Je veux travailler pres d'une fenetre pour avoir fond de lumieres. Il faut aussi avoir une bonne chaise confortable et un bureau grand. L'air doit etre frais et il ne doit pas avoir trop de bruits. Un ambiance calme et positif c'est tres importante pour ma productivité",
+      "time_spent_sec": 174
+    },
+    {
+      "question_id": "q_fr_11",
+      "type": "open",
+      "answer_text": "J'ai fait un voyage memorable au Maroc l'année derniere. C'étaient absolument magnifique avec des paysages terriblement belle. J'ai visité Marrakech, Fes et Tanger. La culture c'étaient tres differente de chez moi mais vrement enrichissante. J'ai mangé les meilleures nourriture de ma vie et j'ai rencontré des personnes tres sympas. C'étaient une experience que je vais jamais oublié",
+      "time_spent_sec": 203
+    }
+  ]
+}

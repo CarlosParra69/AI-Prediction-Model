@@ -1,0 +1,129 @@
+{
+  "exam_id": "ex-french-priority-003",
+  "candidate_id": "cand-fr-003",
+  "adaptive": true,
+  "questions": [
+    {
+      "question_id": "q_fr_1",
+      "type": "open",
+      "text": "Parlez de votre plat préféré.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_3",
+      "type": "mcq",
+      "text": "Quelle est la couleur d'une banane mûre?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_2",
+      "type": "open",
+      "text": "Décrivez votre meilleur ami.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_4",
+      "type": "mcq",
+      "text": "Quel est le contraire du mot 'facile'?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_5",
+      "type": "open",
+      "text": "Parlez d'un professeur qui vous a marqué.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_7",
+      "type": "open",
+      "text": "Expliquez comment vous passez une journée normale.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_6",
+      "type": "mcq",
+      "text": "Combien de jours y a-t-il dans une semaine?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_8",
+      "type": "mcq",
+      "text": "Quelle ville est la capitale de la France?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_9",
+      "type": "open",
+      "text": "Décrivez un endroit que vous aimeriez visiter.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_11",
+      "type": "open",
+      "text": "Racontez une expérience de travail intéressante.",
+      "language": "fr"
+    }
+  ],
+  "answers": [
+    {
+      "question_id": "q_fr_1",
+      "type": "open",
+      "answer_text": "Mon plat prefere est les pates avec sauce tomate. C'est simple mais tres delicieux. J'aime aussi ajouter du fromage et parfois des legumes.",
+      "time_spent_sec": 142
+    },
+    {
+      "question_id": "q_fr_3",
+      "type": "mcq",
+      "answer_text": "jaune",
+      "time_spent_sec": 5
+    },
+    {
+      "question_id": "q_fr_2",
+      "type": "open",
+      "answer_text": "Mon meilleur ami s'appelle Lucas. Il est tres gentil et toujours pret a aider les autres. Nous aimons jouer au football et regarder des films ensemble.",
+      "time_spent_sec": 151
+    },
+    {
+      "question_id": "q_fr_4",
+      "type": "mcq",
+      "answer_text": "difficile",
+      "time_spent_sec": 4
+    },
+    {
+      "question_id": "q_fr_5",
+      "type": "open",
+      "answer_text": "Un professeur qui m'a marqué etait mon professeur de histoire. Il expliquait les sujets avec beaucoup de passion et il racontait des histoires tres interessant.",
+      "time_spent_sec": 176
+    },
+    {
+      "question_id": "q_fr_7",
+      "type": "open",
+      "answer_text": "Une journée normale pour moi commence avec le travail le matin. Après je mange avec mes collegues et dans l'apres midi je continue mes taches. Le soir je me repose ou je regarde une serie.",
+      "time_spent_sec": 165
+    },
+    {
+      "question_id": "q_fr_6",
+      "type": "mcq",
+      "answer_text": "7",
+      "time_spent_sec": 3
+    },
+    {
+      "question_id": "q_fr_8",
+      "type": "mcq",
+      "answer_text": "Paris",
+      "time_spent_sec": 5
+    },
+    {
+      "question_id": "q_fr_9",
+      "type": "open",
+      "answer_text": "J'aimerais visiter le Japon parce que la culture est tres differente et interessante. Les villes sont moderne mais il y a aussi beaucoup de tradition.",
+      "time_spent_sec": 170
+    },
+    {
+      "question_id": "q_fr_11",
+      "type": "open",
+      "answer_text": "Dans mon ancien travail j'ai participé a un projet important pour l'entreprise. Nous avons travaillé plusieurs semaines et finalement le projet etait un succes.",
+      "time_spent_sec": 182
+    }
+  ]
+}

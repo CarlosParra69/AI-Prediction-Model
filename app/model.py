@@ -202,28 +202,35 @@ class OnlineExamModel:
         )
 
     def _score_to_level(self, score: float) -> str:
-        """Mapea score (0-100) a nivel DELF."""
+        """Mapea score (0-100 o 0-1) a nivel DELF con criterios más rigurosos para B1+."""
+        # Normalizar a 0-100 si está entre 0-1
+        if score <= 1.0:
+            score = score * 100
+        
+        # Criterios del marco DELF más rigurosos
+        # B1 y B2 requieren muy pocos errores gramaticales
         if score < 20:
             return "A1-"
-        if score < 30:
+        elif score < 30:
             return "A1"
-        if score < 40:
+        elif score < 40:
             return "A1+"
-        if score < 45:
+        elif score < 45:
             return "A2-"
-        if score < 50:
+        elif score < 50:
             return "A2"
-        if score < 60:
+        elif score < 60:
             return "A2+"
-        if score < 65:
+        elif score < 68:  # Empezar B1 más arriba (antes era 65)
             return "B1-"
-        if score < 75:
+        elif score < 77:  # B1 requiere menos errores que 75
             return "B1"
-        if score < 85:
+        elif score < 85:  # B1+ desde 77
             return "B1+"
-        if score < 90:
+        elif score < 92:  # B2- desde 85
             return "B2-"
-        return "B2"
+        else:  # B2 solo con scores muy altos
+            return "B2"
 
     # ========================================================================
     # New Methods (Adaptive Testing)
@@ -244,7 +251,7 @@ class OnlineExamModel:
             data_dict = request.model_dump()
             if not self.bias_checker.is_data_suitable_for_evaluation(data_dict):
                 logger.warning(
-                    f"Aviso: Candidato {request.candidate_id} puede contener datos sensibles."
+                    f"Aviso: Candidato {request.candidate_id} presentado posiblemente contiene datos sensibles."
                 )
 
             # Crea mapa de respuestas por question_id

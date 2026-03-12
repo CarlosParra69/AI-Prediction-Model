@@ -1,0 +1,57 @@
+{
+  "exam_id": "ex-multilingual-001",
+  "candidate_id": "cand-456",
+  "adaptive": true,
+  "questions": [
+    {
+      "question_id": "q_fr_1",
+      "type": "open",
+      "text": "Écrivez un message court sur votre journée.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_en_1",
+      "type": "open",
+      "text": "Write a short description of your favorite place to relax.",
+      "language": "en"
+    },
+    {
+      "question_id": "q_fr_3",
+      "type": "mcq",
+      "text": "Quelle est la couleur du ciel?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_en_3",
+      "type": "mcq",
+      "text": "What is the capital of France?",
+      "language": "en"
+    }
+  ],
+  "answers": [
+    {
+      "question_id": "q_fr_1",
+      "type": "open",
+      "answer_text": "Aujourd'hui j'ai eu une très bonne journée. J'ai travaillé dur et j'ai appris beaucoup de choses. Le soir, j'ai relaxé à la maison avec mes amis.",
+      "time_spent_sec": 180
+    },
+    {
+      "question_id": "q_en_1",
+      "type": "open",
+      "answer_text": "My favorite place to relax is the beach. I like to sit on the sand and listen to the waves. It is peaceful and beautiful. I can think about my life there.",
+      "time_spent_sec": 165
+    },
+    {
+      "question_id": "q_fr_3",
+      "type": "mcq",
+      "answer_text": "bleu",
+      "time_spent_sec": 10
+    },
+    {
+      "question_id": "q_en_3",
+      "type": "mcq",
+      "answer_text": "Paris",
+      "time_spent_sec": 12
+    }
+  ]
+}

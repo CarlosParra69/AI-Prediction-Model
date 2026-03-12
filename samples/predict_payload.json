@@ -1,9 +1,0 @@
-{
-  "language": "french",
-  "learner_background": "normal",
-  "questions": [
-    {"question_type": "mcq", "answer_text": "B", "time_spent_sec": 25, "max_points": 1, "is_correct": true, "difficulty": 2},
-    {"question_type": "short_answer", "answer_text": "Je pense que la cause est economique", "time_spent_sec": 65, "max_points": 5, "obtained_points": 3.5, "difficulty": 3},
-    {"question_type": "essay", "answer_text": "Essai organise avec quelques erreurs mais bonne coherence generale", "time_spent_sec": 340, "max_points": 10, "difficulty": 4}
-  ]
-}

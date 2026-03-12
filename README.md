@@ -1,4 +1,56 @@
-# PLACEMENT TEST AI Prediction Model - Multilingual DELF/CEFR Evaluation System
+# PLACEMENT TEST AI Prediction Model - Multilingual DELF/CEFR Exams Evaluation System
+
+---
+
+## Quick Start Project
+
+### 1. Prerequisites Python 3.12+
+
+In PowerShell or CMD:
+
+```bash
+python -m venv .venv
+
+.venv\Scripts\activate
+
+pip install -r requirements.txt
+```
+
+### 2. Run the API
+```bash
+python -m uvicorn app.main:app --reload
+```
+
+Server running on: `http://localhost:8000`
+
+### 3. API Examples
+
+#### Health Check
+```bash
+curl http://localhost:8000/health
+```
+
+#### Train the Model
+```bash
+curl -X POST http://localhost:8000/train \
+  -H "Content-Type: application/json" \
+  -d @samples/train_multilingual_delf.json
+```
+
+#### Predict Proficiency Level
+```bash
+curl -X POST http://localhost:8000/predict \
+  -H "Content-Type: application/json" \
+  -d @samples/predict_multilingual_exam.json
+```
+
+### 4. Run Tests
+```bash
+pytest tests/test_api.py -v
+# Expected: 23 passed in 1.60s
+```
+
+---
 
 ## Bilingual Support
 
@@ -48,51 +100,6 @@ Evaluates **language proficiency** in French and/or English exams using CEFR sta
 - Lexical Range (20%) - Vocabulary diversity and appropriateness
 - Morphosyntax (20%) - Grammar, tense, verb conjugation
 
----
-
-## 🚀 Quick Start
-
-### 1. Prerequisites
-```bash
-Python 3.12+
-pip install -r requirements.txt
-```
-
-### 2. Run the API
-```bash
-python -m uvicorn app.main:app --reload
-```
-
-Server running on: `http://localhost:8000`
-
-### 3. API Examples
-
-#### Health Check
-```bash
-curl http://localhost:8000/health
-```
-
-#### Train the Model
-```bash
-curl -X POST http://localhost:8000/train \
-  -H "Content-Type: application/json" \
-  -d @samples/train_multilingual_delf.json
-```
-
-#### Predict Proficiency Level
-```bash
-curl -X POST http://localhost:8000/predict \
-  -H "Content-Type: application/json" \
-  -d @samples/predict_multilingual_exam.json
-```
-
-### 4. Run Tests
-```bash
-pytest tests/test_api.py -v
-# Expected: 23 passed in 1.60s
-```
-
----
 
 ## 📁 Project Structure
 
@@ -323,7 +330,7 @@ Multilingual Tests (v2.1 - NEW):
 
 ---
 
-## 🚀 Deployment
+## 🚀 Deployment Production
 
 ### Requirements
 - Python 3.12+
@@ -370,4 +377,4 @@ Possible extensions (not in current scope):
 - Performance monitoring dashboard
 - A/B testing framework
 
-### ----------- PIE PLACEMENT TEST PROJECT - PYTHON IA MODEL -------------- 
+### ------------------------ PIE PLACEMENT TEST PROJECT - PYTHON IA MODEL --------------------------- 

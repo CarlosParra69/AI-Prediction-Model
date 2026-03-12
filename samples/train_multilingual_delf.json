@@ -1,0 +1,184 @@
+{
+  "train_id": "t2026-03-11-multilingual",
+  "examples": [
+    {
+      "question_id": "q_fr_1",
+      "text": "Écrivez un message court sur votre journée.",
+      "type": "open",
+      "language": "fr",
+      "difficulty": 2,
+      "expected_keywords": ["aujourd'hui", "bien", "travail", "matin"],
+      "rubric": {
+        "level": "A1",
+        "expected_min_words": 25,
+        "expected_keywords": ["aujourd'hui", "bien", "travail"],
+        "criteria_weights": {
+          "task_realisation": 0.25,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.20,
+          "morphosyntax": 0.20
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "Aujourd'hui j'ai travaillé toute la journée. C'était bien.",
+          "score": 0.65
+        }
+      ]
+    },
+    {
+      "question_id": "q_en_1",
+      "text": "Write a short description of your favorite place to relax.",
+      "type": "open",
+      "language": "en",
+      "difficulty": 2,
+      "expected_keywords": ["place", "relax", "calm", "peaceful"],
+      "rubric": {
+        "level": "A1",
+        "expected_min_words": 25,
+        "expected_keywords": ["place", "relax"],
+        "criteria_weights": {
+          "task_realisation": 0.25,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.20,
+          "morphosyntax": 0.20
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "I like to relax in the library because it is quiet and peaceful.",
+          "score": 0.70
+        }
+      ]
+    },
+    {
+      "question_id": "q_fr_2",
+      "text": "Parlez de vos loisirs préférés et pourquoi vous les aimez.",
+      "type": "open",
+      "language": "fr",
+      "difficulty": 3,
+      "expected_keywords": ["loisir", "aimer", "parce que", "activité"],
+      "rubric": {
+        "level": "A2",
+        "expected_min_words": 50,
+        "expected_keywords": ["loisir", "aimer"],
+        "criteria_weights": {
+          "task_realisation": 0.25,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.20,
+          "morphosyntax": 0.20
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "J'aime beaucoup la lecture. C'est mon loisir préféré parce que je peux apprendre de nouvelles choses. J'aime aussi le sport car c'est bon pour la santé.",
+          "score": 0.75
+        }
+      ]
+    },
+    {
+      "question_id": "q_en_2",
+      "text": "What is your opinion on learning languages? Explain your reasons.",
+      "type": "open",
+      "language": "en",
+      "difficulty": 3,
+      "expected_keywords": ["language", "learn", "important", "reason"],
+      "rubric": {
+        "level": "A2",
+        "expected_min_words": 50,
+        "expected_keywords": ["language", "learn"],
+        "criteria_weights": {
+          "task_realisation": 0.25,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.20,
+          "morphosyntax": 0.20
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "Learning languages is very important in today's world. It helps us communicate with different people and understand new cultures. I think learning languages is essential for our future.",
+          "score": 0.78
+        }
+      ]
+    },
+    {
+      "question_id": "q_fr_3",
+      "type": "mcq",
+      "text": "Quelle est la couleur du ciel?",
+      "language": "fr",
+      "options": ["bleu", "vert", "rouge"],
+      "answer": "bleu",
+      "difficulty": 1
+    },
+    {
+      "question_id": "q_en_3",
+      "type": "mcq",
+      "text": "What is the capital of France?",
+      "language": "en",
+      "options": ["London", "Paris", "Berlin"],
+      "answer": "Paris",
+      "difficulty": 1
+    },
+    {
+      "question_id": "q_fr_4",
+      "text": "Décrivez un jour important de votre vie en détail.",
+      "type": "open",
+      "language": "fr",
+      "difficulty": 4,
+      "expected_keywords": ["jour", "important", "moment", "souvenir"],
+      "rubric": {
+        "level": "B1",
+        "expected_min_words": 80,
+        "expected_keywords": ["jour", "important"],
+        "criteria_weights": {
+          "task_realisation": 0.25,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.20,
+          "morphosyntax": 0.20
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "Le jour le plus important de ma vie était le jour de mon diplôme. J'ai été tellement heureux et fier. Mes parents étaient aussi très contents. C'était un moment que je n'oublierai jamais.",
+          "score": 0.80
+        }
+      ]
+    },
+    {
+      "question_id": "q_en_4",
+      "text": "Write about an experience that changed your perspective on life.",
+      "type": "open",
+      "language": "en",
+      "difficulty": 4,
+      "expected_keywords": ["experience", "perspective", "changed", "life"],
+      "rubric": {
+        "level": "B1",
+        "expected_min_words": 80,
+        "expected_keywords": ["experience", "perspective"],
+        "criteria_weights": {
+          "task_realisation": 0.25,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.20,
+          "morphosyntax": 0.20
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "Traveling to different countries changed my perspective on life. I learned that people everywhere have similar dreams and hopes. This experience taught me to be more open-minded and understanding of different cultures.",
+          "score": 0.82
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "source": "multilingual_corpus",
+    "version": "2.1.0",
+    "languages": "en,fr"
+  }
+}

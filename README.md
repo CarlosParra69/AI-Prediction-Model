@@ -6,6 +6,20 @@
 
 ### 1. Prerequisites Python 3.12+
 
+#### Opción 1: Instalación Automática (Recomendado)
+
+**Windows:**
+```bash
+setup_windows.bat
+```
+
+**Linux/Mac:**
+```bash
+bash setup_linux_mac.sh
+```
+
+#### Opción 2: Instalación Manual
+
 In PowerShell or CMD:
 
 ```bash
@@ -14,6 +28,8 @@ python -m venv .venv
 .venv\Scripts\activate
 
 pip install -r requirements.txt
+
+pytest tests/test_api.py -v
 ```
 
 ### 2. Run the API

@@ -1,0 +1,226 @@
+{
+  "exam_id": "ex-french-priority-004",
+  "candidate_id": "cand-fr-A2-plus",
+  "adaptive": true,
+  "questions": [
+    {
+      "question_id": "q_fr_1",
+      "type": "writing_text",
+      "text": "Écrivez un message court sur votre journée.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_3",
+      "type": "single_choice",
+      "text": "Quelle est la couleur du ciel lors d'une belle journée?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_2",
+      "type": "writing_text",
+      "text": "Parlez de vos loisirs préférés et pourquoi vous les aimez.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_4",
+      "type": "single_choice",
+      "text": "Quel est le contraire du mot 'grand'?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_5",
+      "type": "writing_text",
+      "text": "Décrivez un jour important de votre vie en détail.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_7",
+      "type": "writing_text",
+      "text": "Expliquez comment vous préparez votre repas préféré.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_6",
+      "type": "single_choice",
+      "text": "Quel temps faut-il pour aller de Paris à Lyon en TGV?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_8",
+      "type": "single_choice",
+      "text": "Quel est le plus grand fleuve en France?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_9",
+      "type": "writing_text",
+      "text": "Décrivez votre environnement de travail ou d'études idéal.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_11",
+      "type": "writing_text",
+      "text": "Racontez une expérience de voyage mémorable.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_13",
+      "type": "fill_blank",
+      "text": "Nous ___ allés au marché hier matin.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_14",
+      "type": "fill_blank",
+      "text": "Mon chat dort toujours ___ le canapé.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_15",
+      "type": "fill_blank",
+      "text": "Elle a ___ un excellent résultat à son examen de français.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_16",
+      "type": "ordering",
+      "text": "Remettez ces étapes dans l'ordre correct pour préparer des pâtes.",
+      "language": "fr",
+      "elements": [
+        "Égoutter les pâtes.",
+        "Faire bouillir l'eau.",
+        "Servir dans une assiette.",
+        "Saler l'eau.",
+        "Ajouter les pâtes."
+      ]
+    },
+    {
+      "question_id": "q_fr_17",
+      "type": "ordering",
+      "text": "Remettez ces moments de la journée dans l'ordre chronologique.",
+      "language": "fr",
+      "elements": [
+        "Le dîner",
+        "Le petit-déjeuner",
+        "Le déjeuner",
+        "Le goûter"
+      ]
+    },
+    {
+      "question_id": "q_fr_18",
+      "type": "speaking_record",
+      "text": "Présentez-vous en quelques phrases : votre prénom, votre âge, votre profession et un loisir que vous aimez.",
+      "language": "fr"
+    }
+  ],
+  "answers": [
+    {
+      "question_id": "q_fr_1",
+      "type": "writing_text",
+      "answer_text": "Aujourd'hui j'ai eu une journée assez normale. Le matin je suis allé à l'université pour suivre deux cours. Après, j'ai déjeuné avec une amie dans la cafétéria. L'après-midi j'ai étudié un peu à la bibliothèque et ensuite je suis rentré chez moi pour me reposer.",
+      "time_spent_sec": 180
+    },
+    {
+      "question_id": "q_fr_3",
+      "type": "single_choice",
+      "answer_text": "bleu",
+      "time_spent_sec": 8
+    },
+    {
+      "question_id": "q_fr_2",
+      "type": "writing_text",
+      "answer_text": "Mes loisirs préférés sont écouter de la musique et faire du vélo. J'écoute surtout de la musique pop parce que les mélodies sont faciles et me donnent de l'énergie. Je fais du vélo le week-end dans le parc de ma ville; ça me permet de faire un peu de sport sans trop de difficulté.",
+      "time_spent_sec": 170
+    },
+    {
+      "question_id": "q_fr_4",
+      "type": "single_choice",
+      "answer_text": "petit",
+      "time_spent_sec": 6
+    },
+    {
+      "question_id": "q_fr_5",
+      "type": "writing_text",
+      "answer_text": "Un jour important de ma vie a été celui où j'ai passé mon examen de fin de lycée. J'étais très stressé mais aussi excité. Quand j'ai vu mon nom sur la liste des étudiants qui ont réussi, j'ai senti un grand soulagement. Le soir, j'ai fêté cela avec ma famille dans un petit restaurant.",
+      "time_spent_sec": 195
+    },
+    {
+      "question_id": "q_fr_7",
+      "type": "writing_text",
+      "answer_text": "Pour préparer mon repas préféré, les pâtes à la tomate, je commence par faire bouillir de l'eau avec un peu de sel. Ensuite j'ajoute les pâtes et je les laisse cuire quelques minutes. Pendant ce temps, je chauffe la sauce tomate dans une petite casserole. Quand les pâtes sont prêtes, je les égoutte et je mélange avec la sauce.",
+      "time_spent_sec": 185
+    },
+    {
+      "question_id": "q_fr_6",
+      "type": "single_choice",
+      "answer_text": "2 heures",
+      "time_spent_sec": 7
+    },
+    {
+      "question_id": "q_fr_8",
+      "type": "single_choice",
+      "answer_text": "La Loire",
+      "time_spent_sec": 7
+    },
+    {
+      "question_id": "q_fr_9",
+      "type": "writing_text",
+      "answer_text": "Mon environnement d'étude idéal serait une petite pièce calme avec un bureau près d'une fenêtre. J'aimerais avoir une chaise confortable et une bonne lumière. Il ne doit pas y avoir trop de bruit pour que je puisse me concentrer. J'aimerais aussi avoir quelques plantes pour rendre la pièce plus agréable.",
+      "time_spent_sec": 190
+    },
+    {
+      "question_id": "q_fr_11",
+      "type": "writing_text",
+      "answer_text": "Une expérience de voyage mémorable a été mon séjour à Barcelone avec des amis. Nous avons visité beaucoup de lieux intéressants comme la Sagrada Família et le parc Güell. J'ai beaucoup aimé marcher près de la mer le soir. Ce voyage était spécial parce que c'était la première fois que je voyageais sans mes parents.",
+      "time_spent_sec": 205
+    },
+    {
+      "question_id": "q_fr_13",
+      "type": "fill_blank",
+      "answer_text": "sommes",
+      "time_spent_sec": 10
+    },
+    {
+      "question_id": "q_fr_14",
+      "type": "fill_blank",
+      "answer_text": "sur",
+      "time_spent_sec": 6
+    },
+    {
+      "question_id": "q_fr_15",
+      "type": "fill_blank",
+      "answer_text": "eu",
+      "time_spent_sec": 7
+    },
+    {
+      "question_id": "q_fr_16",
+      "type": "ordering",
+      "answer_list": [
+        "Faire bouillir l'eau.",
+        "Saler l'eau.",
+        "Ajouter les pâtes.",
+        "Égoutter les pâtes.",
+        "Servir dans une assiette."
+      ],
+      "time_spent_sec": 32
+    },
+    {
+      "question_id": "q_fr_17",
+      "type": "ordering",
+      "answer_list": [
+        "Le petit-déjeuner",
+        "Le déjeuner",
+        "Le goûter",
+        "Le dîner"
+      ],
+      "time_spent_sec": 18
+    },
+    {
+      "question_id": "q_fr_18",
+      "type": "speaking_record",
+      "answer_text": "Bonjour, je m'appelle Lucas. J'ai vingt-quatre ans et je suis étudiant en économie. J'habite dans une résidence universitaire près de mon campus. Dans mon temps libre, j'aime faire du sport, surtout le basket, et regarder des films avec mes amis.",
+      "time_spent_sec": 40
+    }
+  ]
+}
+

@@ -1,129 +1,226 @@
 {
   "exam_id": "ex-french-priority-002",
-  "candidate_id": "cand-fr-002",
+  "candidate_id": "cand-fr-A2-low",
   "adaptive": true,
   "questions": [
     {
       "question_id": "q_fr_1",
-      "type": "open",
-      "text": "Décrivez votre routine du matin.",
+      "type": "writing_text",
+      "text": "Écrivez un message court sur votre journée.",
       "language": "fr"
     },
     {
       "question_id": "q_fr_3",
-      "type": "mcq",
-      "text": "Quelle est la couleur des feuilles au printemps?",
+      "type": "single_choice",
+      "text": "Quelle est la couleur du ciel lors d'une belle journée?",
       "language": "fr"
     },
     {
       "question_id": "q_fr_2",
-      "type": "open",
-      "text": "Parlez de votre activité préférée pendant le week-end.",
+      "type": "writing_text",
+      "text": "Parlez de vos loisirs préférés et pourquoi vous les aimez.",
       "language": "fr"
     },
     {
       "question_id": "q_fr_4",
-      "type": "mcq",
-      "text": "Quel est le contraire du mot 'rapide'?",
+      "type": "single_choice",
+      "text": "Quel est le contraire du mot 'grand'?",
       "language": "fr"
     },
     {
       "question_id": "q_fr_5",
-      "type": "open",
-      "text": "Décrivez un souvenir heureux de votre enfance.",
+      "type": "writing_text",
+      "text": "Décrivez un jour important de votre vie en détail.",
       "language": "fr"
     },
     {
       "question_id": "q_fr_7",
-      "type": "open",
-      "text": "Expliquez comment vous préparez votre petit déjeuner.",
+      "type": "writing_text",
+      "text": "Expliquez comment vous préparez votre repas préféré.",
       "language": "fr"
     },
     {
       "question_id": "q_fr_6",
-      "type": "mcq",
-      "text": "Combien de minutes y a-t-il dans une heure?",
+      "type": "single_choice",
+      "text": "Quel temps faut-il pour aller de Paris à Lyon en TGV?",
       "language": "fr"
     },
     {
       "question_id": "q_fr_8",
-      "type": "mcq",
-      "text": "Quel est l'océan à l'ouest de la France?",
+      "type": "single_choice",
+      "text": "Quel est le plus grand fleuve en France?",
       "language": "fr"
     },
     {
       "question_id": "q_fr_9",
-      "type": "open",
-      "text": "Décrivez votre lieu idéal pour étudier.",
+      "type": "writing_text",
+      "text": "Décrivez votre environnement de travail ou d'études idéal.",
       "language": "fr"
     },
     {
       "question_id": "q_fr_11",
-      "type": "open",
-      "text": "Racontez un moment amusant avec vos amis.",
+      "type": "writing_text",
+      "text": "Racontez une expérience de voyage mémorable.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_13",
+      "type": "fill_blank",
+      "text": "Nous ___ allés au marché hier matin.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_14",
+      "type": "fill_blank",
+      "text": "Mon chat dort toujours ___ le canapé.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_15",
+      "type": "fill_blank",
+      "text": "Elle a ___ un excellent resultado à son examen de français.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_16",
+      "type": "ordering",
+      "text": "Remettez ces étapes dans l'ordre correct pour préparer des pâtes.",
+      "language": "fr",
+      "elements": [
+        "Égoutter les pâtes.",
+        "Faire bouillir l'eau.",
+        "Servir dans une assiette.",
+        "Saler l'eau.",
+        "Ajouter les pâtes."
+      ]
+    },
+    {
+      "question_id": "q_fr_17",
+      "type": "ordering",
+      "text": "Remettez ces moments de la journée dans l'ordre chronologique.",
+      "language": "fr",
+      "elements": [
+        "Le dîner",
+        "Le petit-déjeuner",
+        "Le déjeuner",
+        "Le goûter"
+      ]
+    },
+    {
+      "question_id": "q_fr_18",
+      "type": "speaking_record",
+      "text": "Présentez-vous en quelques phrases : votre prénom, votre âge, votre profession et un loisir que vous aimez.",
       "language": "fr"
     }
   ],
   "answers": [
     {
       "question_id": "q_fr_1",
-      "type": "open",
-      "answer_text": "Chaque matin je me reveille vers sept heure. Je bois un café et je regarde les nouvelles sur mon telephone. Après je prend une douche rapide avant de commencer mon travail.",
-      "time_spent_sec": 136
+      "type": "writing_text",
+      "answer_text": "Aujourd'hui c'était un jour un peu compliqué. Je me suis levé tard et j'ai raté le bus. Au travail j'ai fait des erreurs avec les documents et mon chef n'était pas très content. Le soir je suis rentré fatigué et j'ai juste mangé quelque chose rapide.",
+      "time_spent_sec": 160
     },
     {
       "question_id": "q_fr_3",
-      "type": "mcq",
+      "type": "single_choice",
       "answer_text": "vert",
-      "time_spent_sec": 6
+      "time_spent_sec": 10
     },
     {
       "question_id": "q_fr_2",
-      "type": "open",
-      "answer_text": "Le week end j'aime faire du velo dans le parc pres de ma maison. C'est tres relaxant et je peut respirer l'air frais. Parfois je vais aussi avec mes amis pour manger quelque chose.",
+      "type": "writing_text",
+      "answer_text": "Mes loisirs preferé sont regarder des series et jouer au telephone. Je ne lis pas beaucoup parce que c'est difficile pour moi. J'aime aussi sortir avec mes amis au centre commercial mais je ne vais pas souvent parce que je dois étudier.",
       "time_spent_sec": 150
     },
     {
       "question_id": "q_fr_4",
-      "type": "mcq",
-      "answer_text": "lent",
-      "time_spent_sec": 5
+      "type": "single_choice",
+      "answer_text": "petit",
+      "time_spent_sec": 6
     },
     {
       "question_id": "q_fr_5",
-      "type": "open",
-      "answer_text": "Quand j'etais enfant je passais beaucoup de temps chez mes grand parents. On jouais dans le jardin et ma grand mere preparait des gateaux tres delicieux. C'etait toujours un moment tres heureux pour moi.",
-      "time_spent_sec": 187
+      "type": "writing_text",
+      "answer_text": "Un jour important pour moi c'était quand j'ai changé de ville. J'étais très nerveux parce que je ne connaissais personne. Le voyage était long et je me sentais un peu seul. Mais après quelques semaines j'ai trouvé des nouveaux amis et maintenant je suis plus tranquille.",
+      "time_spent_sec": 190
     },
     {
       "question_id": "q_fr_7",
-      "type": "open",
-      "answer_text": "Pour preparer mon petit dejeuner je commence par faire chauffer du lait. Ensuite je prepare du pain avec du beurre et parfois des oeufs. C'est simple mais tres bon pour commencer la journée.",
-      "time_spent_sec": 162
+      "type": "writing_text",
+      "answer_text": "Pour preparer mon repas préféré qui est le riz avec poulet, d'abord je coupe le poulet en petits morceaux. Après je met un peu d'huile dans la poele et je fais cuire le poulet. Puis je ajoute le riz et l'eau et j'attends jusqu'à que tout est cuit. A la fin je met du sel et un peu de citron.",
+      "time_spent_sec": 180
     },
     {
       "question_id": "q_fr_6",
-      "type": "mcq",
-      "answer_text": "60",
-      "time_spent_sec": 4
+      "type": "single_choice",
+      "answer_text": "3 heures",
+      "time_spent_sec": 9
     },
     {
       "question_id": "q_fr_8",
-      "type": "mcq",
-      "answer_text": "Atlantique",
-      "time_spent_sec": 7
+      "type": "single_choice",
+      "answer_text": "La Seine",
+      "time_spent_sec": 8
     },
     {
       "question_id": "q_fr_9",
-      "type": "open",
-      "answer_text": "Mon lieu ideal pour etudier est une bibliotheque calme. Il y a beaucoup de silence et une bonne lumiere. Je peux rester concentré pendant plusieurs heures.",
-      "time_spent_sec": 168
+      "type": "writing_text",
+      "answer_text": "Mon environement ideal d'étude serait une petite chambre calme avec pas beaucoup de choses. Je veux une table simple, une bonne chaise et une lampe. J'ai besoin aussi d'un peu de musique tres douce pour me concentrer. Je ne veux pas de telephone ni de television pour ne pas me distraire.",
+      "time_spent_sec": 180
     },
     {
       "question_id": "q_fr_11",
-      "type": "open",
-      "answer_text": "Un jour avec mes amis nous sommes allé au lac pour faire un pique nique. Il a commencé a pleuvoir soudainement et nous avons tous couru pour nous cacher sous un arbre. C'etait tres drole.",
-      "time_spent_sec": 179
+      "type": "writing_text",
+      "answer_text": "Une experience de voyage memorable pour moi c'était quand je suis allé à la mer pour la premiere fois. J'ai vu la mer et j'étais très surpris parce que c'était très grand. Je ne savais pas bien nager alors je suis resté près du bord. Mais j'ai beaucoup aimé marcher sur la plage avec ma famille.",
+      "time_spent_sec": 200
+    },
+    {
+      "question_id": "q_fr_13",
+      "type": "fill_blank",
+      "answer_text": "avons",
+      "time_spent_sec": 11
+    },
+    {
+      "question_id": "q_fr_14",
+      "type": "fill_blank",
+      "answer_text": "sur",
+      "time_spent_sec": 7
+    },
+    {
+      "question_id": "q_fr_15",
+      "type": "fill_blank",
+      "answer_text": "eu",
+      "time_spent_sec": 8
+    },
+    {
+      "question_id": "q_fr_16",
+      "type": "ordering",
+      "answer_list": [
+        "Faire bouillir l'eau.",
+        "Saler l'eau.",
+        "Ajouter les pâtes.",
+        "Égoutter les pâtes.",
+        "Servir dans une assiette."
+      ],
+      "time_spent_sec": 40
+    },
+    {
+      "question_id": "q_fr_17",
+      "type": "ordering",
+      "answer_list": [
+        "Le petit-déjeuner",
+        "Le déjeuner",
+        "Le dîner",
+        "Le goûter"
+      ],
+      "time_spent_sec": 20
+    },
+    {
+      "question_id": "q_fr_18",
+      "type": "speaking_record",
+      "answer_text": "Bonjour, je m'appelle Karim. J'ai vingt-deux ans et je suis étudiant en informatique. J'habite dans une petite ville près de Lyon. Dans mon temps libre j'aime jouer aux jeux vidéo et parfois faire du foot avec mes amis.",
+      "time_spent_sec": 38
     }
   ]
 }
+

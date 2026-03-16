@@ -28,6 +28,8 @@ from sklearn.preprocessing import StandardScaler
 from .adaptive_selector import AbilityState, AdaptiveSelector
 from .bias_checker import BiasChecker
 from .open_response_scorer import OpenResponseScorer
+from .scorers.fill_blank_scorer import score_fill_blank
+from .scorers.ordering_scorer import score_ordering
 from .schemas import (
     DELFLevel,
     ExamFeatures,
@@ -113,7 +115,7 @@ class OnlineExamModel:
         return [1.0 if background == level else 0.0 for level in levels]
 
     def _encode_language(self, language: Language) -> List[float]:
-        langs = [Language.english, Language.french]
+        langs = [Language.en, Language.fr]
         return [1.0 if language == lang else 0.0 for lang in langs]
 
     def _build_numeric_features(self, sample: ExamFeatures) -> np.ndarray:
@@ -121,9 +123,12 @@ class OnlineExamModel:
         n_questions = len(questions)
 
         q_types = [q.question_type for q in questions]
-        mcq_ratio = q_types.count(QuestionType.mcq) / n_questions
-        short_ratio = q_types.count(QuestionType.short_answer) / n_questions
-        essay_ratio = q_types.count(QuestionType.essay) / n_questions
+        _mcq_types = {QuestionType.mcq, QuestionType.SINGLE_CHOICE, QuestionType.IMAGE}
+        _short_types = {QuestionType.short_answer, QuestionType.FILL_BLANK, QuestionType.ORDERING}
+        _essay_types = {QuestionType.essay, QuestionType.open, QuestionType.WRITING_TEXT, QuestionType.SPEAKING_RECORD}
+        mcq_ratio = sum(1 for t in q_types if t in _mcq_types) / n_questions
+        short_ratio = sum(1 for t in q_types if t in _short_types) / n_questions
+        essay_ratio = sum(1 for t in q_types if t in _essay_types) / n_questions
 
         total_time = float(sum(q.time_spent_sec for q in questions))
         avg_time = total_time / n_questions
@@ -145,11 +150,11 @@ class OnlineExamModel:
 
         expected_time = 0.0
         for q in questions:
-            if q.question_type == QuestionType.mcq:
+            if q.question_type in {QuestionType.mcq, QuestionType.SINGLE_CHOICE, QuestionType.IMAGE}:
                 expected_time += 18.0 + (q.difficulty * 6.0)
-            elif q.question_type == QuestionType.short_answer:
+            elif q.question_type in {QuestionType.short_answer, QuestionType.FILL_BLANK, QuestionType.ORDERING}:
                 expected_time += 45.0 + (q.difficulty * 12.0)
-            else:  # essay
+            else:
                 expected_time += 160.0 + (q.difficulty * 45.0)
         tempo_efficiency = max(0.0, min(1.0, 1.0 - abs(total_time - expected_time) / max(expected_time, 1.0)))
 
@@ -272,6 +277,7 @@ class OnlineExamModel:
                     question_type=question.type,
                     question_text=question.text,
                     answer_text=answer.answer_text,
+                    answer_list=answer.answer_list,
                     language=question.language,
                     time_spent_sec=answer.time_spent_sec,
                 )
@@ -331,98 +337,264 @@ class OnlineExamModel:
         question_type: QuestionType,
         question_text: str,
         answer_text: str,
+        answer_list: Optional[List[str]] = None,
         language: Language = Language.fr,
         time_spent_sec: float = 0.0,
     ) -> QuestionScoreDetail:
         """
-        Evalúa una pregunta individual.
+        Evalúa una pregunta individual según su QuestionType.
 
         Args:
-            question_id: ID de la pregunta.
-            question_type: Tipo de pregunta (mcq, open, etc).
+            question_id:   ID de la pregunta.
+            question_type: Tipo de pregunta (QuestionType enum).
             question_text: Texto de la pregunta.
-            answer_text: Texto de la respuesta del candidato.
-            language: Idioma de la pregunta (en|fr).
-            time_spent_sec: Tiempo gastado (solo informativo).
+            answer_text:   Texto de la respuesta del candidato.
+            answer_list:   Respuesta como lista (solo para ORDERING).
+            language:      Idioma de la pregunta (en|fr).
+            time_spent_sec: Tiempo gastado (informativo).
 
         Returns:
             QuestionScoreDetail con puntuación y feedback.
         """
-        if question_type == QuestionType.open:
-            # Busca rúbrica en question_pool
-            question_info = self.question_pool.get(question_id, {})
+        # ── Texto libre (WRITING_TEXT / open / short_answer / essay) ─────────
+        if question_type.is_open_text():
+            return self._evaluate_open_text(
+                question_id, question_type, answer_text, language
+            )
+
+        # ── Opción múltiple (SINGLE_CHOICE / mcq / IMAGE) ────────────────────
+        if question_type.is_choice_based():
+            return self._evaluate_choice(
+                question_id, question_type, answer_text, language
+            )
+
+        # ── Rellenar hueco (FILL_BLANK) ───────────────────────────────────────
+        if question_type.is_fill_blank():
+            return self._evaluate_fill_blank(
+                question_id, question_type, answer_text, language
+            )
+
+        # ── Ordenar elementos (ORDERING) ──────────────────────────────────────
+        if question_type.is_ordering():
+            return self._evaluate_ordering(
+                question_id, question_type, answer_list or [], language
+            )
+
+        # ── Grabación de voz (SPEAKING_RECORD) ───────────────────────────────
+        if question_type.is_speaking():
+            return self._evaluate_speaking_record(
+                question_id, question_type, answer_text, language
+            )
+
+        # ── Tipos futuros (AUDIO / VIDEO) → revisión humana ──────────────────
+        if question_type.requires_human_review_by_default():
+            msg = (
+                f"Question type '{question_type.value}' is not yet scored automatically. "
+                "Pending human review."
+                if language == Language.en
+                else f"El tipo '{question_type.value}' no tiene scoring automático aún. "
+                "Pendiente de revisión humana."
+            )
+            return QuestionScoreDetail(
+                question_id=question_id,
+                type=question_type,
+                score=0.0,
+                max_score=1.0,
+                explanation=msg,
+                confidence=0.0,
+                needs_human_review=True,
+                language_detected=language,
+            )
+
+        # ── Fallback genérico ─────────────────────────────────────────────────
+        return QuestionScoreDetail(
+            question_id=question_id,
+            type=question_type,
+            score=0.5,
+            max_score=1.0,
+            explanation="Tipo de pregunta no reconocido.",
+            confidence=0.3,
+            needs_human_review=True,
+            language_detected=language,
+        )
+
+    # ── Helpers de evaluación por tipo ───────────────────────────────────────
+
+    def _evaluate_open_text(
+        self,
+        question_id: str,
+        question_type: QuestionType,
+        answer_text: str,
+        language: Language,
+    ) -> QuestionScoreDetail:
+        """Evalúa preguntas de texto libre con rúbrica DELF."""
+        question_info = self.question_pool.get(question_id, {})
+        rubric = question_info.get("rubric")
+        expected_keywords = question_info.get("expected_keywords", [])
+
+        if rubric and isinstance(rubric, dict):
+            try:
+                rubric_obj = OpenQuestionRubric(**rubric)
+            except Exception:
+                rubric_obj = OpenQuestionRubric(level="A1")
+        else:
+            rubric_obj = OpenQuestionRubric(level="A1")
+
+        score_result = self.open_response_scorer.score(
+            response_text=answer_text,
+            rubric=rubric_obj,
+            language=language,
+            expected_keywords=expected_keywords,
+        )
+        return QuestionScoreDetail(
+            question_id=question_id,
+            type=question_type,
+            score=score_result.score,
+            max_score=1.0,
+            explanation=score_result.explanation,
+            confidence=score_result.confidence,
+            needs_human_review=score_result.needs_human_review,
+            rubric_breakdown=score_result.rubric_breakdown,
+            language_detected=score_result.language_detected,
+        )
+
+    def _evaluate_choice(
+        self,
+        question_id: str,
+        question_type: QuestionType,
+        answer_text: str,
+        language: Language,
+    ) -> QuestionScoreDetail:
+        """Evalúa preguntas de opción múltiple (SINGLE_CHOICE / MCQ / IMAGE)."""
+        question_info = self.question_pool.get(question_id, {})
+        correct_answer = question_info.get("answer", "")
+
+        is_correct = answer_text.strip().lower() == correct_answer.strip().lower()
+        score = 1.0 if is_correct else 0.0
+
+        if language == Language.fr:
+            explanation = "Réponse correcte." if is_correct else "Réponse incorrecte."
+        else:
+            explanation = "Correct answer." if is_correct else "Incorrect answer."
+
+        return QuestionScoreDetail(
+            question_id=question_id,
+            type=question_type,
+            score=score,
+            max_score=1.0,
+            explanation=explanation,
+            confidence=0.97,
+            needs_human_review=False,
+            language_detected=language,
+        )
+
+    def _evaluate_fill_blank(
+        self,
+        question_id: str,
+        question_type: QuestionType,
+        answer_text: str,
+        language: Language,
+    ) -> QuestionScoreDetail:
+        """Evalúa preguntas de rellenar hueco."""
+        question_info = self.question_pool.get(question_id, {})
+        accepted_answers: List[str] = question_info.get("accepted_answers") or []
+
+        s, conf, explanation = score_fill_blank(answer_text, accepted_answers, language)
+        return QuestionScoreDetail(
+            question_id=question_id,
+            type=question_type,
+            score=s,
+            max_score=1.0,
+            explanation=explanation,
+            confidence=conf,
+            needs_human_review=False,
+            language_detected=language,
+        )
+
+    def _evaluate_ordering(
+        self,
+        question_id: str,
+        question_type: QuestionType,
+        answer_list: List[str],
+        language: Language,
+    ) -> QuestionScoreDetail:
+        """Evalúa preguntas de ordenar elementos."""
+        question_info = self.question_pool.get(question_id, {})
+        correct_order: List[str] = question_info.get("correct_order") or []
+
+        s, conf, explanation = score_ordering(answer_list, correct_order, language)
+        return QuestionScoreDetail(
+            question_id=question_id,
+            type=question_type,
+            score=s,
+            max_score=1.0,
+            explanation=explanation,
+            confidence=conf,
+            needs_human_review=False,
+            language_detected=language,
+        )
+
+    def _evaluate_speaking_record(
+        self,
+        question_id: str,
+        question_type: QuestionType,
+        answer_text: str,
+        language: Language,
+    ) -> QuestionScoreDetail:
+        """
+        Evalúa preguntas de grabación de voz.
+
+        Si hay transcripción disponible (answer_text), usa el OpenResponseScorer.
+        Si no, marca para revisión humana.
+        """
+        question_info = self.question_pool.get(question_id, {})
+
+        # Si se envió transcripción, puntúa como texto libre
+        if answer_text and answer_text.strip():
             rubric = question_info.get("rubric")
             expected_keywords = question_info.get("expected_keywords", [])
-
             if rubric and isinstance(rubric, dict):
-                # Convierte dict a OpenQuestionRubric si es necesario
                 try:
                     rubric_obj = OpenQuestionRubric(**rubric)
-                except:
-                    rubric_obj = OpenQuestionRubric()
+                except Exception:
+                    rubric_obj = OpenQuestionRubric(level="A1")
             else:
-                rubric_obj = OpenQuestionRubric()
+                rubric_obj = OpenQuestionRubric(level="A1")
 
-            # Usa OpenResponseScorer con lenguaje
             score_result = self.open_response_scorer.score(
                 response_text=answer_text,
                 rubric=rubric_obj,
                 language=language,
                 expected_keywords=expected_keywords,
             )
-
             return QuestionScoreDetail(
                 question_id=question_id,
                 type=question_type,
                 score=score_result.score,
                 max_score=1.0,
                 explanation=score_result.explanation,
-                confidence=score_result.confidence,
-                needs_human_review=score_result.needs_human_review,
+                confidence=score_result.confidence * 0.85,  # penalización por transcripción
+                needs_human_review=True,
                 rubric_breakdown=score_result.rubric_breakdown,
                 language_detected=score_result.language_detected,
             )
 
-        elif question_type == QuestionType.mcq:
-            # MCQ: verifica respuesta correcta (si existe en pool)
-            question_info = self.question_pool.get(question_id, {})
-            correct_answer = question_info.get("answer", "")
-
-            # Normaliza respuestas para comparación
-            answer_clean = answer_text.strip().lower()
-            correct_clean = correct_answer.strip().lower()
-
-            is_correct = answer_clean == correct_clean
-            score = 1.0 if is_correct else 0.0
-            confidence = 0.95  # MCQ tiene alta confianza
-
-            explanation = "Correct." if is_correct else "Incorrect."
-            if language == Language.fr:
-                explanation = "Respuesta correcta." if is_correct else "Respuesta incorrecta."
-
-            return QuestionScoreDetail(
-                question_id=question_id,
-                type=question_type,
-                score=score,
-                max_score=1.0,
-                explanation=explanation,
-                confidence=confidence,
-                needs_human_review=False,
-                language_detected=language,
-            )
-
-        else:
-            # Fallback para otros tipos
-            return QuestionScoreDetail(
-                question_id=question_id,
-                type=question_type,
-                score=0.5,
-                max_score=1.0,
-                explanation="Tipo de pregunta no soportado.",
-                confidence=0.3,
-                needs_human_review=True,
-                language_detected=language,
-            )
+        # Sin transcripción: revisión humana
+        msg = (
+            "Speaking record received. Pending human review (no transcript available)."
+            if language == Language.en
+            else "Grabación recibida. Pendiente de revisión humana (sin transcripción disponible)."
+        )
+        return QuestionScoreDetail(
+            question_id=question_id,
+            type=question_type,
+            score=0.0,
+            max_score=1.0,
+            explanation=msg,
+            confidence=0.0,
+            needs_human_review=True,
+            language_detected=language,
+        )
 
     # ========================================================================
     # Training

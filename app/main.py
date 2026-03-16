@@ -39,7 +39,17 @@ def version() -> dict:
         "model_version": model.version,
         "trained_samples": model.trained_samples,
         "api_version": "2.0.0",
-        "features": ["adaptive_testing", "open_questions", "delf_rubrics", "bias_checking"],
+        "features": [
+            "adaptive_testing",
+            "open_questions",
+            "single_choice",
+            "fill_blank",
+            "ordering",
+            "image_questions",
+            "speaking_record_architecture",
+            "delf_rubrics",
+            "bias_checking",
+        ],
     }
 
 
@@ -165,7 +175,14 @@ def info() -> dict:
         "training_sessions": len(model.training_history),
         "features": {
             "adaptive_testing": True,
-            "open_questions": True,
+            "open_questions_writing_text": True,
+            "single_choice_mcq": True,
+            "fill_blank": True,
+            "ordering": True,
+            "image_questions": True,
+            "speaking_record_architecture": True,
+            "audio_future": True,
+            "video_future": True,
             "delf_rubrics": True,
             "bias_checking": True,
             "human_review": True,

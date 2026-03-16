@@ -4,15 +4,29 @@
   "adaptive": true,
   "questions": [
     {
+      "question_id": "q_img_3",
+      "type": "image",
+      "text": "Quel lieu représente cette image?",
+      "image_description": "Une gare SNCF avec des voyageurs attendant sur le quai, un panneau affichant les horaires des trains.",
+      "language": "fr"
+    },
+    {
       "question_id": "q_fr_1",
       "type": "writing_text",
       "text": "Écrivez un message court sur votre journée.",
       "language": "fr"
     },
     {
-      "question_id": "q_fr_3",
+      "question_id": "q_fr_16",
+      "type": "ordering",
+      "text": "Remettez ces étapes dans l'ordre correct pour préparer des pâtes.",
+      "language": "fr",
+      "elements": ["Égoutter les pâtes.", "Faire bouillir l'eau.", "Servir dans une assiette.", "Saler l'eau.", "Ajouter les pâtes."]
+    },
+    {
+      "question_id": "q_fr_8",
       "type": "single_choice",
-      "text": "Quelle est la couleur du ciel lors d'une belle journée?",
+      "text": "Quel est le plus grand fleuve en France?",
       "language": "fr"
     },
     {
@@ -22,15 +36,28 @@
       "language": "fr"
     },
     {
-      "question_id": "q_fr_4",
-      "type": "single_choice",
-      "text": "Quel est le contraire du mot 'grand'?",
+      "question_id": "q_fr_13",
+      "type": "fill_blank",
+      "text": "Nous ___ allés au marché hier matin.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_img_1",
+      "type": "image",
+      "text": "Que font les personnes sur l'image?",
+      "image_description": "Un groupe d'étudiants en train d'étudier ensemble dans une bibliothèque universitaire.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_26",
+      "type": "fill_blank",
+      "text": "Nous ___ arrivés très tard à la maison.",
       "language": "fr"
     },
     {
       "question_id": "q_fr_5",
       "type": "writing_text",
-      "text": "Décrivez un jour important de votre vie en detalle.",
+      "text": "Décrivez un jour important de votre vie en détail.",
       "language": "fr"
     },
     {
@@ -40,39 +67,22 @@
       "language": "fr"
     },
     {
-      "question_id": "q_fr_6",
+      "question_id": "q_fr_3",
       "type": "single_choice",
-      "text": "Quel temps faut-il pour aller de Paris à Lyon en TGV?",
+      "text": "Quelle est la couleur du ciel lors d'une belle journée?",
       "language": "fr"
     },
     {
-      "question_id": "q_fr_8",
-      "type": "single_choice",
-      "text": "Quel est le plus grand fleuve en France?",
-      "language": "fr"
+      "question_id": "q_fr_17",
+      "type": "ordering",
+      "text": "Remettez ces moments de la journée dans l'ordre chronologique.",
+      "language": "fr",
+      "elements": ["Le dîner", "Le petit-déjeuner", "Le déjeuner", "Le goûter"]
     },
     {
       "question_id": "q_fr_9",
       "type": "writing_text",
       "text": "Décrivez votre environnement de travail ou d'études idéal.",
-      "language": "fr"
-    },
-    {
-      "question_id": "q_fr_11",
-      "type": "writing_text",
-      "text": "Racontez une expérience de voyage mémorable.",
-      "language": "fr"
-    },
-    {
-      "question_id": "q_fr_13",
-      "type": "fill_blank",
-      "text": "Nous ___ allés au marché hier matin.",
-      "language": "fr"
-    },
-    {
-      "question_id": "q_fr_14",
-      "type": "fill_blank",
-      "text": "Mon chat dort toujours ___ le canapé.",
       "language": "fr"
     },
     {
@@ -82,29 +92,22 @@
       "language": "fr"
     },
     {
-      "question_id": "q_fr_16",
-      "type": "ordering",
-      "text": "Remettez ces étapes dans l'ordre correct pour préparer des pâtes.",
-      "language": "fr",
-      "elements": [
-        "Égoutter les pâtes.",
-        "Faire bouillir l'eau.",
-        "Servir dans une assiette.",
-        "Saler l'eau.",
-        "Ajouter les pâtes."
-      ]
+      "question_id": "q_fr_11",
+      "type": "writing_text",
+      "text": "Racontez une expérience de voyage mémorable.",
+      "language": "fr"
     },
     {
-      "question_id": "q_fr_17",
-      "type": "ordering",
-      "text": "Remettez ces moments de la journée dans l'ordre chronologique.",
-      "language": "fr",
-      "elements": [
-        "Le dîner",
-        "Le petit-déjeuner",
-        "Le déjeuner",
-        "Le goûter"
-      ]
+      "question_id": "q_fr_6",
+      "type": "single_choice",
+      "text": "Quel temps faut-il pour aller de Paris à Lyon en TGV?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_10",
+      "type": "single_choice",
+      "text": "En quelle année a eu lieu la Révolution française?",
+      "language": "fr"
     },
     {
       "question_id": "q_fr_18",
@@ -114,113 +117,23 @@
     }
   ],
   "answers": [
-    {
-      "question_id": "q_fr_1",
-      "type": "writing_text",
-      "answer_text": "Aujourd'hui a été une journée particulièrement chargée mais très satisfaisante. Le matin, j'ai animé une réunion avec mon équipe pour planifier un nouveau projet. Ensuite, j'ai rédigé plusieurs rapports et répondu à des courriels importants. L'après-midi, j'ai suivi une formation en ligne pour améliorer mes compétences en gestion de projet. Malgré la fatigue, je suis content du travail accompli.",
-      "time_spent_sec": 210
-    },
-    {
-      "question_id": "q_fr_3",
-      "type": "single_choice",
-      "answer_text": "bleu",
-      "time_spent_sec": 7
-    },
-    {
-      "question_id": "q_fr_2",
-      "type": "writing_text",
-      "answer_text": "Mes loisirs préférés sont la lecture de romans historiques et la randonnée en montagne. La lecture me permet de voyager dans le temps et de comprendre d'autres époques, ce que je trouve fascinant. La randonnée, quant à elle, m'aide à me déconnecter du stress quotidien et à profiter de la nature. J'apprécie particulièrement le sentiment de liberté lorsque j'atteins le sommet d'un chemin difficile.",
-      "time_spent_sec": 220
-    },
-    {
-      "question_id": "q_fr_4",
-      "type": "single_choice",
-      "answer_text": "petit",
-      "time_spent_sec": 5
-    },
-    {
-      "question_id": "q_fr_5",
-      "type": "writing_text",
-      "answer_text": "Le jour le plus important de ma vie a sans doute été celui où j'ai obtenu mon premier emploi à temps plein. Après plusieurs mois de recherches et d'entretiens parfois décevants, j'ai finalement reçu un appel m'annonçant que j'étais sélectionné. Je me souviens très bien du mélange de soulagement et de fierté que j'ai ressenti. Ce jour-là a marqué le début de mon indépendance financière et d'une nouvelle étape dans ma vie d'adulte.",
-      "time_spent_sec": 230
-    },
-    {
-      "question_id": "q_fr_7",
-      "type": "writing_text",
-      "answer_text": "Pour préparer mon repas préféré, un risotto aux champignons, je commence par faire revenir doucement des oignons dans un peu d'huile d'olive. Ensuite, j'ajoute le riz et je le laisse nacrer quelques minutes. Puis j'incorpore progressivement du bouillon chaud tout en remuant régulièrement. Lorsque le riz est presque cuit, j'ajoute les champignons sautés et un peu de parmesan râpé. À la fin, je laisse reposer le plat quelques instants afin que les saveurs se mélangent bien.",
-      "time_spent_sec": 210
-    },
-    {
-      "question_id": "q_fr_6",
-      "type": "single_choice",
-      "answer_text": "2 heures",
-      "time_spent_sec": 6
-    },
-    {
-      "question_id": "q_fr_8",
-      "type": "single_choice",
-      "answer_text": "La Loire",
-      "time_spent_sec": 6
-    },
-    {
-      "question_id": "q_fr_9",
-      "type": "writing_text",
-      "answer_text": "Mon environnement de travail idéal serait un espace lumineux et silencieux, avec une grande bibliothèque et un bureau ergonomique. J'aimerais pouvoir organiser mes documents facilement et disposer de quelques plantes pour rendre l'atmosphère plus agréable. Il serait également important d'avoir une bonne connexion Internet et un siège confortable pour éviter les douleurs de dos. Enfin, je souhaiterais travailler dans une équipe bienveillante, où la communication est claire et respectueuse.",
-      "time_spent_sec": 220
-    },
-    {
-      "question_id": "q_fr_11",
-      "type": "writing_text",
-      "answer_text": "Une expérience de voyage particulièrement mémorable a été mon séjour en Écosse. J'y ai passé une semaine à explorer les Highlands, avec leurs paysages impressionnants et leur météo imprévisible. Un jour, nous avons fait une longue randonnée autour d'un loch entouré de montagnes couvertes de brume. Le soir, nous avons partagé un repas dans un petit pub local où les habitants jouaient de la musique traditionnelle. Cette combinaison de nature sauvage et de chaleur humaine m'a profondément marqué.",
-      "time_spent_sec": 240
-    },
-    {
-      "question_id": "q_fr_13",
-      "type": "fill_blank",
-      "answer_text": "sommes",
-      "time_spent_sec": 9
-    },
-    {
-      "question_id": "q_fr_14",
-      "type": "fill_blank",
-      "answer_text": "sur",
-      "time_spent_sec": 6
-    },
-    {
-      "question_id": "q_fr_15",
-      "type": "fill_blank",
-      "answer_text": "obtenu",
-      "time_spent_sec": 6
-    },
-    {
-      "question_id": "q_fr_16",
-      "type": "ordering",
-      "answer_list": [
-        "Faire bouillir l'eau.",
-        "Saler l'eau.",
-        "Ajouter les pâtes.",
-        "Égoutter les pâtes.",
-        "Servir dans une assiette."
-      ],
-      "time_spent_sec": 28
-    },
-    {
-      "question_id": "q_fr_17",
-      "type": "ordering",
-      "answer_list": [
-        "Le petit-déjeuner",
-        "Le déjeuner",
-        "Le goûter",
-        "Le dîner"
-      ],
-      "time_spent_sec": 16
-    },
-    {
-      "question_id": "q_fr_18",
-      "type": "speaking_record",
-      "answer_text": "Bonjour, je m'appelle Claire. J'ai trente-trois ans et je travaille comme responsable marketing dans une entreprise internationale. Je vis à Toulouse depuis plusieurs années, une ville que j'apprécie beaucoup pour son ambiance chaleureuse. Dans mon temps libre, j'aime particulièrement voyager et pratiquer la photographie, car cela me permet de découvrir de nouveaux endroits et de garder des souvenirs visuels de mes expériences.",
-      "time_spent_sec": 45
-    }
+    {"question_id": "q_img_3", "type": "image", "answer_text": "Une gare.", "time_spent_sec": 8},
+    {"question_id": "q_fr_1", "type": "writing_text", "answer_text": "Aujourd'hui a été une journée particulièrement chargée mais très satisfaisante. Le matin, j'ai animé une réunion avec mon équipe pour planifier un nouveau projet. Ensuite, j'ai rédigé plusieurs rapports et répondu à des courriels importants. L'après-midi, j'ai suivi une formation en ligne pour améliorer mes compétences en gestion de projet. Malgré la fatigue, je suis content du travail accompli.", "time_spent_sec": 210},
+    {"question_id": "q_fr_16", "type": "ordering", "answer_list": ["Faire bouillir l'eau.", "Saler l'eau.", "Ajouter les pâtes.", "Égoutter les pâtes.", "Servir dans une assiette."], "time_spent_sec": 28},
+    {"question_id": "q_fr_8", "type": "single_choice", "answer_text": "La Loire", "time_spent_sec": 6},
+    {"question_id": "q_fr_2", "type": "writing_text", "answer_text": "Mes loisirs préférés sont la lecture de romans historiques et la randonnée en montagne. La lecture me permet de voyager dans le temps et de comprendre d'autres époques, ce que je trouve fascinant. La randonnée, quant à elle, m'aide à me déconnecter du stress quotidien et à profiter de la nature. J'apprécie particulièrement le sentiment de liberté lorsque j'atteins le sommet d'un chemin difficile.", "time_spent_sec": 220},
+    {"question_id": "q_fr_13", "type": "fill_blank", "answer_text": "sommes", "time_spent_sec": 9},
+    {"question_id": "q_img_1", "type": "image", "answer_text": "Ils étudient.", "time_spent_sec": 7},
+    {"question_id": "q_fr_26", "type": "fill_blank", "answer_text": "sommes", "time_spent_sec": 8},
+    {"question_id": "q_fr_5", "type": "writing_text", "answer_text": "Le jour le plus important de ma vie a sans doute été celui où j'ai obtenu mon premier emploi à temps plein. Après plusieurs mois de recherches et d'entretiens parfois décevants, j'ai finalement reçu un appel m'annonçant que j'étais sélectionné. Je me souviens très bien du mélange de soulagement et de fierté que j'ai ressenti. Ce jour-là a marqué le début de mon indépendance financière et d'une nouvelle étape dans ma vie d'adulte.", "time_spent_sec": 230},
+    {"question_id": "q_fr_7", "type": "writing_text", "answer_text": "Pour préparer mon repas préféré, un risotto aux champignons, je commence par faire revenir doucement des oignons dans un peu d'huile d'olive. Ensuite, j'ajoute le riz et je le laisse nacrer quelques minutes. Puis j'incorpore progressivement du bouillon chaud tout en remuant régulièrement. Lorsque le riz est presque cuit, j'ajoute les champignons sautés et un peu de parmesan râpé. À la fin, je laisse reposer le plat quelques instants afin que les saveurs se mélangent bien.", "time_spent_sec": 210},
+    {"question_id": "q_fr_3", "type": "single_choice", "answer_text": "bleu", "time_spent_sec": 7},
+    {"question_id": "q_fr_17", "type": "ordering", "answer_list": ["Le petit-déjeuner", "Le déjeuner", "Le goûter", "Le dîner"], "time_spent_sec": 16},
+    {"question_id": "q_fr_9", "type": "writing_text", "answer_text": "Mon environnement de travail idéal serait un espace lumineux et silencieux, avec une grande bibliothèque et un bureau ergonomique. J'aimerais pouvoir organiser mes documents facilement et disposer de quelques plantes pour rendre l'atmosphère plus agréable. Il serait également important d'avoir une bonne connexion Internet et un siège confortable pour éviter les douleurs de dos. Enfin, je souhaiterais travailler dans une équipe bienveillante, où la communication est claire et respectueuse.", "time_spent_sec": 220},
+    {"question_id": "q_fr_15", "type": "fill_blank", "answer_text": "obtenu", "time_spent_sec": 6},
+    {"question_id": "q_fr_11", "type": "writing_text", "answer_text": "Une expérience de voyage particulièrement mémorable a été mon séjour en Écosse. J'y ai passé une semaine à explorer les Highlands, avec leurs paysages impressionnants et leur météo imprévisible. Un jour, nous avons fait une longue randonnée autour d'un loch entouré de montagnes couvertes de brume. Le soir, nous avons partagé un repas dans un petit pub local où les habitants jouaient de la musique traditionnelle. Cette combinaison de nature sauvage et de chaleur humaine m'a profondément marqué.", "time_spent_sec": 240},
+    {"question_id": "q_fr_6", "type": "single_choice", "answer_text": "2 heures", "time_spent_sec": 6},
+    {"question_id": "q_fr_10", "type": "single_choice", "answer_text": "1789", "time_spent_sec": 5},
+    {"question_id": "q_fr_18", "type": "speaking_record", "answer_text": "Bonjour, je m'appelle Claire. J'ai trente-trois ans et je travaille comme responsable marketing dans une entreprise internationale. Je vis à Toulouse depuis plusieurs années, une ville que j'apprécie beaucoup pour son ambiance chaleureuse. Dans mon temps libre, j'aime particulièrement voyager et pratiquer la photographie, car cela me permet de découvrir de nouveaux endroits et de garder des souvenirs visuels de mes expériences.", "time_spent_sec": 45}
   ]
 }
-

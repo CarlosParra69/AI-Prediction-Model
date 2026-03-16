@@ -3,257 +3,144 @@
   "candidate_id": "cand-fr-001-B1-low",
   "adaptive": true,
   "questions": [
-
+    {
+      "question_id": "q_img_1",
+      "type": "image",
+      "text": "Que font les personnes sur l'image?",
+      "image_description": "Un groupe d'étudiants en train d'étudier ensemble dans une bibliothèque universitaire.",
+      "language": "fr"
+    },
     {
       "question_id": "q_fr_1",
       "type": "writing_text",
       "text": "Écrivez un message court sur votre journée.",
       "language": "fr"
     },
-
-    {
-      "question_id": "q_fr_3",
-      "type": "single_choice",
-      "text": "Quelle est la couleur du ciel lors d'une belle journée?",
-      "language": "fr"
-    },
-
-    {
-      "question_id": "q_fr_2",
-      "type": "writing_text",
-      "text": "Parlez de vos loisirs préférés et pourquoi vous les aimez.",
-      "language": "fr"
-    },
-
     {
       "question_id": "q_fr_4",
       "type": "single_choice",
       "text": "Quel est le contraire du mot 'grand'?",
       "language": "fr"
     },
-
     {
-      "question_id": "q_fr_5",
+      "question_id": "q_fr_2",
       "type": "writing_text",
-      "text": "Décrivez un jour important de votre vie en détail.",
+      "text": "Parlez de vos loisirs préférés et pourquoi vous les aimez.",
       "language": "fr"
     },
-
-    {
-      "question_id": "q_fr_7",
-      "type": "writing_text",
-      "text": "Expliquez comment vous préparez votre repas préféré.",
-      "language": "fr"
-    },
-
-    {
-      "question_id": "q_fr_6",
-      "type": "single_choice",
-      "text": "Quel temps faut-il pour aller de Paris à Lyon en TGV?",
-      "language": "fr"
-    },
-
-    {
-      "question_id": "q_fr_8",
-      "type": "single_choice",
-      "text": "Quel est le plus grand fleuve en France?",
-      "language": "fr"
-    },
-
-    {
-      "question_id": "q_fr_9",
-      "type": "writing_text",
-      "text": "Décrivez votre environnement de travail ou d'études idéal.",
-      "language": "fr"
-    },
-
-    {
-      "question_id": "q_fr_11",
-      "type": "writing_text",
-      "text": "Racontez une expérience de voyage mémorable.",
-      "language": "fr"
-    },
-
     {
       "question_id": "q_fr_13",
       "type": "fill_blank",
       "text": "Nous ___ allés au marché hier matin.",
       "language": "fr"
     },
-
+    {
+      "question_id": "q_fr_17",
+      "type": "ordering",
+      "text": "Remettez ces moments de la journée dans l'ordre chronologique.",
+      "language": "fr",
+      "elements": ["Le dîner", "Le petit-déjeuner", "Le déjeuner", "Le goûter"]
+    },
+    {
+      "question_id": "q_fr_7",
+      "type": "writing_text",
+      "text": "Expliquez comment vous préparez votre repas préféré.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_6",
+      "type": "single_choice",
+      "text": "Quel temps faut-il pour aller de Paris à Lyon en TGV?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_19",
+      "type": "fill_blank",
+      "text": "Je ___ très content aujourd'hui.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_img_2",
+      "type": "image",
+      "text": "Décrivez ce que vous voyez sur l'image.",
+      "image_description": "Une jeune femme travaillant sur un ordinateur portable dans un café, avec une tasse de café sur la table.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_5",
+      "type": "writing_text",
+      "text": "Décrivez un jour important de votre vie en détail.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_16",
+      "type": "ordering",
+      "text": "Remettez ces étapes dans l'ordre correct pour préparer des pâtes.",
+      "language": "fr",
+      "elements": ["Égoutter les pâtes.", "Faire bouillir l'eau.", "Servir dans une assiette.", "Saler l'eau.", "Ajouter les pâtes."]
+    },
+    {
+      "question_id": "q_fr_9",
+      "type": "writing_text",
+      "text": "Décrivez votre environnement de travail ou d'études idéal.",
+      "language": "fr"
+    },
     {
       "question_id": "q_fr_14",
       "type": "fill_blank",
       "text": "Mon chat dort toujours ___ le canapé.",
       "language": "fr"
     },
-
+    {
+      "question_id": "q_fr_10",
+      "type": "single_choice",
+      "text": "En quelle année a eu lieu la Révolution française?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_11",
+      "type": "writing_text",
+      "text": "Racontez une expérience de voyage mémorable.",
+      "language": "fr"
+    },
     {
       "question_id": "q_fr_15",
       "type": "fill_blank",
       "text": "Elle a ___ un excellent résultat à son examen de français.",
       "language": "fr"
     },
-
     {
-      "question_id": "q_fr_16",
-      "type": "ordering",
-      "text": "Remettez ces étapes dans l'ordre correct pour préparer des pâtes.",
-      "language": "fr",
-      "elements": [
-        "Égoutter les pâtes.",
-        "Faire bouillir l'eau.",
-        "Servir dans une assiette.",
-        "Saler l'eau.",
-        "Ajouter les pâtes."
-      ]
+      "question_id": "q_fr_8",
+      "type": "single_choice",
+      "text": "Quel est le plus grand fleuve en France?",
+      "language": "fr"
     },
-
-    {
-      "question_id": "q_fr_17",
-      "type": "ordering",
-      "text": "Remettez ces moments de la journée dans l'ordre chronologique.",
-      "language": "fr",
-      "elements": [
-        "Le dîner",
-        "Le petit-déjeuner",
-        "Le déjeuner",
-        "Le goûter"
-      ]
-    },
-
     {
       "question_id": "q_fr_18",
       "type": "speaking_record",
       "text": "Présentez-vous en quelques phrases : votre prénom, votre âge, votre profession et un loisir que vous aimez.",
       "language": "fr"
     }
-
   ],
   "answers": [
-
-    {
-      "question_id": "q_fr_1",
-      "type": "writing_text",
-      "answer_text": "Aujourd'hui j'ai eu une journée dificile. J'ai travaillé beaucoup et j'étaient très fatigué. Le soir j'ai alé dormir plus tot. Encor demain j'aurais beaucoup de travail",
-      "time_spent_sec": 145
-    },
-
-    {
-      "question_id": "q_fr_3",
-      "type": "single_choice",
-      "answer_text": "bleu",
-      "time_spent_sec": 8
-    },
-
-    {
-      "question_id": "q_fr_2",
-      "type": "writing_text",
-      "answer_text": "Les loisir que je adore c'est joué le piano et la lecture. Je les aimes parce qu'est tres relaxant et je peux oublier mes problemes. Je fais ca tous les jours pendant une ou deux heures. C'es mon passions",
-      "time_spent_sec": 152
-    },
-
-    {
-      "question_id": "q_fr_4",
-      "type": "single_choice",
-      "answer_text": "petit",
-      "time_spent_sec": 5
-    },
-
-    {
-      "question_id": "q_fr_5",
-      "type": "writing_text",
-      "answer_text": "Le jours le plus importante dans ma vies c'étaient quand j'ai reçu mon diplôme de licence. Mes parentés était tellement contentes et fieres. On a fait une grande fête avec toute la famile et les amies. C'étaient une moment que je vais jamais oublier parce qu'il representé beacoup pour moi",
-      "time_spent_sec": 198
-    },
-
-    {
-      "question_id": "q_fr_7",
-      "type": "writing_text",
-      "answer_text": "Pour preparé mon plat favori qui c'est le couscous je commence par prendre les ingridients. Je met l'eau dans un casserolle et je fait bouille. Après j'ajoute la semoule et les legume. Je cuisne pendant vingt minute jusqu'à ce que c'es pret. Finalement j'ajoute de l'huile d'olif et du sel",
-      "time_spent_sec": 167
-    },
-
-    {
-      "question_id": "q_fr_6",
-      "type": "single_choice",
-      "answer_text": "2 heures",
-      "time_spent_sec": 9
-    },
-
-    {
-      "question_id": "q_fr_8",
-      "type": "single_choice",
-      "answer_text": "La Loire",
-      "time_spent_sec": 7
-    },
-
-    {
-      "question_id": "q_fr_9",
-      "type": "writing_text",
-      "answer_text": "Mon environement ideal pour travailer c'est un place avec beaucoup de naturel et de quietud. Je veux travailler pres d'une fenetre pour avoir fond de lumieres. Il faut aussi avoir une bonne chaise confortable et un bureau grand. L'air doit etre frais et il ne doit pas avoir trop de bruits. Un ambiance calme et positif c'est tres importante pour ma productivité",
-      "time_spent_sec": 174
-    },
-
-    {
-      "question_id": "q_fr_11",
-      "type": "writing_text",
-      "answer_text": "J'ai fait un voyage memorable au Maroc l'année derniere. C'étaient absolument magnifique avec des paysages terriblement belle. J'ai visité Marrakech, Fes et Tanger. La culture c'étaient tres differente de chez moi mais vrement enrichissante. J'ai mangé les meilleures nourriture de ma vie et j'ai rencontré des personnes tres sympas. C'étaient une experience que je vais jamais oublié",
-      "time_spent_sec": 203
-    },
-
-    {
-      "question_id": "q_fr_13",
-      "type": "fill_blank",
-      "answer_text": "avons",
-      "time_spent_sec": 12
-    },
-
-    {
-      "question_id": "q_fr_14",
-      "type": "fill_blank",
-      "answer_text": "sur",
-      "time_spent_sec": 7
-    },
-
-    {
-      "question_id": "q_fr_15",
-      "type": "fill_blank",
-      "answer_text": "reçu",
-      "time_spent_sec": 9
-    },
-
-    {
-      "question_id": "q_fr_16",
-      "type": "ordering",
-      "answer_list": [
-        "Faire bouillir l'eau.",
-        "Ajouter les pâtes.",
-        "Saler l'eau.",
-        "Égoutter les pâtes.",
-        "Servir dans une assiette."
-      ],
-      "time_spent_sec": 34
-    },
-
-    {
-      "question_id": "q_fr_17",
-      "type": "ordering",
-      "answer_list": [
-        "Le petit-déjeuner",
-        "Le déjeuner",
-        "Le goûter",
-        "Le dîner"
-      ],
-      "time_spent_sec": 18
-    },
-
-    {
-      "question_id": "q_fr_18",
-      "type": "speaking_record",
-      "answer_text": "Bonjour, je m'appelle Sofia. J'ai vingt-huit ans et je suis professeure de mathématiques dans un lycée. J'habite à Lyon depuis trois ans. Dans mes temps libres, j'aime beaucoup lire des romans et faire du vélo le week-end.",
-      "time_spent_sec": 42
-    }
-
+    {"question_id": "q_img_1", "type": "image", "answer_text": "Ils étudient.", "time_spent_sec": 12},
+    {"question_id": "q_fr_1", "type": "writing_text", "answer_text": "Aujourd'hui j'ai eu une journée dificile. J'ai travaillé beaucoup et j'étaient très fatigué. Le soir j'ai alé dormir plus tot. Encor demain j'aurais beaucoup de travail", "time_spent_sec": 145},
+    {"question_id": "q_fr_4", "type": "single_choice", "answer_text": "petit", "time_spent_sec": 5},
+    {"question_id": "q_fr_2", "type": "writing_text", "answer_text": "Les loisir que je adore c'est joué le piano et la lecture. Je les aimes parce qu'est tres relaxant et je peux oublier mes problemes. Je fais ca tous les jours pendant une ou deux heures. C'es mon passions", "time_spent_sec": 152},
+    {"question_id": "q_fr_13", "type": "fill_blank", "answer_text": "avons", "time_spent_sec": 12},
+    {"question_id": "q_fr_17", "type": "ordering", "answer_list": ["Le petit-déjeuner", "Le déjeuner", "Le goûter", "Le dîner"], "time_spent_sec": 18},
+    {"question_id": "q_fr_7", "type": "writing_text", "answer_text": "Pour preparé mon plat favori qui c'est le couscous je commence par prendre les ingridients. Je met l'eau dans un casserolle et je fait bouille. Après j'ajoute la semoule et les legume. Je cuisne pendant vingt minute jusqu'à ce que c'es pret. Finalement j'ajoute de l'huile d'olif et du sel", "time_spent_sec": 167},
+    {"question_id": "q_fr_6", "type": "single_choice", "answer_text": "2 heures", "time_spent_sec": 9},
+    {"question_id": "q_fr_19", "type": "fill_blank", "answer_text": "suis", "time_spent_sec": 8},
+    {"question_id": "q_img_2", "type": "image", "answer_text": "Une femme dans un café avec son ordinateur.", "time_spent_sec": 15},
+    {"question_id": "q_fr_5", "type": "writing_text", "answer_text": "Le jours le plus importante dans ma vies c'étaient quand j'ai reçu mon diplôme de licence. Mes parentés était tellement contentes et fieres. On a fait une grande fête avec toute la famile et les amies. C'étaient une moment que je vais jamais oublier parce qu'il representé beacoup pour moi", "time_spent_sec": 198},
+    {"question_id": "q_fr_16", "type": "ordering", "answer_list": ["Faire bouillir l'eau.", "Ajouter les pâtes.", "Saler l'eau.", "Égoutter les pâtes.", "Servir dans une assiette."], "time_spent_sec": 34},
+    {"question_id": "q_fr_9", "type": "writing_text", "answer_text": "Mon environement ideal pour travailer c'est un place avec beaucoup de naturel et de quietud. Je veux travailler pres d'une fenetre pour avoir fond de lumieres. Il faut aussi avoir une bonne chaise confortable et un bureau grand. L'air doit etre frais et il ne doit pas avoir trop de bruits. Un ambiance calme et positif c'est tres importante pour ma productivité", "time_spent_sec": 174},
+    {"question_id": "q_fr_14", "type": "fill_blank", "answer_text": "sur", "time_spent_sec": 7},
+    {"question_id": "q_fr_10", "type": "single_choice", "answer_text": "1789", "time_spent_sec": 8},
+    {"question_id": "q_fr_11", "type": "writing_text", "answer_text": "J'ai fait un voyage memorable au Maroc l'année derniere. C'étaient absolument magnifique avec des paysages terriblement belle. J'ai visité Marrakech, Fes et Tanger. La culture c'étaient tres differente de chez moi mais vrement enrichissante. J'ai mangé les meilleures nourriture de ma vie et j'ai rencontré des personnes tres sympas. C'étaient une experience que je vais jamais oublié", "time_spent_sec": 203},
+    {"question_id": "q_fr_15", "type": "fill_blank", "answer_text": "reçu", "time_spent_sec": 9},
+    {"question_id": "q_fr_8", "type": "single_choice", "answer_text": "La Loire", "time_spent_sec": 7},
+    {"question_id": "q_fr_18", "type": "speaking_record", "answer_text": "Bonjour, je m'appelle Sofia. J'ai vingt-huit ans et je suis professeure de mathématiques dans un lycée. J'habite à Lyon depuis trois ans. Dans mes temps libres, j'aime beaucoup lire des romans et faire du vélo le week-end.", "time_spent_sec": 42}
   ]
 }

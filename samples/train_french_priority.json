@@ -318,6 +318,36 @@
     },
 
     {
+      "question_id": "q_img_1",
+      "type": "image",
+      "text": "Que font les personnes sur l'image?",
+      "image_description": "Un groupe d'étudiants en train d'étudier ensemble dans une bibliothèque universitaire.",
+      "language": "fr",
+      "options": ["Ils étudient.", "Ils mangent.", "Ils jouent au football.", "Ils regardent un film."],
+      "answer": "Ils étudient.",
+      "difficulty": 1
+    },
+    {
+      "question_id": "q_img_2",
+      "type": "image",
+      "text": "Décrivez ce que vous voyez sur l'image.",
+      "image_description": "Une jeune femme travaillant sur un ordinateur portable dans un café, avec une tasse de café sur la table.",
+      "language": "fr",
+      "options": ["Une femme dans un café avec son ordinateur.", "Une femme dans une bibliothèque.", "Une femme en train de cuisiner.", "Une femme qui fait du sport."],
+      "answer": "Une femme dans un café avec son ordinateur.",
+      "difficulty": 2
+    },
+    {
+      "question_id": "q_img_3",
+      "type": "image",
+      "text": "Quel lieu représente cette image?",
+      "image_description": "Une gare SNCF avec des voyageurs attendant sur le quai, un panneau affichant les horaires des trains.",
+      "language": "fr",
+      "options": ["Une gare.", "Un aéroport.", "Une station de métro.", "Un supermarché."],
+      "answer": "Une gare.",
+      "difficulty": 1
+    },
+    {
       "question_id": "q_fr_18",
       "type": "speaking_record",
       "text": "Présentez-vous en quelques phrases : votre prénom, votre âge, votre profession et un loisir que vous aimez.",
@@ -353,6 +383,6 @@
     "version": "2.0.0",
     "language": "fr",
     "includes_errors": "true",
-    "question_types": "writing_text, single_choice, fill_blank, ordering, speaking_record"
+    "question_types": "writing_text, single_choice, fill_blank, ordering, speaking_record, image"
   }
 }

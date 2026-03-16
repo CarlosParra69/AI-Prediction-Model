@@ -6,19 +6,7 @@
 
 ### 1. Prerequisites Python 3.12+
 
-#### Opción 1: Instalación Automática (Recomendado)
-
-**Windows:**
-```bash
-setup_windows.bat
-```
-
-**Linux/Mac:**
-```bash
-bash setup_linux_mac.sh
-```
-
-#### Opción 2: Instalación Manual
+#### Manual Instalation
 
 In PowerShell or CMD:
 
@@ -33,6 +21,7 @@ pytest tests/test_api.py -v
 ```
 
 ### 2. Run the API
+
 ```bash
 python -m uvicorn app.main:app --reload
 ```
@@ -42,25 +31,35 @@ Server running on: `http://localhost:8000`
 ### 3. API Examples
 
 #### Health Check
+
 ```bash
 curl http://localhost:8000/health
 ```
 
 #### Train the Model
+
 ```bash
+# Entrenar con corpus principal (tipos variados)
 curl -X POST http://localhost:8000/train \
   -H "Content-Type: application/json" \
-  -d @samples/train_multilingual_delf.json
+  -d @samples/train_french_priority.json
+
+# Entrenar con corpus adicional (verbo être + IMAGE)
+curl -X POST http://localhost:8000/train \
+  -H "Content-Type: application/json" \
+  -d @samples/train_french_priority_2.json
 ```
 
 #### Predict Proficiency Level
+
 ```bash
 curl -X POST http://localhost:8000/predict \
   -H "Content-Type: application/json" \
-  -d @samples/predict_multilingual_exam.json
+  -d @"samples/exams french/predict_exam_french1.json"
 ```
 
 ### 4. Run Tests
+
 ```bash
 pytest tests/test_api.py -v
 # Expected: 23 passed in 1.60s
@@ -79,11 +78,13 @@ This project has been upgraded to support **both French and English** language a
 Evaluates **language proficiency** in French and/or English exams using CEFR standards.
 
 ### Input
+
 - Training examples (corpus of responses with proficiency rubrics)
 - Exam questions (open-ended or multiple-choice)
 - Candidate answers
 
 ### Output
+
 - Proficiency level (A1, A1+, A2, A2+, B1, B1+, B2, etc.)
 - Detailed scoring by criterion (Task, Coherence, Sociolinguistic, Lexicon, Grammar)
 - Language detected (en or fr)
@@ -93,29 +94,51 @@ Evaluates **language proficiency** in French and/or English exams using CEFR sta
 
 ## 📊 Features
 
+### Tipos de pregunta soportados
+
+
+| Tipo                | Descripción                                              | Scoring                                                  |
+| ------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| **WRITING_TEXT**    | Respuesta libre con rúbrica DELF                         | Por criterios (tarea, coherencia, léxico, morfosintaxis) |
+| **SINGLE_CHOICE**   | Opción múltiple, una respuesta correcta                  | Automático (0/1)                                         |
+| **FILL_BLANK**      | Rellenar huecos (varios aceptados, tolerancia a acentos) | Coincidencia normalizada                                 |
+| **ORDERING**        | Ordenar elementos en secuencia                           | Puntaje parcial (posiciones + pares adyacentes)          |
+| **IMAGE**           | Pregunta basada en imagen                                | Igual que SINGLE_CHOICE o WRITING según diseño           |
+| **SPEAKING_RECORD** | Grabación de voz → transcripción                         | Rúbrica DELF sobre texto transcrito                      |
+| **AUDIO / VIDEO**   | Arquitectura preparada                                   | Pendiente revisión humana                                |
+
+
+Las preguntas IMAGE incluyen el campo opcional `image_description` para accesibilidad y revisión humana.
+
 ### Bilingual Support
-- 🇫🇷 **French (fr)** - Native DELF evaluation
-- 🇬🇧 **English (en)** - CEFR ESL-aware evaluation
-- 🔍 **Auto-Detection** - Heuristic language detection from responses
+
+- 🇫🇷 **French (fr)** - Evaluación DELF nativa
+- 🇬🇧 **English (en)** - Evaluación CEFR/ESL
+- 🔍 **Auto-Detection** - Detección heurística del idioma en respuestas
 
 ### Adaptive Assessment
-- Adjusts question difficulty based on performance
-- Selects appropriate questions for detected level
-- Converges on proficiency level estimate
+
+- Ajusta la dificultad según el desempeño
+- Selecciona preguntas apropiadas al nivel detectado
+- **Estimación de nivel**: media ponderada de escritura/habla (80%) + precisión global (20%)
+- Umbrales calibrados para el rango real de scoring (A1- a B2)
 
 ### Fair Evaluation
-- Language-specific linguistic features (connectors, politeness markers)
-- Same CEFR rubric framework for both languages
-- No language bias in level estimation
-- Linguistically appropriate feedback
 
-### Comprehensive Scoring
-- Task Realisation (25%) - Did they answer the question?
-- Coherence & Cohesion (20%) - Logical flow with appropriate connectors
-- Sociolinguistic Adequacy (15%) - Register and politeness
-- Lexical Range (20%) - Vocabulary diversity and appropriateness
-- Morphosyntax (20%) - Grammar, tense, verb conjugation
+- Conectores y marcadores de cortesía por idioma
+- Rúbrica CEFR unificada para ambos idiomas
+- Bias checker para detectar datos sensibles en corpus
+- Feedback lingüísticamente apropiado
 
+### Comprehensive Scoring (respuestas abiertas)
+
+- Task Realisation (25%) - ¿Respondió la pregunta?
+- Coherence & Cohesion (20%) - Flujo lógico y conectores
+- Sociolinguistic Adequacy (15%) - Registro y cortesía
+- Lexical Range (20%) - Diversidad y adecuación de vocabulario
+- Morphosyntax (20%) - Gramática, tiempos, conjugación
+
+El `french_scorer` incluye detección de errores típicos A2/B1 (auxiliaires, género, conjugación, ortografía).
 
 ## 📁 Project Structure
 
@@ -123,30 +146,35 @@ Evaluates **language proficiency** in French and/or English exams using CEFR sta
 AI-Prediction-Model/
 ├── app/
 │   ├── main.py                    # FastAPI application
-│   ├── model.py                   # Core ML model
-│   ├── schemas.py                 # Data models (Language enum, etc.)
-│   ├── open_response_scorer.py    # Bilingual scoring engine
-│   ├── question_selector.py       # Adaptive question selection
-│   ├── difficulty_adjuster.py     # Proficiency level estimation
+│   ├── model.py                   # Core ML model & prediction pipeline
+│   ├── adaptive_selector.py       # Adaptive question selection & level estimation
+│   ├── open_response_scorer.py    # Scoring de respuestas abiertas (bilingüe)
+│   ├── french_scorer.py           # Reglas lingüísticas para francés
+│   ├── english_scorer.py          # Reglas lingüísticas para inglés
+│   ├── bias_checker.py            # Detección de datos sensibles en corpus
+│   ├── schemas/                   # Modelos Pydantic
+│   │   ├── __init__.py            # Re-export de modelos
+│   │   └── question_type.py       # Enum QuestionType centralizado
+│   ├── scorers/
+│   │   ├── fill_blank_scorer.py   # Scoring FILL_BLANK
+│   │   └── ordering_scorer.py     # Scoring ORDERING
 │   └── models/
-│       └── exam_model.joblib      # Trained model
+│       └── exam_model.joblib      # Modelo entrenado
 │
 ├── samples/
-│   ├── example.json               # Single question example
-│   ├── train_payload.json         # Training payload
-│   ├── predict_payload.json       # Prediction payload
-│   ├── train_multilingual_delf.json       # Bilingual training
-│   └── predict_multilingual_exam.json     # Bilingual exam
+│   ├── train_french_priority.json     # Corpus principal (18+ preguntas variadas)
+│   ├── train_french_priority_2.json    # Corpus verbo être + IMAGE
+│   └── exams french/
+│       ├── predict_exam_french1.json   # Examen B1
+│       ├── predict_exam_french2.json   # Examen A2
+│       ├── predict_exam_french3.json   # Examen B2
+│       └── predict_exam_french4.json   # Examen A2+
 │
 ├── tests/
-│   └── test_api.py                # 23 comprehensive tests (17 + 6 new)
+│   └── test_api.py                # Tests de API
 │
-├── requirements.txt               # Dependencies
-├── README.md                      # This file
-├── MULTILINGUAL_UPDATE.md         # Technical details
-├── QUICKSTART_MULTILINGUAL.md     # Usage guide
-├── BEFORE_AND_AFTER.md            # Change summary
-└── COMPLETION_SUMMARY.md          # Implementation summary
+├── requirements.txt
+└── README.md
 ```
 
 ---
@@ -154,6 +182,7 @@ AI-Prediction-Model/
 ## 🌐 Language Support Details
 
 ### French (fr)
+
 - **Framework**: DELF/CEFR
 - **Levels**: A1-, A1, A1+, A2-, A2, A2+, B1-, B1, B1+, B2-, B2+
 - **Connectors**: 28 across levels (et, mais, cependant, donc, néanmoins, etc.)
@@ -161,6 +190,7 @@ AI-Prediction-Model/
 - **Status**: ✅ Ready to Run
 
 ### English (en)
+
 - **Framework**: CEFR ESL
 - **Levels**: A1-, A1, A1+, A2-, A2, A2+, B1-, B1, B1+, B2-, B2+
 - **Connectors**: 31 across levels (and, but, however, therefore, nonetheless, etc.)
@@ -168,6 +198,7 @@ AI-Prediction-Model/
 - **ESL Tolerance**: Applied for learner-appropriate evaluation
 
 ### Language Detection
+
 ```
 Input:  "Je suis heureux aujourd'hui" → Detected: fr ✅
 Input:  "I am very happy today"      → Detected: en ✅
@@ -177,39 +208,32 @@ Input:  "I am very happy today"      → Detected: en ✅
 
 ## 📋 Sample Usage
 
-### Request (Mixed Language Exam)
+### Request (examen con tipos variados)
+
 ```json
 {
-  "exam_id": "exam-2024-001",
+  "exam_id": "ex-french-001",
+  "candidate_id": "cand-123",
   "adaptive": true,
   "questions": [
-    {
-      "question_id": "q_fr_1",
-      "type": "open",
-      "text": "Décrivez votre jour",
-      "language": "fr"
-    },
-    {
-      "question_id": "q_en_1",
-      "type": "open",
-      "text": "Describe your day",
-      "language": "en"
-    }
+    {"question_id": "q_fr_1", "type": "writing_text", "text": "Écrivez un message sur votre journée.", "language": "fr"},
+    {"question_id": "q_fr_3", "type": "single_choice", "text": "Quelle est la couleur du ciel?", "language": "fr"},
+    {"question_id": "q_img_1", "type": "image", "text": "Que font les personnes sur l'image?", "image_description": "Un groupe d'étudiants en train d'étudier dans une bibliothèque.", "language": "fr"},
+    {"question_id": "q_fr_13", "type": "fill_blank", "text": "Nous ___ allés au marché.", "language": "fr"},
+    {"question_id": "q_fr_16", "type": "ordering", "text": "Remettez les étapes dans l'ordre.", "language": "fr", "elements": ["Égoutter.", "Faire bouillir.", "Saler.", "Ajouter."]}
   ],
   "answers": [
-    {
-      "question_id": "q_fr_1",
-      "answer_text": "Aujourd'hui j'ai eu une belle journée. J'ai travaillé et j'ai appris beaucoup."
-    },
-    {
-      "question_id": "q_en_1",
-      "answer_text": "Today I had a beautiful day. I worked and learned many things."
-    }
+    {"question_id": "q_fr_1", "type": "writing_text", "answer_text": "Aujourd'hui j'ai travaillé et j'ai appris beaucoup.", "time_spent_sec": 120},
+    {"question_id": "q_fr_3", "type": "single_choice", "answer_text": "bleu", "time_spent_sec": 8},
+    {"question_id": "q_img_1", "type": "image", "answer_text": "Ils étudient.", "time_spent_sec": 12},
+    {"question_id": "q_fr_13", "type": "fill_blank", "answer_text": "sommes", "time_spent_sec": 10},
+    {"question_id": "q_fr_16", "type": "ordering", "answer_list": ["Faire bouillir.", "Saler.", "Ajouter.", "Égoutter."], "time_spent_sec": 25}
   ]
 }
 ```
 
 ### Response
+
 ```json
 {
   "exam_id": "exam-2024-001",
@@ -250,16 +274,20 @@ Input:  "I am very happy today"      → Detected: en ✅
 ## 🔧 Configuration
 
 ### Default Language
+
 By default, the system is **French-first** (Language.fr is default).
 
 To change:
-1. Edit `app/schemas.py`
+
+1. Edit `app/schemas/__init__.py`
 2. Change `language: Language = Language.fr` to `language: Language = Language.en`
 
 ### Language Detection Threshold
+
 Current heuristic: Uses French/English word markers with +2 threshold.
 
 To adjust accuracy:
+
 1. Edit `app/open_response_scorer.py`
 2. Modify `detect_language()` function
 3. Adjust threshold from `+2` to `+3` for stricter detection
@@ -270,19 +298,21 @@ To adjust accuracy:
 
 Both languages use identical CEFR proficiency scale:
 
-| Abbreviation | Level | Description |
-|--------------|-------|-------------|
-| A1- | Breakthrough | Basic survival language |
-| A1 | Breakthrough | Can introduce themselves |
-| A1+ | Elementary | Can handle simple topics |
-| A2- | Lower Elementary | Can describe familiar topics |
-| A2 | Elementary | Can discuss simple matters |
-| A2+ | Upper Elementary | Can handle wider range |
-| B1- | Lower Intermediate | Can express basic opinions |
-| B1 | Intermediate | Can discuss many topics |
-| B1+ | Upper Intermediate | Can explain views fluently |
-| B2- | Lower Upper-Intermediate | Can argue persuasively |
-| B2+ | Upper-Intermediate | Can discuss complex topics |
+
+| Abbreviation | Level                    | Description                  |
+| ------------ | ------------------------ | ---------------------------- |
+| A1-          | Breakthrough             | Basic survival language      |
+| A1           | Breakthrough             | Can introduce themselves     |
+| A1+          | Elementary               | Can handle simple topics     |
+| A2-          | Lower Elementary         | Can describe familiar topics |
+| A2           | Elementary               | Can discuss simple matters   |
+| A2+          | Upper Elementary         | Can handle wider range       |
+| B1-          | Lower Intermediate       | Can express basic opinions   |
+| B1           | Intermediate             | Can discuss many topics      |
+| B1+          | Upper Intermediate       | Can explain views fluently   |
+| B2-          | Lower Upper-Intermediate | Can argue persuasively       |
+| B2+          | Upper-Intermediate       | Can discuss complex topics   |
+
 
 ---
 
@@ -329,26 +359,39 @@ Multilingual Tests (v2.1 - NEW):
 ## ✨ Key Features by Version
 
 ### v2.0 (Original)
-- ✅ French DELF evaluation
-- ✅ Open-ended questions  
-- ✅ Multiple-choice questions
-- ✅ Adaptive assessment
-- ✅ Level estimation (A1-B2)
-- ✅ 17 comprehensive tests
 
-### v2.1 (Current – Multilingual)
-- ✅ All v2.0 features
-- ✅ **English support** (NEW)
-- ✅ **Automatic language detection** (NEW)
-- ✅ **Fairness validation** (NEW)
-- ✅ **6 new tests** (NEW)
-- ✅ **Full backward compatibility** (MAINTAINED)
+- French DELF evaluation
+- Open-ended questions
+- Multiple-choice questions
+- Adaptive assessment
+- Level estimation (A1-B2)
+
+### v2.1 (Multilingual)
+
+- English support
+- Automatic language detection
+- Fairness validation
+- Full backward compatibility
+
+### v2.2+ (Current – Tipos extendidos)
+
+- **FILL_BLANK** con respuestas múltiples aceptadas y tolerancia a acentos
+- **ORDERING** con puntaje parcial (posiciones + pares adyacentes)
+- **IMAGE** con campo `image_description` (opcional)
+- **SPEAKING_RECORD** con scoring por rúbrica DELF
+- Enum centralizado `QuestionType` (sin comparaciones por string)
+- Estimación de nivel writing-focused (80% escritura/habla, 20% precisión)
+- Umbrales calibrados para rango real de scoring
+- `french_scorer` ampliado: detección de errores auxiliaires, género, conjugación
+- Bias checker para corpus de entrenamiento
+- Corpus y exámenes de muestra variados (todos los tipos por examen)
 
 ---
 
 ## 🚀 Deployment Production
 
 ### Requirements
+
 - Python 3.12+
 - FastAPI 0.115.6+
 - Pydantic 2.10.3+
@@ -356,16 +399,19 @@ Multilingual Tests (v2.1 - NEW):
 - joblib
 
 ### Installation
+
 ```bash
 pip install -r requirements.txt
 ```
 
 ### Running
+
 ```bash
 python -m uvicorn app.main:app --reload
 ```
 
 ### Production
+
 ```bash
 python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
 ```
@@ -374,23 +420,30 @@ python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
 
 ## 📈 Performance
 
-| Metric | Value |
-|--------|-------|
-| **API Response Time** | <100ms per question |
-| **Full Exam (4 questions)** | ~300ms |
-| **Model Training** | <1s for typical corpus |
-| **Language Detection Accuracy** | 95%+ for clear text |
-| **Scoring Reliability** | Validated by 23 tests |
+
+| Metric                              | Value                                                                     |
+| ----------------------------------- | ------------------------------------------------------------------------- |
+| **API Response Time**               | <100ms por pregunta                                                       |
+| **Examen completo (≈18 preguntas)** | ~1–2 s                                                                    |
+| **Model Training**                  | <5 s para corpus típico (train_french_priority + train_french_priority_2) |
+| **Language Detection Accuracy**     | 95%+ para texto claro                                                     |
+| **Scoring Reliability**             | Validado por suite de tests                                               |
+
 
 ---
 
 ## 🔮 Future Enhancements
 
 Possible extensions (not in current scope):
+
 - Additional languages (Spanish, German)
 - Machine learning-based language detection
 - Dialect-specific scoring variations
 - Performance monitoring dashboard
 - A/B testing framework
 
-### ------------------------ PIE PLACEMENT TEST PROJECT - PYTHON IA MODEL --------------------------- 
+---
+
+---
+
+*PIE Placement Test Project — Python AI Model* 

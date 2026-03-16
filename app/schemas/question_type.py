@@ -74,6 +74,10 @@ class QuestionType(str, Enum):
     def is_ordering(self) -> bool:
         return self == QuestionType.ORDERING
 
+    def is_image(self) -> bool:
+        """True si la pregunta está basada en una imagen."""
+        return self == QuestionType.IMAGE
+
     def is_speaking(self) -> bool:
         return self == QuestionType.SPEAKING_RECORD
 

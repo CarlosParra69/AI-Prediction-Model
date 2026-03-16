@@ -80,6 +80,44 @@
       "language": "fr",
       "accepted_answers": ["est"],
       "difficulty": 2
+    },
+    {
+      "question_id": "q_img_4",
+      "type": "image",
+      "text": "Que fait la personne sur l'image?",
+      "image_description": "Un homme cuisinant dans une cuisine moderne, en train de couper des légumes sur une planche.",
+      "language": "fr",
+      "options": ["Il cuisine.", "Il lit un livre.", "Il fait du sport.", "Il travaille à l'ordinateur."],
+      "answer": "Il cuisine.",
+      "difficulty": 1
+    },
+    {
+      "question_id": "q_img_5",
+      "type": "image",
+      "text": "Où se trouve cette scène?",
+      "image_description": "Des personnes assises à une terrasse de café en plein air, avec des parasols et des tables.",
+      "language": "fr",
+      "options": ["À la terrasse d'un café.", "Dans une salle de classe.", "Au supermarché.", "À la plage."],
+      "answer": "À la terrasse d'un café.",
+      "difficulty": 2
+    },
+    {
+      "question_id": "q_fr_29",
+      "type": "single_choice",
+      "text": "Quelle est la capitale de la France?",
+      "language": "fr",
+      "options": ["Lyon", "Paris", "Marseille", "Bordeaux"],
+      "answer": "Paris",
+      "difficulty": 1
+    },
+    {
+      "question_id": "q_fr_30",
+      "type": "ordering",
+      "text": "Remettez les étapes du matin dans l'ordre logique.",
+      "language": "fr",
+      "elements": ["Se lever.", "Prendre le petit-déjeuner.", "Se laver.", "S'habiller."],
+      "correct_order": ["Se lever.", "Se laver.", "S'habiller.", "Prendre le petit-déjeuner."],
+      "difficulty": 1
     }
   ],
   "metadata": {
@@ -87,6 +125,6 @@
     "version": "2.0.0",
     "language": "fr",
     "includes_errors": "false",
-    "question_types": "fill_blank"
+    "question_types": "fill_blank, image, single_choice, ordering"
   }
 }

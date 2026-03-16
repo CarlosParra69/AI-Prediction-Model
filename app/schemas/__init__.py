@@ -171,6 +171,10 @@ class QuestionForExam(BaseModel):
     language: Language = Language.fr
     # Para IMAGE
     image_url: Optional[str] = Field(default=None, description="URL o referencia de imagen (para IMAGE)")
+    image_description: Optional[str] = Field(
+        default=None,
+        description="Descripción textual de la imagen mostrada al candidato (para IMAGE)",
+    )
     # Para ORDERING: elementos disponibles en orden aleatorio
     elements: Optional[List[str]] = Field(default=None, description="Elementos a ordenar (para ORDERING)")
 
@@ -227,6 +231,10 @@ class TrainSample(BaseModel):
 
     # Para IMAGE
     image_url: Optional[str] = Field(default=None, description="URL o referencia de imagen")
+    image_description: Optional[str] = Field(
+        default=None,
+        description="Descripción de la imagen mostrada al candidato (para IMAGE)",
+    )
 
     # Para SPEAKING_RECORD
     audio_recording_ref: Optional[str] = Field(
@@ -290,6 +298,15 @@ class TrainRequest(BaseModel):
                         "text": "Ordena las estaciones del año.",
                         "elements": ["automne", "hiver", "printemps", "été"],
                         "correct_order": ["printemps", "été", "automne", "hiver"],
+                        "difficulty": 2,
+                    },
+                    {
+                        "question_id": "q_img_1",
+                        "type": "image",
+                        "text": "What are the people doing in the image?",
+                        "image_description": "A group of students studying together in a university library.",
+                        "options": ["They are studying.", "They are eating.", "They are playing."],
+                        "answer": "They are studying.",
                         "difficulty": 2,
                     },
                 ],
@@ -356,6 +373,13 @@ class PredictRequest(BaseModel):
                         "type": "ordering",
                         "text": "Ordena las estaciones.",
                         "elements": ["hiver", "printemps", "été", "automne"],
+                    },
+                    {
+                        "question_id": "q_img_1",
+                        "type": "image",
+                        "text": "Describe what is happening in the image.",
+                        "image_description": "A young woman working on a laptop in a coffee shop.",
+                        "language": "en",
                     },
                 ],
                 "answers": [

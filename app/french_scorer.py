@@ -91,6 +91,14 @@ FRENCH_SPELLING_ERRORS = {
     "experience": ("expérience", 0.03),
     "encor": ("encore", 0.05),
     "vrement": ("vraiment", 0.05),
+    # Erreurs d'accent fréquentes chez les apprenants A2/B1
+    "preparer": ("préparer", 0.04),
+    "premiere": ("première", 0.04),
+    "etudier": ("étudier", 0.04),
+    "special": ("spécial", 0.04),
+    "ideal": ("idéal", 0.04),
+    "adoree": ("adorée", 0.03),
+    "interessant": ("intéressant", 0.03),
 }
 
 
@@ -118,29 +126,56 @@ def score_morphosyntax_fr(response_text: str, text_lower: str) -> float:
         (r"\billÉ?s\s+sommes\b", "ils sont"),
         (r"\bell[e]?s\s+suis\b", "elles sont"),
         (r"\bj[e']?.*étaient\b", "j'étais"),
+        # Verbes irréguliers courants mal conjugués (manque -s/-s/-t)
+        (r"\bje\s+met\b", "je mets"),
+        (r"\bje\s+fait\b", "je fais"),
+        (r"\bje\s+dit\b", "je dis"),
+        (r"\bje\s+prend\b", "je prends"),
+        # Mauvais auxiliaire pour verbes de mouvement (avoir → être)
+        (r"\bj[e']?\s*ai\s+(allé|alé|parti|venu|arrivé|sorti|entré|monté|descendu|resté|tombé)\b",
+         "je suis + participe (verbe de mouvement)"),
+        # Accord pluriel sujet + était (devrait être étaient)
+        (r"\b(mes|tes|ses|les|nos|vos|leurs)\s+\w+\s+était\b", "pluriel → étaient"),
+        # Participe passé sans auxiliaire (je + pp direct, sans avoir/être)
+        # Matches: "je regardé", "je dormi", "je mangé", etc. (≥4 chars ending in é or i)
+        (r"\bje\s+[a-z\u00e0-\u00ff]{4,}[éi]\b", "je + participe passé sans avoir/être"),
     ]
     for pattern, suggestion in conj_errors:
         if re.search(pattern, text_lower):
             errors.append(("conjugation", 0.12))
-    
-    # Spelling/Accent errors
-    spelling_errors = [
-        r"dificile", r"casserolle", r"legume", r"cuisne", r"parentés",
-        r"fieres", r"famile", r"alé", r"beacoup", r"riconctr",
-        r"enrichissante", r"nouriture", r"nourriture", r"oublier",
-        r"differente|différente", r"environement|environnement",
-        r"quietud", r"lumieres", r"memorable", r"enrichissante",
-        r"vrement", r"experience",
+
+    # Erreurs d'élision (omission de l'apostrophe ou de la contraction)
+    elision_errors = [
+        (r"\bde\s+[éèêëàâîïôùûü]\w+", "d' + voyelle accentuée"),
+        (r"\bje\s+ai\b", "j'ai (élision obligatoire)"),
+        (r"\bje\s+e[a-zéèêëàâîïôùûü]\w+", "j' + voyelle (élision)"),
     ]
-    
+    for pattern, suggestion in elision_errors:
+        if re.search(pattern, text_lower):
+            errors.append(("elision", 0.08))
+
+    # Spelling/Accent errors — sólo patrones INCORRECTOS (no las formas correctas)
+    spelling_errors = [
+        r"dificile", r"casserolle", r"\blegume\b", r"cuisne", r"\bparentes\b",
+        r"\bfieres\b", r"\bfamile\b", r"\bal[eé]\b", r"beacoup", r"riconctr",
+        r"\bnouriture\b",
+        r"\bdifferente\b",   # sin acento (différente = correcto)
+        r"\benvironement\b", # falta una 'n' (environnement = correcto)
+        r"quietud", r"\blumieres\b", r"\bmemorable\b",
+        r"vrement", r"\bexperience\b",
+    ]
+
     for error_pattern in spelling_errors:
         if re.search(error_pattern, text_lower):
             errors.append(("spelling", 0.06))
-    
-    # Gender/Number agreement errors  
+
+    # Gender/Number agreement errors
     gender_errors = [
-        (r"\bun\s+place\b", "une place (feminine)"),
-        (r"un\s+plat\s+favori.*couscous.*je", "le couscous (masculine)"),
+        (r"\bun\s+place\b", "une place (féminin)"),
+        (r"\bun\s+journée\b", "une journée (féminin)"),
+        (r"\bun\s+heure\b", "une heure (féminin)"),
+        (r"\bun\s+idée\b", "une idée (féminin)"),
+        (r"\bun\s+erreur\b", "une erreur (féminin)"),
     ]
     for pattern, note in gender_errors:
         if re.search(pattern, text_lower):

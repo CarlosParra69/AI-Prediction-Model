@@ -117,8 +117,8 @@
     {
       "question_id": "q_fr_1",
       "type": "writing_text",
-      "answer_text": "Aujourd'hui c'était un jour un peu compliqué. Je me suis levé tard et j'ai raté le bus. Au travail j'ai fait des erreurs avec les documents et mon chef n'était pas très content. Le soir je suis rentré fatigué et j'ai juste mangé quelque chose rapide.",
-      "time_spent_sec": 160
+      "answer_text": "Aujourd'hui c'était un journée dificile. Je suis alé au travail mais il y a des problèmes. Le soir j'ai mangé vite et je dormi tôt.",
+      "time_spent_sec": 125
     },
     {
       "question_id": "q_fr_3",
@@ -129,26 +129,26 @@
     {
       "question_id": "q_fr_2",
       "type": "writing_text",
-      "answer_text": "Mes loisirs preferé sont regarder des series et jouer au telephone. Je ne lis pas beaucoup parce que c'est difficile pour moi. J'aime aussi sortir avec mes amis au centre commercial mais je ne vais pas souvent parce que je dois étudier.",
-      "time_spent_sec": 150
+      "answer_text": "J'aime regarder la television et jouer au telephone. J'aime aussi sortir avec mes amis. C'est beacoup amusant pour moi.",
+      "time_spent_sec": 135
     },
     {
       "question_id": "q_fr_4",
       "type": "single_choice",
       "answer_text": "petit",
-      "time_spent_sec": 6
+      "time_spent_sec": 7
     },
     {
       "question_id": "q_fr_5",
       "type": "writing_text",
-      "answer_text": "Un jour important pour moi c'était quand j'ai changé de ville. J'étais très nerveux parce que je ne connaissais personne. Le voyage était long et je me sentais un peu seul. Mais après quelques semaines j'ai trouvé des nouveaux amis et maintenant je suis plus tranquille.",
-      "time_spent_sec": 190
+      "answer_text": "Un jour important c'était quand je ai changé de ville pour travailler. J'étais beacoup nerveux parce que je connaissais pas les personnes. Maintenant c'est mieux.",
+      "time_spent_sec": 155
     },
     {
       "question_id": "q_fr_7",
       "type": "writing_text",
-      "answer_text": "Pour preparer mon repas préféré qui est le riz avec poulet, d'abord je coupe le poulet en petits morceaux. Après je met un peu d'huile dans la poele et je fais cuire le poulet. Puis je ajoute le riz et l'eau et j'attends jusqu'à que tout est cuit. A la fin je met du sel et un peu de citron.",
-      "time_spent_sec": 180
+      "answer_text": "Pour faire mon repas j'ai besoin de poulet et riz. Je met dans la poele et je fait cuire. Après je met du sel. C'est facile et bon.",
+      "time_spent_sec": 148
     },
     {
       "question_id": "q_fr_6",
@@ -165,20 +165,20 @@
     {
       "question_id": "q_fr_9",
       "type": "writing_text",
-      "answer_text": "Mon environement ideal d'étude serait une petite chambre calme avec pas beaucoup de choses. Je veux une table simple, une bonne chaise et une lampe. J'ai besoin aussi d'un peu de musique tres douce pour me concentrer. Je ne veux pas de telephone ni de television pour ne pas me distraire.",
-      "time_spent_sec": 180
+      "answer_text": "Mon endroit pour etudier c'est ma chambre. Je veux calme et lumière. Je peux pas travailler avec beacoup de bruit. J'ai besoin de bonne chaise et table.",
+      "time_spent_sec": 140
     },
     {
       "question_id": "q_fr_11",
       "type": "writing_text",
-      "answer_text": "Une experience de voyage memorable pour moi c'était quand je suis allé à la mer pour la premiere fois. J'ai vu la mer et j'étais très surpris parce que c'était très grand. Je ne savais pas bien nager alors je suis resté près du bord. Mais j'ai beaucoup aimé marcher sur la plage avec ma famille.",
-      "time_spent_sec": 200
+      "answer_text": "Un voyage important c'était quand j'ai allé à la mer. J'ai vu la mer et c'était très grande. Je suis resté près. J'ai beacoup aimé la plage avec ma famille.",
+      "time_spent_sec": 158
     },
     {
       "question_id": "q_fr_13",
       "type": "fill_blank",
       "answer_text": "avons",
-      "time_spent_sec": 11
+      "time_spent_sec": 12
     },
     {
       "question_id": "q_fr_14",
@@ -190,19 +190,19 @@
       "question_id": "q_fr_15",
       "type": "fill_blank",
       "answer_text": "eu",
-      "time_spent_sec": 8
+      "time_spent_sec": 9
     },
     {
       "question_id": "q_fr_16",
       "type": "ordering",
       "answer_list": [
-        "Faire bouillir l'eau.",
-        "Saler l'eau.",
         "Ajouter les pâtes.",
+        "Faire bouillir l'eau.",
+        "Servir dans une assiette.",
         "Égoutter les pâtes.",
-        "Servir dans une assiette."
+        "Saler l'eau."
       ],
-      "time_spent_sec": 40
+      "time_spent_sec": 50
     },
     {
       "question_id": "q_fr_17",
@@ -213,14 +213,13 @@
         "Le dîner",
         "Le goûter"
       ],
-      "time_spent_sec": 20
+      "time_spent_sec": 22
     },
     {
       "question_id": "q_fr_18",
       "type": "speaking_record",
-      "answer_text": "Bonjour, je m'appelle Karim. J'ai vingt-deux ans et je suis étudiant en informatique. J'habite dans une petite ville près de Lyon. Dans mon temps libre j'aime jouer aux jeux vidéo et parfois faire du foot avec mes amis.",
-      "time_spent_sec": 38
+      "answer_text": "Bonjour, je m'appelle Karim. J'ai vingt-deux ans et je suis étudiant. J'habite près de Lyon. J'aime les jeux vidéo et le foot avec mes amis.",
+      "time_spent_sec": 32
     }
   ]
 }
-

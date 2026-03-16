@@ -262,8 +262,9 @@ class OnlineExamModel:
             # Crea mapa de respuestas por question_id
             answers_by_id = {ans.question_id: ans for ans in request.answers}
 
-            # Procesa cada pregunta
+            # Procesa cada pregunta y registra qué preguntas se evaluaron
             per_question: List[QuestionScoreDetail] = []
+            evaluated_questions = []
             ability_state = self.adaptive_selector.initialize_state() if request.adaptive else None
 
             for question in request.questions:
@@ -271,7 +272,6 @@ class OnlineExamModel:
                 if not answer:
                     continue
 
-                # Evalúa la pregunta
                 score_detail = self._evaluate_question(
                     question_id=question.question_id,
                     question_type=question.type,
@@ -282,21 +282,49 @@ class OnlineExamModel:
                     time_spent_sec=answer.time_spent_sec,
                 )
                 per_question.append(score_detail)
+                evaluated_questions.append(question)
 
-                # Actualiza ability_state si modo adaptativo
                 if request.adaptive and ability_state is not None:
                     ability_state = self.adaptive_selector.update_state(
                         ability_state, score_detail.score
                     )
 
-            # Calcula nivel estimado
-            all_scores = [q.score for q in per_question]
-            avg_score_normalized = (sum(all_scores) / len(all_scores)) if all_scores else 0.5
-            
-            if ability_state is not None:
-                estimated_level = DELFLevel(self.adaptive_selector.estimate_delf_level(ability_state.ability_estimate))
-            else:
-                estimated_level = DELFLevel(self._score_to_level(avg_score_normalized * 100))
+            # ── Estimación de nivel: writing-focused ─────────────────────────────
+            # Los tipos de texto libre (writing_text, speaking_record) son los más
+            # discriminativos del nivel DELF. Las preguntas binarias (single_choice,
+            # fill_blank, ordering) informan sobre precisión pero no sobre nivel
+            # lingüístico — un A2+ y un B2 pueden acertar las mismas MCQ.
+            #
+            # Fórmula: level_score = writing_avg × 0.8 + overall_avg × 0.2
+            _WRITING_TYPES = {
+                QuestionType.WRITING_TEXT, QuestionType.open,
+                QuestionType.short_answer, QuestionType.essay,
+                QuestionType.SPEAKING_RECORD,
+            }
+
+            writing_weighted_sum = 0.0
+            writing_weight_total = 0.0
+            overall_weighted_sum = 0.0
+            overall_weight_total = 0.0
+
+            for q, detail in zip(evaluated_questions, per_question):
+                q_info = self.question_pool.get(q.question_id, {})
+                difficulty = float(q_info.get("difficulty", 3))
+                overall_weighted_sum += detail.score * difficulty
+                overall_weight_total += difficulty
+                if detail.type in _WRITING_TYPES:
+                    writing_weighted_sum += detail.score * difficulty
+                    writing_weight_total += difficulty
+
+            overall_avg = (overall_weighted_sum / overall_weight_total) if overall_weight_total > 0 else 0.5
+            writing_avg = (writing_weighted_sum / writing_weight_total) if writing_weight_total > 0 else overall_avg
+
+            # Blended score: calidad lingüística (80%) + precisión global (20%)
+            level_score = writing_avg * 0.8 + overall_avg * 0.2
+
+            estimated_level = DELFLevel(
+                self.adaptive_selector.estimate_delf_level(level_score)
+            )
 
             # Recomendación para siguiente pregunta
             next_recommendation = None
@@ -315,6 +343,9 @@ class OnlineExamModel:
                 "request_id": str(uuid4()),
                 "adaptive_mode": str(request.adaptive),
                 "questions_evaluated": str(len(per_question)),
+                "writing_avg": str(round(writing_avg, 4)),
+                "overall_avg": str(round(overall_avg, 4)),
+                "level_score": str(round(level_score, 4)),
             }
 
             # Calcula confianza global

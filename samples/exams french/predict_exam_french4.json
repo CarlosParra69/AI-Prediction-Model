@@ -117,8 +117,8 @@
     {
       "question_id": "q_fr_1",
       "type": "writing_text",
-      "answer_text": "Aujourd'hui j'ai eu une journée assez normale. Le matin je suis allé à l'université pour suivre deux cours. Après, j'ai déjeuné avec une amie dans la cafétéria. L'après-midi j'ai étudié un peu à la bibliothèque et ensuite je suis rentré chez moi pour me reposer.",
-      "time_spent_sec": 180
+      "answer_text": "Aujourd'hui j'ai eu une journée normale. Le matin je suis alé à l'université pour deux cours. Après j'ai mangé avec une amie à la cafétéria. Le soir je suis rentré chez moi.",
+      "time_spent_sec": 140
     },
     {
       "question_id": "q_fr_3",
@@ -129,8 +129,8 @@
     {
       "question_id": "q_fr_2",
       "type": "writing_text",
-      "answer_text": "Mes loisirs préférés sont écouter de la musique et faire du vélo. J'écoute surtout de la musique pop parce que les mélodies sont faciles et me donnent de l'énergie. Je fais du vélo le week-end dans le parc de ma ville; ça me permet de faire un peu de sport sans trop de difficulté.",
-      "time_spent_sec": 170
+      "answer_text": "J'aime écouter la musique et faire du vélo. J'écoute la musique pop parce que c'est joli et ça donne beacoup de énergie. Je fais du vélo le week-end au parc avec mes amis. C'est bon pour la santé.",
+      "time_spent_sec": 155
     },
     {
       "question_id": "q_fr_4",
@@ -141,68 +141,68 @@
     {
       "question_id": "q_fr_5",
       "type": "writing_text",
-      "answer_text": "Un jour important de ma vie a été celui où j'ai passé mon examen de fin de lycée. J'étais très stressé mais aussi excité. Quand j'ai vu mon nom sur la liste des étudiants qui ont réussi, j'ai senti un grand soulagement. Le soir, j'ai fêté cela avec ma famille dans un petit restaurant.",
-      "time_spent_sec": 195
+      "answer_text": "Un jour important pour moi c'était quand j'ai eu mon diplôme de lycée. J'étais beacoup content et nerveux. Mes parents était aussi très contents. On a mangé au restaurant pour fêter. C'était très special pour moi.",
+      "time_spent_sec": 175
     },
     {
       "question_id": "q_fr_7",
       "type": "writing_text",
-      "answer_text": "Pour préparer mon repas préféré, les pâtes à la tomate, je commence par faire bouillir de l'eau avec un peu de sel. Ensuite j'ajoute les pâtes et je les laisse cuire quelques minutes. Pendant ce temps, je chauffe la sauce tomate dans une petite casserole. Quand les pâtes sont prêtes, je les égoutte et je mélange avec la sauce.",
-      "time_spent_sec": 185
+      "answer_text": "Pour preparer les pâtes je met de l'eau dans une casserole. Quand c'est chaud j'ajoute le sel et les pâtes. Je fait cuire dix minutes. Pendant ce temps je chauffe la sauce tomate. Après je mélange tout et c'est prêt.",
+      "time_spent_sec": 165
     },
     {
       "question_id": "q_fr_6",
       "type": "single_choice",
-      "answer_text": "2 heures",
-      "time_spent_sec": 7
+      "answer_text": "3 heures",
+      "time_spent_sec": 10
     },
     {
       "question_id": "q_fr_8",
       "type": "single_choice",
-      "answer_text": "La Loire",
-      "time_spent_sec": 7
+      "answer_text": "La Seine",
+      "time_spent_sec": 9
     },
     {
       "question_id": "q_fr_9",
       "type": "writing_text",
-      "answer_text": "Mon environnement d'étude idéal serait une petite pièce calme avec un bureau près d'une fenêtre. J'aimerais avoir une chaise confortable et une bonne lumière. Il ne doit pas y avoir trop de bruit pour que je puisse me concentrer. J'aimerais aussi avoir quelques plantes pour rendre la pièce plus agréable.",
-      "time_spent_sec": 190
+      "answer_text": "Mon lieu ideal pour etudier c'est un endroit calme avec une table et une chaise. J'ai besoin de bonne lumière et pas beacoup de bruit. Je peux pas travailler s'il y a trop de bruit. J'aime aussi avoir des plantes.",
+      "time_spent_sec": 168
     },
     {
       "question_id": "q_fr_11",
       "type": "writing_text",
-      "answer_text": "Une expérience de voyage mémorable a été mon séjour à Barcelone avec des amis. Nous avons visité beaucoup de lieux intéressants comme la Sagrada Família et le parc Güell. J'ai beaucoup aimé marcher près de la mer le soir. Ce voyage était spécial parce que c'était la première fois que je voyageais sans mes parents.",
-      "time_spent_sec": 205
+      "answer_text": "Un voyage memorable pour moi c'était quand je suis alé à Barcelone avec des amis. Nous avons vu beacoup de choses comme la Sagrada Familia. J'ai aimé la ville et la nourriture. C'était la premiere fois que je voyageais sans mes parents.",
+      "time_spent_sec": 180
     },
     {
       "question_id": "q_fr_13",
       "type": "fill_blank",
-      "answer_text": "sommes",
-      "time_spent_sec": 10
+      "answer_text": "avons",
+      "time_spent_sec": 11
     },
     {
       "question_id": "q_fr_14",
       "type": "fill_blank",
       "answer_text": "sur",
-      "time_spent_sec": 6
+      "time_spent_sec": 7
     },
     {
       "question_id": "q_fr_15",
       "type": "fill_blank",
       "answer_text": "eu",
-      "time_spent_sec": 7
+      "time_spent_sec": 8
     },
     {
       "question_id": "q_fr_16",
       "type": "ordering",
       "answer_list": [
         "Faire bouillir l'eau.",
-        "Saler l'eau.",
         "Ajouter les pâtes.",
+        "Saler l'eau.",
         "Égoutter les pâtes.",
         "Servir dans une assiette."
       ],
-      "time_spent_sec": 32
+      "time_spent_sec": 34
     },
     {
       "question_id": "q_fr_17",
@@ -218,9 +218,8 @@
     {
       "question_id": "q_fr_18",
       "type": "speaking_record",
-      "answer_text": "Bonjour, je m'appelle Lucas. J'ai vingt-quatre ans et je suis étudiant en économie. J'habite dans une résidence universitaire près de mon campus. Dans mon temps libre, j'aime faire du sport, surtout le basket, et regarder des films avec mes amis.",
-      "time_spent_sec": 40
+      "answer_text": "Bonjour, je m'appelle Lucas. J'ai vingt-quatre ans et je suis étudiant en économie. J'habite dans une résidence universitaire. Dans mon temps libre j'aime le basket et regarder des films.",
+      "time_spent_sec": 35
     }
   ]
 }
-

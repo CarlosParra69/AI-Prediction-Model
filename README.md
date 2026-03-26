@@ -6,7 +6,8 @@
 
 ### 1. Prerequisites Python 3.12+
 
-#### Manual Instalation
+
+#### Instalación Manual
 
 In PowerShell or CMD:
 

@@ -145,19 +145,23 @@ class AdaptiveSelector:
         Returns:
             Nivel DELF estimado (A1-, A1, A1+, ..., B2+).
         """
-        # Mapeo simple y progresivo
+        # Umbrales calibrados para el rango real de scoring del sistema (0.35–0.95).
+        # El open_response_scorer produce scores entre ~0.35 (texto muy corto con errores
+        # graves) y ~0.93 (escritura B2 fluida). Los umbrales están ajustados para que
+        # el level_score compuesto (writing×0.8 + overall×0.2) produzca etiquetas DELF
+        # coherentes con la calidad lingüística observada en los exámenes de referencia.
         thresholds = [
-            (0.09, "A1-"),
-            (0.18, "A1"),
-            (0.27, "A1+"),
-            (0.36, "A2-"),
-            (0.45, "A2"),
-            (0.54, "A2+"),
-            (0.63, "B1-"),
-            (0.72, "B1"),
-            (0.81, "B1+"),
-            (0.90, "B2-"),
-            (1.0, "B2"),
+            (0.35, "A1-"),
+            (0.42, "A1"),
+            (0.47, "A1+"),
+            (0.52, "A2-"),
+            (0.675, "A2"),
+            (0.699, "A2+"),
+            (0.74, "B1-"),
+            (0.78, "B1"),
+            (0.83, "B1+"),
+            (0.88, "B2-"),
+            (0.93, "B2"),
         ]
 
         for threshold, level in thresholds:

@@ -1,0 +1,412 @@
+{
+  "train_id": "t2026-03-24-english-cefr-priority",
+  "examples": [
+    {
+      "question_id": "q_en_1",
+      "text": "Write a short message about your day (what you did and how you felt).",
+      "type": "writing_text",
+      "language": "en",
+      "difficulty": 1,
+      "expected_keywords": ["today", "work", "tired", "happy", "morning"],
+      "rubric": {
+        "level": "A1",
+        "expected_min_words": 25,
+        "expected_keywords": ["today", "work", "good"],
+        "criteria_weights": {
+          "task_realisation": 0.25,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.20,
+          "morphosyntax": 0.20
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "Today I went to work in the morning. I was very tired but the day was good. In the evening I rested at home.",
+          "score": 0.68
+        },
+        {
+          "text": "Today day good. I work many. Tired. Home sleep.",
+          "score": 0.38
+        }
+      ]
+    },
+    {
+      "question_id": "q_en_2",
+      "text": "Describe your favourite hobbies and explain why you enjoy them.",
+      "type": "writing_text",
+      "language": "en",
+      "difficulty": 2,
+      "expected_keywords": ["hobby", "enjoy", "because", "free time", "weekend"],
+      "rubric": {
+        "level": "A2",
+        "expected_min_words": 50,
+        "expected_keywords": ["hobby", "enjoy", "because"],
+        "criteria_weights": {
+          "task_realisation": 0.25,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.20,
+          "morphosyntax": 0.20
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "My favourite hobbies are reading and swimming. I enjoy reading because it helps me relax after work. I also like swimming on weekends because it keeps me healthy and I can meet friends at the pool.",
+          "score": 0.76
+        },
+        {
+          "text": "I have hobby is play game and music. I enjoy because is fun. I do every day one hour. Is my passion.",
+          "score": 0.44
+        }
+      ]
+    },
+    {
+      "question_id": "q_en_3",
+      "type": "single_choice",
+      "text": "Which sentence is grammatically correct?",
+      "language": "en",
+      "options": [
+        "She work in an office every day.",
+        "She works in an office every day.",
+        "She working in an office every day."
+      ],
+      "answer": "She works in an office every day.",
+      "difficulty": 1
+    },
+    {
+      "question_id": "q_en_4",
+      "type": "single_choice",
+      "text": "Choose the word that is closest in meaning to \"difficult\" in: \"The exam was very difficult.\"",
+      "language": "en",
+      "options": ["easy", "hard", "quick", "short"],
+      "answer": "hard",
+      "difficulty": 1
+    },
+    {
+      "question_id": "q_en_5",
+      "text": "Describe an important day in your life and why it mattered to you.",
+      "type": "writing_text",
+      "language": "en",
+      "difficulty": 3,
+      "expected_keywords": ["because", "remember", "family", "proud", "graduation"],
+      "rubric": {
+        "level": "B1",
+        "expected_min_words": 80,
+        "expected_keywords": ["important", "because"],
+        "criteria_weights": {
+          "task_realisation": 0.25,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.20,
+          "morphosyntax": 0.20
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "The most important day in my life was when I graduated from university. I felt very proud because my family had supported me for years. We celebrated together, and I knew that moment would change my career opportunities.",
+          "score": 0.82
+        },
+        {
+          "text": "The important day was when I get my diploma. I was very happy and my parents was proud too. We make party with friends. It was good memory for me.",
+          "score": 0.56
+        }
+      ]
+    },
+    {
+      "question_id": "q_en_6",
+      "type": "single_choice",
+      "text": "Which preposition completes the sentence correctly? \"She is really interested ___ improving her pronunciation.\"",
+      "language": "en",
+      "options": ["on", "at", "in", "for"],
+      "answer": "in",
+      "difficulty": 2
+    },
+    {
+      "question_id": "q_en_7",
+      "text": "Explain step by step how you make a simple dish you often cook (ingredients and main stages).",
+      "type": "writing_text",
+      "language": "en",
+      "difficulty": 2,
+      "expected_keywords": ["first", "then", "ingredients", "boil", "add"],
+      "rubric": {
+        "level": "A2",
+        "expected_min_words": 60,
+        "expected_keywords": ["first", "then"],
+        "criteria_weights": {
+          "task_realisation": 0.25,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.20,
+          "morphosyntax": 0.20
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "First, I boil water in a pot and add a little salt. Then I put the pasta in the water and cook it for about ten minutes. After that, I drain the pasta and mix it with tomato sauce and cheese.",
+          "score": 0.74
+        },
+        {
+          "text": "I make pasta easy. I put water in pot and make hot. After I put pasta and wait. Then I take out and put sauce. Is very good.",
+          "score": 0.46
+        }
+      ]
+    },
+    {
+      "question_id": "q_en_8",
+      "type": "single_choice",
+      "text": "Choose the correct past simple form: \"Yesterday afternoon I ___ English vocabulary for an hour.\"",
+      "language": "en",
+      "options": ["study", "studied", "studying", "am studying"],
+      "answer": "studied",
+      "difficulty": 1
+    },
+    {
+      "question_id": "q_en_9",
+      "text": "Describe the study environment where you learn English best (place, noise, tools, routine).",
+      "type": "writing_text",
+      "language": "en",
+      "difficulty": 3,
+      "expected_keywords": ["quiet", "desk", "laptop", "focus", "library"],
+      "rubric": {
+        "level": "B1",
+        "expected_min_words": 75,
+        "expected_keywords": ["study", "because"],
+        "criteria_weights": {
+          "task_realisation": 0.25,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.20,
+          "morphosyntax": 0.20
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "I learn English best in a quiet room with a clear desk and good light. I use my laptop for online exercises and keep my phone away so I can focus. Short breaks every forty minutes help me stay concentrated.",
+          "score": 0.79
+        },
+        {
+          "text": "Best for me is place with no many noise and big window for light. I need computer for lesson. If is too loud I cannot study good.",
+          "score": 0.53
+        }
+      ]
+    },
+    {
+      "question_id": "q_en_10",
+      "type": "single_choice",
+      "text": "Which option correctly completes this second conditional? \"If I ___ more free time, I would practise speaking every day.\"",
+      "language": "en",
+      "options": ["have", "had", "will have", "having"],
+      "answer": "had",
+      "difficulty": 3
+    },
+    {
+      "question_id": "q_en_11",
+      "text": "Write about a trip or journey you remember well (where you went, what happened, how you felt).",
+      "type": "writing_text",
+      "language": "en",
+      "difficulty": 3,
+      "expected_keywords": ["journey", "remember", "visited", "exciting", "weather"],
+      "rubric": {
+        "level": "B1",
+        "expected_min_words": 85,
+        "expected_keywords": ["trip", "because"],
+        "criteria_weights": {
+          "task_realisation": 0.25,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.20,
+          "morphosyntax": 0.20
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "Last year I took a train to visit a friend in another city. The journey was long but comfortable, and I enjoyed watching the countryside. When I arrived, we walked around the old town and tried local food. It was an exciting weekend I still remember clearly.",
+          "score": 0.83
+        },
+        {
+          "text": "I go to trip in summer and was very nice. We see many thing and eat good food. The weather was sun and hot. I take many photos and was happy with my friends.",
+          "score": 0.57
+        }
+      ]
+    },
+    {
+      "question_id": "q_en_12",
+      "type": "single_choice",
+      "text": "Which collocation is natural in English?",
+      "language": "en",
+      "options": [
+        "do a mistake",
+        "make a mistake",
+        "make homework",
+        "do a break"
+      ],
+      "answer": "make a mistake",
+      "difficulty": 2
+    },
+    {
+      "question_id": "q_en_13",
+      "type": "fill_blank",
+      "text": "They ___ in this city since 2020.",
+      "language": "en",
+      "accepted_answers": ["have lived", "have been living", "'ve lived", "'ve been living"],
+      "difficulty": 3
+    },
+    {
+      "question_id": "q_en_14",
+      "type": "fill_blank",
+      "text": "This email ___ sent to all students yesterday.",
+      "language": "en",
+      "accepted_answers": ["was"],
+      "difficulty": 2
+    },
+    {
+      "question_id": "q_en_15",
+      "type": "fill_blank",
+      "text": "At the airport, the officer asked: \"Could you ___ me your passport, please?\"",
+      "language": "en",
+      "accepted_answers": ["show", "hand"],
+      "difficulty": 2
+    },
+    {
+      "question_id": "q_en_16",
+      "type": "ordering",
+      "text": "Put these steps in a logical order for writing a short formal email in English.",
+      "language": "en",
+      "elements": [
+        "State clearly why you are writing.",
+        "Use an appropriate greeting (e.g. Dear Mr Smith,).",
+        "Sign off politely (e.g. Best regards,).",
+        "Write a clear subject line."
+      ],
+      "correct_order": [
+        "Write a clear subject line.",
+        "Use an appropriate greeting (e.g. Dear Mr Smith,).",
+        "State clearly why you are writing.",
+        "Sign off politely (e.g. Best regards,)."
+      ],
+      "difficulty": 2
+    },
+    {
+      "question_id": "q_en_17",
+      "type": "ordering",
+      "text": "Order these parts of the day from earliest to latest.",
+      "language": "en",
+      "elements": ["dinner", "breakfast", "lunch", "mid-afternoon snack"],
+      "correct_order": ["breakfast", "lunch", "mid-afternoon snack", "dinner"],
+      "difficulty": 1
+    },
+    {
+      "question_id": "q_img_en_1",
+      "type": "image",
+      "text": "What are the people in the image doing?",
+      "image_description": "A group of students studying together with books and laptops in a university library.",
+      "language": "en",
+      "options": [
+        "They are studying.",
+        "They are cooking.",
+        "They are playing football.",
+        "They are watching a film."
+      ],
+      "answer": "They are studying.",
+      "difficulty": 1
+    },
+    {
+      "question_id": "q_img_en_2",
+      "type": "image",
+      "text": "Which option best describes what you see?",
+      "image_description": "A person working on a laptop at a small table in a café, with a cup of coffee nearby.",
+      "language": "en",
+      "options": [
+        "Someone working on a laptop in a café.",
+        "Someone reading in a hospital.",
+        "Someone swimming in a pool.",
+        "Someone driving a bus."
+      ],
+      "answer": "Someone working on a laptop in a café.",
+      "difficulty": 2
+    },
+    {
+      "question_id": "q_img_en_3",
+      "type": "image",
+      "text": "Where is this scene most likely taking place?",
+      "image_description": "A teacher pointing at a whiteboard with grammar notes while learners sit at desks with notebooks.",
+      "language": "en",
+      "options": [
+        "In a language classroom.",
+        "In a restaurant kitchen.",
+        "On a sports field.",
+        "At a concert hall."
+      ],
+      "answer": "In a language classroom.",
+      "difficulty": 1
+    },
+    {
+      "question_id": "q_en_18",
+      "type": "speaking_record",
+      "text": "Introduce yourself in a few sentences: your name, where you are from, your job or studies, and one thing you like doing in English class or when you practise English.",
+      "language": "en",
+      "difficulty": 2,
+      "rubric": {
+        "level": "A2",
+        "expected_min_words": 30,
+        "expected_keywords": ["my name", "from", "I am", "I like", "English"],
+        "criteria_weights": {
+          "task_realisation": 0.35,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.15,
+          "morphosyntax": 0.15
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "Hello, my name is Ana and I am from Spain. I am a nurse and I study English online twice a week. In class I like speaking in pairs because it helps my fluency.",
+          "score": 0.87
+        },
+        {
+          "text": "Hi I am Carlos. I from Mexico. I student. I like English class because fun.",
+          "score": 0.54
+        }
+      ]
+    },
+    {
+      "question_id": "q_en_19",
+      "text": "Give a balanced view: what are two advantages and two disadvantages of learning English mainly through apps and short videos? Use connectors such as however, on the other hand, and therefore where appropriate.",
+      "type": "writing_text",
+      "language": "en",
+      "difficulty": 4,
+      "expected_keywords": ["however", "advantage", "disadvantage", "flexible", "interaction"],
+      "rubric": {
+        "level": "B2",
+        "expected_min_words": 120,
+        "expected_keywords": ["however", "advantage"],
+        "criteria_weights": {
+          "task_realisation": 0.22,
+          "coherence": 0.24,
+          "sociolinguistic": 0.14,
+          "lexicon": 0.20,
+          "morphosyntax": 0.20
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "Learning English through apps and short videos has clear advantages: it is flexible, and you can study in short sessions every day. On the other hand, you often lack real interaction with a teacher who corrects your mistakes. Another disadvantage is that passive watching does not always improve speaking. Therefore, I combine apps with conversation practice whenever I can.",
+          "score": 0.84
+        },
+        {
+          "text": "Apps is good because you can study when you want. Videos help listening. However the problem is you dont speak much. On other hand is cheap. So I think is ok but not enough alone.",
+          "score": 0.58
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "source": "english_cefr_priority_corpus",
+    "version": "1.0.0",
+    "language": "en",
+    "includes_errors": "true",
+    "question_types": "writing_text, single_choice, fill_blank, ordering, speaking_record, image",
+    "rubric_note": "CEFR-aligned dimensions mapped to criteria: task_realisation (task fulfillment), coherence (linkers/cohesion), sociolinguistic (register), lexicon (range/precision), morphosyntax (grammar range and accuracy)."
+  }
+}

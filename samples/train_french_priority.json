@@ -1,0 +1,388 @@
+{
+  "train_id": "t2026-03-16-french-priority",
+  "examples": [
+
+    {
+      "question_id": "q_fr_1",
+      "text": "Écrivez un message court sur votre journée.",
+      "type": "writing_text",
+      "language": "fr",
+      "difficulty": 1,
+      "expected_keywords": ["aujourd'hui", "bien", "travail", "matin"],
+      "rubric": {
+        "level": "A1",
+        "expected_min_words": 25,
+        "expected_keywords": ["aujourd'hui", "bien", "travail"],
+        "criteria_weights": {
+          "task_realisation": 0.25,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.20,
+          "morphosyntax": 0.20
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "Aujourd'hui j'ai travaillé toute la journée. C'était bien.",
+          "score": 0.65
+        },
+        {
+          "text": "Aujourd'hui le jour était bien. J'ai travaillé et c'est tres bon",
+          "score": 0.48
+        }
+      ]
+    },
+
+    {
+      "question_id": "q_fr_2",
+      "text": "Parlez de vos loisirs préférés et pourquoi vous les aimez.",
+      "type": "writing_text",
+      "language": "fr",
+      "difficulty": 2,
+      "expected_keywords": ["loisir", "aimer", "parce que", "activité"],
+      "rubric": {
+        "level": "A2",
+        "expected_min_words": 50,
+        "expected_keywords": ["loisir", "aimer"],
+        "criteria_weights": {
+          "task_realisation": 0.25,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.20,
+          "morphosyntax": 0.20
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "J'aime beaucoup la lecture. C'est mon loisir préféré parce que je peux apprendre de nouvelles choses. J'aime aussi le sport car c'est bon pour la santé.",
+          "score": 0.75
+        },
+        {
+          "text": "Les loisir que j'aimez sont le sport et la music. Je aime parce que c'est amusant et je peut faire avec mes amis.",
+          "score": 0.42
+        }
+      ]
+    },
+
+    {
+      "question_id": "q_fr_3",
+      "type": "single_choice",
+      "text": "Quelle est la couleur du ciel lors d'une belle journée?",
+      "language": "fr",
+      "options": ["bleu", "vert", "rouge", "jaune"],
+      "answer": "bleu",
+      "difficulty": 1
+    },
+
+    {
+      "question_id": "q_fr_4",
+      "type": "single_choice",
+      "text": "Quel est le contraire du mot 'grand'?",
+      "language": "fr",
+      "options": ["petit", "long", "haut", "épais"],
+      "answer": "petit",
+      "difficulty": 1
+    },
+
+    {
+      "question_id": "q_fr_5",
+      "text": "Décrivez un jour important de votre vie en détail.",
+      "type": "writing_text",
+      "language": "fr",
+      "difficulty": 3,
+      "expected_keywords": ["jour", "important", "moment", "souvenir"],
+      "rubric": {
+        "level": "B1",
+        "expected_min_words": 80,
+        "expected_keywords": ["jour", "important"],
+        "criteria_weights": {
+          "task_realisation": 0.25,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.20,
+          "morphosyntax": 0.20
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "Le jour le plus important de ma vie était le jour de mon diplôme. J'ai été tellement heureux et fier. Mes parents étaient aussi très contents. C'était un moment que je n'oublierai jamais.",
+          "score": 0.80
+        },
+        {
+          "text": "Le jours important c'étaient quand j'ai eu mon diplôme. J'était très heureus et fierr. Mes parents sont venu et nous avons fait une fête. C'était des bons souvenirs",
+          "score": 0.55
+        }
+      ]
+    },
+
+    {
+      "question_id": "q_fr_6",
+      "type": "single_choice",
+      "text": "Quel temps faut-il pour aller de Paris à Lyon en TGV?",
+      "language": "fr",
+      "options": ["1 heure", "2 heures", "3 heures", "5 heures"],
+      "answer": "2 heures",
+      "difficulty": 2
+    },
+
+    {
+      "question_id": "q_fr_7",
+      "text": "Expliquez comment vous préparez votre repas préféré.",
+      "type": "writing_text",
+      "language": "fr",
+      "difficulty": 2,
+      "expected_keywords": ["preparer", "repas", "ingrédient", "cuisiner"],
+      "rubric": {
+        "level": "A2",
+        "expected_min_words": 60,
+        "expected_keywords": ["préparer", "repas"],
+        "criteria_weights": {
+          "task_realisation": 0.25,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.20,
+          "morphosyntax": 0.20
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "Pour préparer mon repas préféré, je commence par réunir tous les ingrédients. Je fais cuire l'eau dans une casserole et j'ajoute les pâtes. Puis j'ajoute la sauce tomate et le fromage.",
+          "score": 0.72
+        },
+        {
+          "text": "Je prepere mon plat favori en mettant les ingridient dans une pot. J'ajoute eau et je fait cuire. C'es facile et tres bon. Mon famille aime beaucoup",
+          "score": 0.45
+        }
+      ]
+    },
+
+    {
+      "question_id": "q_fr_8",
+      "type": "single_choice",
+      "text": "Quel est le plus grand fleuve en France?",
+      "language": "fr",
+      "options": ["La Loire", "La Seine", "La Garonne", "Le Rhin"],
+      "answer": "La Loire",
+      "difficulty": 2
+    },
+
+    {
+      "question_id": "q_fr_9",
+      "text": "Décrivez votre environnement de travail ou d'études idéal.",
+      "type": "writing_text",
+      "language": "fr",
+      "difficulty": 3,
+      "expected_keywords": ["environnement", "idéal", "travail", "étude"],
+      "rubric": {
+        "level": "B1",
+        "expected_min_words": 75,
+        "expected_keywords": ["environnement", "idéal"],
+        "criteria_weights": {
+          "task_realisation": 0.25,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.20,
+          "morphosyntax": 0.20
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "Mon environnement de travail idéal serait calme et bien organisé. J'aimerais avoir une grande fenêtre pour avoir de la lumière naturelle. Il faudrait aussi avoir un bon équipement informatique et une connexion Internet rapide.",
+          "score": 0.78
+        },
+        {
+          "text": "L'environement ideal c'est qand il y a beacoup de lumieres et pas trop de bruits. J'aimes bien les plantes et les couleur vivante. On peut travailler mieu si c'es joli",
+          "score": 0.52
+        }
+      ]
+    },
+
+    {
+      "question_id": "q_fr_10",
+      "type": "single_choice",
+      "text": "En quelle année a eu lieu la Révolution française?",
+      "language": "fr",
+      "options": ["1789", "1799", "1802", "1815"],
+      "answer": "1789",
+      "difficulty": 2
+    },
+
+    {
+      "question_id": "q_fr_11",
+      "text": "Racontez une expérience de voyage mémorable.",
+      "type": "writing_text",
+      "language": "fr",
+      "difficulty": 3,
+      "expected_keywords": ["voyage", "mémorable", "expérience", "découvrir"],
+      "rubric": {
+        "level": "B1",
+        "expected_min_words": 85,
+        "expected_keywords": ["voyage", "mémorable"],
+        "criteria_weights": {
+          "task_realisation": 0.25,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.20,
+          "morphosyntax": 0.20
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "Mon voyage le plus mémorable a été quand je suis allé en Italie. J'ai découvert des paysages magnifiques et une culture riche. J'ai goûté la meilleure pizza de ma vie et j'ai visité le Colosseum. C'était vraiment une expérience inoubliable.",
+          "score": 0.81
+        },
+        {
+          "text": "J'ai voyagé en Espagne et c'étaient tres memorable. J'ai vus plein de choses interresante. Les gens était tres sympa et gentil. La nourriture c'étaient delicieuse et j'ai pris beaucoup de fotos",
+          "score": 0.58
+        }
+      ]
+    },
+
+    {
+      "question_id": "q_fr_12",
+      "type": "single_choice",
+      "text": "Combien de côtés a un hexagone?",
+      "language": "fr",
+      "options": ["4", "5", "6", "8"],
+      "answer": "6",
+      "difficulty": 1
+    },
+
+    {
+      "question_id": "q_fr_13",
+      "type": "fill_blank",
+      "text": "Nous ___ allés au marché hier matin.",
+      "language": "fr",
+      "accepted_answers": ["sommes"],
+      "difficulty": 2
+    },
+
+    {
+      "question_id": "q_fr_14",
+      "type": "fill_blank",
+      "text": "Mon chat dort toujours ___ le canapé.",
+      "language": "fr",
+      "accepted_answers": ["sur", "dans", "sous"],
+      "difficulty": 1
+    },
+
+    {
+      "question_id": "q_fr_15",
+      "type": "fill_blank",
+      "text": "Elle a ___ un excellent résultat à son examen de français.",
+      "language": "fr",
+      "accepted_answers": ["obtenu", "eu", "reçu"],
+      "difficulty": 2
+    },
+
+    {
+      "question_id": "q_fr_16",
+      "type": "ordering",
+      "text": "Remettez ces étapes dans l'ordre correct pour préparer des pâtes.",
+      "language": "fr",
+      "elements": [
+        "Égoutter les pâtes.",
+        "Faire bouillir l'eau.",
+        "Servir dans une assiette.",
+        "Saler l'eau.",
+        "Ajouter les pâtes."
+      ],
+      "correct_order": [
+        "Faire bouillir l'eau.",
+        "Saler l'eau.",
+        "Ajouter les pâtes.",
+        "Égoutter les pâtes.",
+        "Servir dans une assiette."
+      ],
+      "difficulty": 2
+    },
+
+    {
+      "question_id": "q_fr_17",
+      "type": "ordering",
+      "text": "Remettez ces moments de la journée dans l'ordre chronologique.",
+      "language": "fr",
+      "elements": [
+        "Le dîner",
+        "Le petit-déjeuner",
+        "Le déjeuner",
+        "Le goûter"
+      ],
+      "correct_order": [
+        "Le petit-déjeuner",
+        "Le déjeuner",
+        "Le goûter",
+        "Le dîner"
+      ],
+      "difficulty": 1
+    },
+
+    {
+      "question_id": "q_img_1",
+      "type": "image",
+      "text": "Que font les personnes sur l'image?",
+      "image_description": "Un groupe d'étudiants en train d'étudier ensemble dans une bibliothèque universitaire.",
+      "language": "fr",
+      "options": ["Ils étudient.", "Ils mangent.", "Ils jouent au football.", "Ils regardent un film."],
+      "answer": "Ils étudient.",
+      "difficulty": 1
+    },
+    {
+      "question_id": "q_img_2",
+      "type": "image",
+      "text": "Décrivez ce que vous voyez sur l'image.",
+      "image_description": "Une jeune femme travaillant sur un ordinateur portable dans un café, avec une tasse de café sur la table.",
+      "language": "fr",
+      "options": ["Une femme dans un café avec son ordinateur.", "Une femme dans une bibliothèque.", "Une femme en train de cuisiner.", "Une femme qui fait du sport."],
+      "answer": "Une femme dans un café avec son ordinateur.",
+      "difficulty": 2
+    },
+    {
+      "question_id": "q_img_3",
+      "type": "image",
+      "text": "Quel lieu représente cette image?",
+      "image_description": "Une gare SNCF avec des voyageurs attendant sur le quai, un panneau affichant les horaires des trains.",
+      "language": "fr",
+      "options": ["Une gare.", "Un aéroport.", "Une station de métro.", "Un supermarché."],
+      "answer": "Une gare.",
+      "difficulty": 1
+    },
+    {
+      "question_id": "q_fr_18",
+      "type": "speaking_record",
+      "text": "Présentez-vous en quelques phrases : votre prénom, votre âge, votre profession et un loisir que vous aimez.",
+      "language": "fr",
+      "difficulty": 2,
+      "rubric": {
+        "level": "A2",
+        "expected_min_words": 30,
+        "expected_keywords": ["je m'appelle", "j'ai", "ans", "je suis", "j'aime"],
+        "criteria_weights": {
+          "task_realisation": 0.35,
+          "coherence": 0.20,
+          "sociolinguistic": 0.15,
+          "lexicon": 0.15,
+          "morphosyntax": 0.15
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "Bonjour, je m'appelle Thomas. J'ai trente ans et je suis ingénieur. J'habite à Paris depuis cinq ans. Dans mes temps libres, j'aime jouer au tennis et lire des romans.",
+          "score": 0.88
+        },
+        {
+          "text": "Bonjour je suis María. J'ai vingt ans. Je suis etudiante. J'aimes le sport et la musique.",
+          "score": 0.55
+        }
+      ]
+    }
+
+  ],
+  "metadata": {
+    "source": "french_priority_corpus",
+    "version": "2.0.0",
+    "language": "fr",
+    "includes_errors": "true",
+    "question_types": "writing_text, single_choice, fill_blank, ordering, speaking_record, image"
+  }
+}

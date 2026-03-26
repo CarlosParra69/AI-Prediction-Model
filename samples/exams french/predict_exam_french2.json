@@ -1,0 +1,138 @@
+{
+  "exam_id": "ex-french-priority-002",
+  "candidate_id": "cand-fr-002-A2",
+  "adaptive": true,
+  "questions": [
+    {
+      "question_id": "q_fr_3",
+      "type": "single_choice",
+      "text": "Quelle est la couleur du ciel lors d'une belle journée?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_1",
+      "type": "writing_text",
+      "text": "Écrivez un message court sur votre journée.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_img_4",
+      "type": "image",
+      "text": "Que fait la personne sur l'image?",
+      "image_description": "Un homme cuisinant dans une cuisine moderne, en train de couper des légumes sur une planche.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_30",
+      "type": "ordering",
+      "text": "Remettez les étapes du matin dans l'ordre logique.",
+      "language": "fr",
+      "elements": ["Se lever.", "Prendre le petit-déjeuner.", "Se laver.", "S'habiller."]
+    },
+    {
+      "question_id": "q_fr_2",
+      "type": "writing_text",
+      "text": "Parlez de vos loisirs préférés et pourquoi vous les aimez.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_22",
+      "type": "fill_blank",
+      "text": "Nous ___ très fatigués après le voyage.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_29",
+      "type": "single_choice",
+      "text": "Quelle est la capitale de la France?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_7",
+      "type": "writing_text",
+      "text": "Expliquez comment vous préparez votre repas préféré.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_17",
+      "type": "ordering",
+      "text": "Remettez ces moments de la journée dans l'ordre chronologique.",
+      "language": "fr",
+      "elements": ["Le dîner", "Le petit-déjeuner", "Le déjeuner", "Le goûter"]
+    },
+    {
+      "question_id": "q_fr_12",
+      "type": "single_choice",
+      "text": "Combien de côtés a un hexagone?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_14",
+      "type": "fill_blank",
+      "text": "Mon chat dort toujours ___ le canapé.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_5",
+      "type": "writing_text",
+      "text": "Décrivez un jour important de votre vie en détail.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_6",
+      "type": "single_choice",
+      "text": "Quel temps faut-il pour aller de Paris à Lyon en TGV?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_9",
+      "type": "writing_text",
+      "text": "Décrivez votre environnement de travail ou d'études idéal.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_25",
+      "type": "fill_blank",
+      "text": "Hier je ___ allé au cinéma avec mes amis.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_11",
+      "type": "writing_text",
+      "text": "Racontez une expérience de voyage mémorable.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_4",
+      "type": "single_choice",
+      "text": "Quel est le contraire du mot 'grand'?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_18",
+      "type": "speaking_record",
+      "text": "Présentez-vous en quelques phrases : votre prénom, votre âge, votre profession et un loisir que vous aimez.",
+      "language": "fr"
+    }
+  ],
+  "answers": [
+    {"question_id": "q_fr_3", "type": "single_choice", "answer_text": "vert", "time_spent_sec": 10},
+    {"question_id": "q_fr_1", "type": "writing_text", "answer_text": "Aujourd'hui c'était un journée dificile. Je suis alé au travail mais il y a des problèmes. Le soir j'ai mangé vite et je dormi tôt.", "time_spent_sec": 125},
+    {"question_id": "q_img_4", "type": "image", "answer_text": "Il cuisine.", "time_spent_sec": 11},
+    {"question_id": "q_fr_30", "type": "ordering", "answer_list": ["Se lever.", "Se laver.", "S'habiller.", "Prendre le petit-déjeuner."], "time_spent_sec": 25},
+    {"question_id": "q_fr_2", "type": "writing_text", "answer_text": "J'aime regarder la television et jouer au telephone. J'aime aussi sortir avec mes amis. C'est beacoup amusant pour moi.", "time_spent_sec": 135},
+    {"question_id": "q_fr_22", "type": "fill_blank", "answer_text": "avons", "time_spent_sec": 11},
+    {"question_id": "q_fr_29", "type": "single_choice", "answer_text": "Paris", "time_spent_sec": 6},
+    {"question_id": "q_fr_7", "type": "writing_text", "answer_text": "Pour faire mon repas j'ai besoin de poulet et riz. Je met dans la poele et je fait cuire. Après je met du sel. C'est facile et bon.", "time_spent_sec": 148},
+    {"question_id": "q_fr_17", "type": "ordering", "answer_list": ["Le petit-déjeuner", "Le déjeuner", "Le dîner", "Le goûter"], "time_spent_sec": 22},
+    {"question_id": "q_fr_12", "type": "single_choice", "answer_text": "5", "time_spent_sec": 9},
+    {"question_id": "q_fr_14", "type": "fill_blank", "answer_text": "sur", "time_spent_sec": 7},
+    {"question_id": "q_fr_5", "type": "writing_text", "answer_text": "Un jour important c'était quand je ai changé de ville pour travailler. J'étais beacoup nerveux parce que je connaissais pas les personnes. Maintenant c'est mieux.", "time_spent_sec": 155},
+    {"question_id": "q_fr_6", "type": "single_choice", "answer_text": "3 heures", "time_spent_sec": 9},
+    {"question_id": "q_fr_9", "type": "writing_text", "answer_text": "Mon endroit pour etudier c'est ma chambre. Je veux calme et lumière. Je peux pas travailler avec beacoup de bruit. J'ai besoin de bonne chaise et table.", "time_spent_sec": 140},
+    {"question_id": "q_fr_25", "type": "fill_blank", "answer_text": "suis", "time_spent_sec": 10},
+    {"question_id": "q_fr_11", "type": "writing_text", "answer_text": "Un voyage important c'était quand j'ai allé à la mer. J'ai vu la mer et c'était très grande. Je suis resté près. J'ai beacoup aimé la plage avec ma famille.", "time_spent_sec": 158},
+    {"question_id": "q_fr_4", "type": "single_choice", "answer_text": "petit", "time_spent_sec": 7},
+    {"question_id": "q_fr_18", "type": "speaking_record", "answer_text": "Bonjour, je m'appelle Karim. J'ai vingt-deux ans et je suis étudiant. J'habite près de Lyon. J'aime les jeux vidéo et le foot avec mes amis.", "time_spent_sec": 32}
+  ]
+}

@@ -28,6 +28,8 @@ from sklearn.preprocessing import StandardScaler
 from .adaptive_selector import AbilityState, AdaptiveSelector
 from .bias_checker import BiasChecker
 from .open_response_scorer import OpenResponseScorer
+from .scorers.fill_blank_scorer import score_fill_blank
+from .scorers.ordering_scorer import score_ordering
 from .schemas import (
     DELFLevel,
     ExamFeatures,
@@ -101,19 +103,18 @@ class OnlineExamModel:
         # Estado
         self.initialized = False
         self.trained_samples = 0
-        self.version = "v2.0"  # Nueva versión con soporte adaptativo
+        self.version = "v1.0"  # Nueva versión con soporte adaptativo
         self._rng_seed = 42
 
-    # ========================================================================
+    
     # Legacy Methods (Compatibilidad)
-    # ========================================================================
 
     def _encode_background(self, background: LearnerBackground) -> List[float]:
         levels = [LearnerBackground.none, LearnerBackground.normal, LearnerBackground.advanced]
         return [1.0 if background == level else 0.0 for level in levels]
 
     def _encode_language(self, language: Language) -> List[float]:
-        langs = [Language.english, Language.french]
+        langs = [Language.en, Language.fr]
         return [1.0 if language == lang else 0.0 for lang in langs]
 
     def _build_numeric_features(self, sample: ExamFeatures) -> np.ndarray:
@@ -121,9 +122,12 @@ class OnlineExamModel:
         n_questions = len(questions)
 
         q_types = [q.question_type for q in questions]
-        mcq_ratio = q_types.count(QuestionType.mcq) / n_questions
-        short_ratio = q_types.count(QuestionType.short_answer) / n_questions
-        essay_ratio = q_types.count(QuestionType.essay) / n_questions
+        _mcq_types = {QuestionType.mcq, QuestionType.SINGLE_CHOICE, QuestionType.IMAGE}
+        _short_types = {QuestionType.short_answer, QuestionType.FILL_BLANK, QuestionType.ORDERING}
+        _essay_types = {QuestionType.essay, QuestionType.open, QuestionType.WRITING_TEXT, QuestionType.SPEAKING_RECORD}
+        mcq_ratio = sum(1 for t in q_types if t in _mcq_types) / n_questions
+        short_ratio = sum(1 for t in q_types if t in _short_types) / n_questions
+        essay_ratio = sum(1 for t in q_types if t in _essay_types) / n_questions
 
         total_time = float(sum(q.time_spent_sec for q in questions))
         avg_time = total_time / n_questions
@@ -145,11 +149,11 @@ class OnlineExamModel:
 
         expected_time = 0.0
         for q in questions:
-            if q.question_type == QuestionType.mcq:
+            if q.question_type in {QuestionType.mcq, QuestionType.SINGLE_CHOICE, QuestionType.IMAGE}:
                 expected_time += 18.0 + (q.difficulty * 6.0)
-            elif q.question_type == QuestionType.short_answer:
+            elif q.question_type in {QuestionType.short_answer, QuestionType.FILL_BLANK, QuestionType.ORDERING}:
                 expected_time += 45.0 + (q.difficulty * 12.0)
-            else:  # essay
+            else:
                 expected_time += 160.0 + (q.difficulty * 45.0)
         tempo_efficiency = max(0.0, min(1.0, 1.0 - abs(total_time - expected_time) / max(expected_time, 1.0)))
 
@@ -202,32 +206,37 @@ class OnlineExamModel:
         )
 
     def _score_to_level(self, score: float) -> str:
-        """Mapea score (0-100) a nivel DELF."""
+        """Mapea score (0-100 o 0-1) a nivel DELF con criterios más rigurosos para B1+."""
+        # Normalizar a 0-100 si está entre 0-1
+        if score <= 1.0:
+            score = score * 100
+        
+        # Criterios del marco DELF más rigurosos
+        # B1 y B2 requieren muy pocos errores gramaticales
         if score < 20:
             return "A1-"
-        if score < 30:
+        elif score < 30:
             return "A1"
-        if score < 40:
+        elif score < 40:
             return "A1+"
-        if score < 45:
+        elif score < 45:
             return "A2-"
-        if score < 50:
+        elif score < 50:
             return "A2"
-        if score < 60:
+        elif score < 60:
             return "A2+"
-        if score < 65:
+        elif score < 68:  # Empezar B1 más arriba (antes era 65)
             return "B1-"
-        if score < 75:
+        elif score < 77:  # B1 requiere menos errores que 75
             return "B1"
-        if score < 85:
+        elif score < 85:  # B1+ desde 77
             return "B1+"
-        if score < 90:
+        elif score < 92:  # B2- desde 85
             return "B2-"
-        return "B2"
+        else:  # B2 solo con scores muy altos
+            return "B2"
 
-    # ========================================================================
     # New Methods (Adaptive Testing)
-    # ========================================================================
 
     def predict_adaptive(self, request: PredictRequest) -> PredictResponse:
         """
@@ -244,14 +253,15 @@ class OnlineExamModel:
             data_dict = request.model_dump()
             if not self.bias_checker.is_data_suitable_for_evaluation(data_dict):
                 logger.warning(
-                    f"Aviso: Candidato {request.candidate_id} puede contener datos sensibles."
+                    f"Aviso: Candidato {request.candidate_id} presentado posiblemente contiene datos sensibles."
                 )
 
             # Crea mapa de respuestas por question_id
             answers_by_id = {ans.question_id: ans for ans in request.answers}
 
-            # Procesa cada pregunta
+            # Procesa cada pregunta y registra qué preguntas se evaluaron
             per_question: List[QuestionScoreDetail] = []
+            evaluated_questions = []
             ability_state = self.adaptive_selector.initialize_state() if request.adaptive else None
 
             for question in request.questions:
@@ -259,31 +269,60 @@ class OnlineExamModel:
                 if not answer:
                     continue
 
-                # Evalúa la pregunta
                 score_detail = self._evaluate_question(
                     question_id=question.question_id,
                     question_type=question.type,
                     question_text=question.text,
                     answer_text=answer.answer_text,
+                    answer_list=answer.answer_list,
                     language=question.language,
                     time_spent_sec=answer.time_spent_sec,
                 )
                 per_question.append(score_detail)
+                evaluated_questions.append(question)
 
-                # Actualiza ability_state si modo adaptativo
                 if request.adaptive and ability_state is not None:
                     ability_state = self.adaptive_selector.update_state(
                         ability_state, score_detail.score
                     )
 
-            # Calcula nivel estimado
-            all_scores = [q.score for q in per_question]
-            avg_score_normalized = (sum(all_scores) / len(all_scores)) if all_scores else 0.5
-            
-            if ability_state is not None:
-                estimated_level = DELFLevel(self.adaptive_selector.estimate_delf_level(ability_state.ability_estimate))
-            else:
-                estimated_level = DELFLevel(self._score_to_level(avg_score_normalized * 100))
+            # Estimación de nivel: writing-focused
+
+            # Los tipos de texto libre (writing_text, speaking_record) son los más
+            # discriminativos del nivel DELF. Las preguntas binarias (single_choice,
+            # fill_blank, ordering) informan sobre precisión pero no sobre nivel
+            # lingüístico — un A2+ y un B2 pueden acertar las mismas MCQ.
+            #
+            # Fórmula: level_score = writing_avg × 0.8 + overall_avg × 0.2
+            _WRITING_TYPES = {
+                QuestionType.WRITING_TEXT, QuestionType.open,
+                QuestionType.short_answer, QuestionType.essay,
+                QuestionType.SPEAKING_RECORD,
+            }
+
+            writing_weighted_sum = 0.0
+            writing_weight_total = 0.0
+            overall_weighted_sum = 0.0
+            overall_weight_total = 0.0
+
+            for q, detail in zip(evaluated_questions, per_question):
+                q_info = self.question_pool.get(q.question_id, {})
+                difficulty = float(q_info.get("difficulty", 3))
+                overall_weighted_sum += detail.score * difficulty
+                overall_weight_total += difficulty
+                if detail.type in _WRITING_TYPES:
+                    writing_weighted_sum += detail.score * difficulty
+                    writing_weight_total += difficulty
+
+            overall_avg = (overall_weighted_sum / overall_weight_total) if overall_weight_total > 0 else 0.5
+            writing_avg = (writing_weighted_sum / writing_weight_total) if writing_weight_total > 0 else overall_avg
+
+            # Blended score: calidad lingüística (80%) + precisión global (20%)
+            level_score = writing_avg * 0.8 + overall_avg * 0.2
+
+            estimated_level = DELFLevel(
+                self.adaptive_selector.estimate_delf_level(level_score)
+            )
 
             # Recomendación para siguiente pregunta
             next_recommendation = None
@@ -302,6 +341,9 @@ class OnlineExamModel:
                 "request_id": str(uuid4()),
                 "adaptive_mode": str(request.adaptive),
                 "questions_evaluated": str(len(per_question)),
+                "writing_avg": str(round(writing_avg, 4)),
+                "overall_avg": str(round(overall_avg, 4)),
+                "level_score": str(round(level_score, 4)),
             }
 
             # Calcula confianza global
@@ -324,102 +366,266 @@ class OnlineExamModel:
         question_type: QuestionType,
         question_text: str,
         answer_text: str,
+        answer_list: Optional[List[str]] = None,
         language: Language = Language.fr,
         time_spent_sec: float = 0.0,
     ) -> QuestionScoreDetail:
         """
-        Evalúa una pregunta individual.
+        Evalúa una pregunta individual según su QuestionType.
 
         Args:
-            question_id: ID de la pregunta.
-            question_type: Tipo de pregunta (mcq, open, etc).
+            question_id:   ID de la pregunta.
+            question_type: Tipo de pregunta (QuestionType enum).
             question_text: Texto de la pregunta.
-            answer_text: Texto de la respuesta del candidato.
-            language: Idioma de la pregunta (en|fr).
-            time_spent_sec: Tiempo gastado (solo informativo).
+            answer_text:   Texto de la respuesta del candidato.
+            answer_list:   Respuesta como lista (solo para ORDERING).
+            language:      Idioma de la pregunta (en|fr).
+            time_spent_sec: Tiempo gastado (informativo).
 
         Returns:
             QuestionScoreDetail con puntuación y feedback.
         """
-        if question_type == QuestionType.open:
-            # Busca rúbrica en question_pool
-            question_info = self.question_pool.get(question_id, {})
+        # Texto libre (WRITING_TEXT / open / short_answer / essay)
+        if question_type.is_open_text():
+            return self._evaluate_open_text(
+                question_id, question_type, answer_text, language
+            )
+
+        # Opción múltiple (SINGLE_CHOICE / mcq / IMAGE)
+        if question_type.is_choice_based():
+            return self._evaluate_choice(
+                question_id, question_type, answer_text, language
+            )
+
+        # Rellenar espacios en blanco (FILL_BLANK)
+        if question_type.is_fill_blank():
+            return self._evaluate_fill_blank(
+                question_id, question_type, answer_text, language
+            )
+
+        # Ordenar elementos (ORDERING)
+        if question_type.is_ordering():
+            return self._evaluate_ordering(
+                question_id, question_type, answer_list or [], language
+            )
+
+        # Grabación de voz (SPEAKING_RECORD)
+        if question_type.is_speaking():
+            return self._evaluate_speaking_record(
+                question_id, question_type, answer_text, language
+            )
+
+        # Tipos futuros (AUDIO / VIDEO) → posible revisión
+        if question_type.requires_human_review_by_default():
+            msg = (
+                f"Question type '{question_type.value}' is not yet scored automatically. "
+                "Pending human review."
+                if language == Language.en
+                else f"El tipo '{question_type.value}' no tiene scoring automático aún. "
+                "Pendiente de revisión humana."
+            )
+            return QuestionScoreDetail(
+                question_id=question_id,
+                type=question_type,
+                score=0.0,
+                max_score=1.0,
+                explanation=msg,
+                confidence=0.0,
+                needs_human_review=True,
+                language_detected=language,
+            )
+
+        # Fallback genérico
+        return QuestionScoreDetail(
+            question_id=question_id,
+            type=question_type,
+            score=0.5,
+            max_score=1.0,
+            explanation="Tipo de pregunta no reconocido.",
+            confidence=0.3,
+            needs_human_review=True,
+            language_detected=language,
+        )
+
+    # Helpers de evaluación por tipo
+
+    def _evaluate_open_text(
+        self,
+        question_id: str,
+        question_type: QuestionType,
+        answer_text: str,
+        language: Language,
+    ) -> QuestionScoreDetail:
+        """Evalúa preguntas de texto libre con rúbrica DELF."""
+        question_info = self.question_pool.get(question_id, {})
+        rubric = question_info.get("rubric")
+        expected_keywords = question_info.get("expected_keywords", [])
+
+        if rubric and isinstance(rubric, dict):
+            try:
+                rubric_obj = OpenQuestionRubric(**rubric)
+            except Exception:
+                rubric_obj = OpenQuestionRubric(level="A1")
+        else:
+            rubric_obj = OpenQuestionRubric(level="A1")
+
+        score_result = self.open_response_scorer.score(
+            response_text=answer_text,
+            rubric=rubric_obj,
+            language=language,
+            expected_keywords=expected_keywords,
+        )
+        return QuestionScoreDetail(
+            question_id=question_id,
+            type=question_type,
+            score=score_result.score,
+            max_score=1.0,
+            explanation=score_result.explanation,
+            confidence=score_result.confidence,
+            needs_human_review=score_result.needs_human_review,
+            rubric_breakdown=score_result.rubric_breakdown,
+            language_detected=score_result.language_detected,
+        )
+
+    def _evaluate_choice(
+        self,
+        question_id: str,
+        question_type: QuestionType,
+        answer_text: str,
+        language: Language,
+    ) -> QuestionScoreDetail:
+        """Evalúa preguntas de opción múltiple (SINGLE_CHOICE / MCQ / IMAGE)."""
+        question_info = self.question_pool.get(question_id, {})
+        correct_answer = question_info.get("answer", "")
+
+        is_correct = answer_text.strip().lower() == correct_answer.strip().lower()
+        score = 1.0 if is_correct else 0.0
+
+        if language == Language.fr:
+            explanation = "Réponse correcte." if is_correct else "Réponse incorrecte."
+        else:
+            explanation = "Correct answer." if is_correct else "Incorrect answer."
+
+        return QuestionScoreDetail(
+            question_id=question_id,
+            type=question_type,
+            score=score,
+            max_score=1.0,
+            explanation=explanation,
+            confidence=0.97,
+            needs_human_review=False,
+            language_detected=language,
+        )
+
+    def _evaluate_fill_blank(
+        self,
+        question_id: str,
+        question_type: QuestionType,
+        answer_text: str,
+        language: Language,
+    ) -> QuestionScoreDetail:
+        """Evalúa preguntas de rellenar hueco."""
+        question_info = self.question_pool.get(question_id, {})
+        accepted_answers: List[str] = question_info.get("accepted_answers") or []
+
+        s, conf, explanation = score_fill_blank(answer_text, accepted_answers, language)
+        return QuestionScoreDetail(
+            question_id=question_id,
+            type=question_type,
+            score=s,
+            max_score=1.0,
+            explanation=explanation,
+            confidence=conf,
+            needs_human_review=False,
+            language_detected=language,
+        )
+
+    def _evaluate_ordering(
+        self,
+        question_id: str,
+        question_type: QuestionType,
+        answer_list: List[str],
+        language: Language,
+    ) -> QuestionScoreDetail:
+        """Evalúa preguntas de ordenar elementos."""
+        question_info = self.question_pool.get(question_id, {})
+        correct_order: List[str] = question_info.get("correct_order") or []
+
+        s, conf, explanation = score_ordering(answer_list, correct_order, language)
+        return QuestionScoreDetail(
+            question_id=question_id,
+            type=question_type,
+            score=s,
+            max_score=1.0,
+            explanation=explanation,
+            confidence=conf,
+            needs_human_review=False,
+            language_detected=language,
+        )
+
+    def _evaluate_speaking_record(
+        self,
+        question_id: str,
+        question_type: QuestionType,
+        answer_text: str,
+        language: Language,
+    ) -> QuestionScoreDetail:
+        """
+        Evalúa preguntas de grabación de voz.
+
+        Si hay transcripción disponible (answer_text), usa el OpenResponseScorer.
+        Si no, marca para revisión humana.
+        """
+        question_info = self.question_pool.get(question_id, {})
+
+        # Si se envió transcripción, puntúa como texto libre
+        if answer_text and answer_text.strip():
             rubric = question_info.get("rubric")
             expected_keywords = question_info.get("expected_keywords", [])
-
             if rubric and isinstance(rubric, dict):
-                # Convierte dict a OpenQuestionRubric si es necesario
                 try:
                     rubric_obj = OpenQuestionRubric(**rubric)
-                except:
-                    rubric_obj = OpenQuestionRubric()
+                except Exception:
+                    rubric_obj = OpenQuestionRubric(level="A1")
             else:
-                rubric_obj = OpenQuestionRubric()
+                rubric_obj = OpenQuestionRubric(level="A1")
 
-            # Usa OpenResponseScorer con lenguaje
             score_result = self.open_response_scorer.score(
                 response_text=answer_text,
                 rubric=rubric_obj,
                 language=language,
                 expected_keywords=expected_keywords,
             )
-
             return QuestionScoreDetail(
                 question_id=question_id,
                 type=question_type,
                 score=score_result.score,
                 max_score=1.0,
                 explanation=score_result.explanation,
-                confidence=score_result.confidence,
-                needs_human_review=score_result.needs_human_review,
+                confidence=score_result.confidence * 0.85,  # penalización por transcripción
+                needs_human_review=True,
                 rubric_breakdown=score_result.rubric_breakdown,
                 language_detected=score_result.language_detected,
             )
 
-        elif question_type == QuestionType.mcq:
-            # MCQ: verifica respuesta correcta (si existe en pool)
-            question_info = self.question_pool.get(question_id, {})
-            correct_answer = question_info.get("answer", "")
+        # Sin transcripción: revisión humana
+        msg = (
+            "Speaking record received. Pending human review (no transcript available)."
+            if language == Language.en
+            else "Grabación recibida. Pendiente de revisión humana (sin transcripción disponible)."
+        )
+        return QuestionScoreDetail(
+            question_id=question_id,
+            type=question_type,
+            score=0.0,
+            max_score=1.0,
+            explanation=msg,
+            confidence=0.0,
+            needs_human_review=True,
+            language_detected=language,
+        )
 
-            # Normaliza respuestas para comparación
-            answer_clean = answer_text.strip().lower()
-            correct_clean = correct_answer.strip().lower()
-
-            is_correct = answer_clean == correct_clean
-            score = 1.0 if is_correct else 0.0
-            confidence = 0.95  # MCQ tiene alta confianza
-
-            explanation = "Correct." if is_correct else "Incorrect."
-            if language == Language.fr:
-                explanation = "Respuesta correcta." if is_correct else "Respuesta incorrecta."
-
-            return QuestionScoreDetail(
-                question_id=question_id,
-                type=question_type,
-                score=score,
-                max_score=1.0,
-                explanation=explanation,
-                confidence=confidence,
-                needs_human_review=False,
-                language_detected=language,
-            )
-
-        else:
-            # Fallback para otros tipos
-            return QuestionScoreDetail(
-                question_id=question_id,
-                type=question_type,
-                score=0.5,
-                max_score=1.0,
-                explanation="Tipo de pregunta no soportado.",
-                confidence=0.3,
-                needs_human_review=True,
-                language_detected=language,
-            )
-
-    # ========================================================================
     # Training
-    # ========================================================================
 
     def train_from_request(self, request: TrainRequest) -> TrainResponse:
         """
@@ -479,9 +685,7 @@ class OnlineExamModel:
             self.trained_samples += len(samples)
             self.version = f"v{self.trained_samples}"
 
-    # ========================================================================
     # Legacy predict (compatibilidad)
-    # ========================================================================
 
     def predict(self, sample: ExamFeatures) -> PredictArtifacts:
         """Legacy: Predice con modelo legacy."""
@@ -534,9 +738,7 @@ class OnlineExamModel:
         text = self.vectorizer.transform(texts)
         return hstack([numeric, text], format="csr")
 
-    # ========================================================================
     # Persistence
-    # ========================================================================
 
     def reset(self) -> None:
         """Reset del modelo."""

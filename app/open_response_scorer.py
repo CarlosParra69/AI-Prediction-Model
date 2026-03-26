@@ -15,49 +15,26 @@ from dataclasses import dataclass
 from typing import Optional
 
 from .schemas import Language, OpenQuestionRubric, RubricBreakdown
+from .french_scorer import (
+    FRENCH_CONNECTORS_BY_LEVEL,
+    FRENCH_POLITENESS_MARKERS,
+    score_morphosyntax_fr,
+    score_coherence_fr,
+    score_sociolinguistic_fr,
+    score_lexicon_fr,
+)
+from .english_scorer import (
+    ENGLISH_CONNECTORS_BY_LEVEL,
+    ENGLISH_POLITENESS_MARKERS,
+    score_morphosyntax_en,
+    score_coherence_en,
+    score_sociolinguistic_en,
+    score_lexicon_en,
+)
 
 
-# ============================================================================
-# FRENCH CONNECTORS AND LINGUISTIC FEATURES
-# ============================================================================
-FRENCH_CONNECTORS_BY_LEVEL = {
-    "A1": {"et", "mais", "parce que", "alors"},
-    "A1+": {"et", "mais", "parce que", "alors", "aussi", "car"},
-    "A2": {"et", "mais", "parce que", "alors", "aussi", "car", "cependant", "ensuite", "d'abord"},
-    "A2+": {"et", "mais", "parce que", "alors", "aussi", "car", "cependant", "ensuite", "d'abord", "puis", "auparavant"},
-    "B1": {"en effet", "cependant", "donc", "toutefois", "de plus", "par contre", "d'ailleurs", "finalement"},
-    "B1+": {"en effet", "cependant", "donc", "toutefois", "de plus", "par contre", "d'ailleurs", "finalement", "bien que", "pourvu que"},
-    "B2": {"en effet", "cependant", "donc", "toutefois", "de plus", "par contre", "d'ailleurs", "finalement", "bien que", "pourvu que", "néanmoins", "ainsi", "notamment"},
-}
-
-FRENCH_POLITENESS_MARKERS = {
-    "s'il vous plaît", "s'il te plaît", "merci", "merci beaucoup",
-    "cordialement", "sincères salutations", "bien à vous"
-}
-
-
-# ============================================================================
-# ENGLISH CONNECTORS AND LINGUISTIC FEATURES
-# ============================================================================
-ENGLISH_CONNECTORS_BY_LEVEL = {
-    "A1": {"and", "but", "because", "so", "then"},
-    "A1+": {"and", "but", "because", "so", "then", "also", "after", "before"},
-    "A2": {"and", "but", "because", "so", "then", "also", "after", "before", "however", "for example", "first"},
-    "A2+": {"and", "but", "because", "so", "then", "also", "after", "before", "however", "for example", "first", "finally", "next", "in addition"},
-    "B1": {"however", "therefore", "moreover", "for instance", "in conclusion", "in addition", "on the other hand", "nevertheless"},
-    "B1+": {"however", "therefore", "moreover", "for instance", "in conclusion", "in addition", "on the other hand", "nevertheless", "although", "despite", "provided that"},
-    "B2": {"nonetheless", "furthermore", "consequently", "in particular", "as a matter of fact", "in summary", "to illustrate", "nevertheless", "although", "despite", "provided that", "whereas"},
-}
-
-ENGLISH_POLITENESS_MARKERS = {
-    "please", "thank you", "thanks", "kind regards", "best regards",
-    "sincerely", "yours truly", "with appreciation"
-}
-
-
-# ============================================================================
 # LANGUAGE DETECTION
-# ============================================================================
+
 def detect_language(text: str) -> Language:
     """
     Detecta el idioma del texto basado en palabras y patrones.
@@ -257,6 +234,7 @@ class OpenResponseScorer:
         lexicon_score = self._score_lexicon(
             text_lower=text_lower,
             word_count=word_count,
+            language=language,
         )
 
         morphosyntax_score = self._score_morphosyntax(
@@ -305,116 +283,32 @@ class OpenResponseScorer:
         text_lower: str,
         language: Language,
     ) -> float:
-        """Evalúa coherencia y cohesión (estructura, conectores, puntuación)."""
-        connectors_pool = (
-            ENGLISH_CONNECTORS_BY_LEVEL if language == Language.en
-            else FRENCH_CONNECTORS_BY_LEVEL
-        )
-        
-        connector_count = sum(
-            1 for connectors in connectors_pool.values()
-            for conn in connectors
-            if conn in text_lower
-        )
-        
-        connector_score = min(0.5, connector_count * 0.1) if word_count > 10 else 0.2
-
-        punctuation_count = text_lower.count(".") + text_lower.count(",") + text_lower.count("?")
-        punctuation_score = min(0.3, punctuation_count * 0.05) if word_count > 5 else 0.1
-
-        sentences = response_text.replace("?", ".").split(".")
-        sentences = [s.strip() for s in sentences if s.strip()]
-        
-        if len(sentences) > 1:
-            avg_sent_len = word_count / len(sentences)
-            sent_score = 0.2
-            if 3 <= avg_sent_len <= 15:
-                sent_score = 0.35
-            elif avg_sent_len > 5:
-                sent_score = 0.3
+        """Evalúa coherencia y cohesión (delega a módulo de idioma específico)."""
+        if language == Language.en:
+            return score_coherence_en(response_text, word_count, text_lower)
         else:
-            sent_score = 0.1
-
-        return min(1.0, connector_score + punctuation_score + sent_score)
+            return score_coherence_fr(response_text, word_count, text_lower)
 
     def _score_sociolinguistic(self, text_lower: str, language: Language) -> float:
-        """Evalúa adecuación sociolingüística (registro, tono)."""
-        original_words = text_lower.split()
-        all_caps_count = sum(1 for w in original_words if w.isupper() and len(w) > 1)
-        
-        if all_caps_count > len(original_words) * 0.3:
-            return 0.3
-
-        if len(original_words) < 5:
-            return 0.4
-        
-        politeness_markers = (
-            ENGLISH_POLITENESS_MARKERS if language == Language.en
-            else FRENCH_POLITENESS_MARKERS
-        )
-        
-        has_politeness = any(marker in text_lower for marker in politeness_markers)
-        if has_politeness:
-            return 0.75
-        
-        return 0.65
-
-    def _score_lexicon(self, text_lower: str, word_count: int) -> float:
-        """Evalúa variedad de vocabulario."""
-        if word_count < 5:
-            return 0.2
-
-        words = text_lower.split()
-        
-        common_words = {
-            "the", "a", "an", "is", "are", "was", "were", "be", "been", "being",
-            "and", "or", "but", "not", "no", "yes", "i", "you", "he", "she", "it",
-            "we", "they", "what", "which", "who", "where", "when", "why", "how",
-            "le", "la", "les", "un", "une", "des", "est", "sont", "être", "eu",
-            "et", "ou", "mais", "ne", "non", "pas", "je", "tu", "il", "elle",
-            "nous", "vous", "ils", "elles", "quoi", "quel", "qui", "où", "quand", "comment",
-        }
-        
-        content_words = [w for w in words if w not in common_words and len(w) > 2]
-        unique_words = len(set(content_words))
-        content_count = len(content_words)
-        
-        diversity = unique_words / content_count if content_count > 0 else 0
-        
-        if diversity > 0.7:
-            return 0.8
-        elif diversity > 0.5:
-            return 0.6
-        elif diversity > 0.3:
-            return 0.4
+        """Evalúa adecuación sociolingüística (delega a módulo de idioma específico)."""
+        if language == Language.en:
+            return score_sociolinguistic_en(text_lower)
         else:
-            return 0.2
+            return score_sociolinguistic_fr(text_lower)
+
+    def _score_lexicon(self, text_lower: str, word_count: int, language: Language) -> float:
+        """Evalúa variedad de vocabulario (delega a módulo de idioma específico)."""
+        if language == Language.en:
+            return score_lexicon_en(text_lower, word_count)
+        else:
+            return score_lexicon_fr(text_lower, word_count)
 
     def _score_morphosyntax(self, response_text: str, text_lower: str, language: Language) -> float:
-        """Evalúa morfosintaxis con tolerancia ESL."""
+        """Evalúa morfosintaxis (delega a módulo de idioma específico)."""
         if language == Language.en:
-            verb_patterns = [r"\w+ing\b", r"\w+ed\b", r"\w+s\b"]
+            return score_morphosyntax_en(response_text, text_lower)
         else:
-            verb_patterns = [r"\w+ais\b", r"\w+ait\b", r"\w+ent\b", r"\w+ions\b"]
-        
-        verb_score = 0.3
-        for pattern in verb_patterns:
-            if re.search(pattern, text_lower):
-                verb_score = 0.5
-                break
-
-        allowed_accents = "éèêëàâäôöûüçñ"
-        illegal_chars = sum(
-            1 for c in response_text 
-            if ord(c) > 127 and c not in allowed_accents
-        )
-        char_score = 1.0 if illegal_chars == 0 else max(0.1, 1.0 - illegal_chars * 0.1)
-
-        punctuation_score = 0.5
-        if response_text.count(".") > 0 or response_text.count("!") > 0 or response_text.count("?") > 0:
-            punctuation_score = 0.7
-
-        return min(1.0, (verb_score + char_score + punctuation_score) / 3 * 1.2)
+            return score_morphosyntax_fr(response_text, text_lower)
 
     def _compute_confidence(
         self,
@@ -422,7 +316,7 @@ class OpenResponseScorer:
         rubric: OpenQuestionRubric,
         breakdown: RubricBreakdown,
     ) -> float:
-        """Calcula la confianza de la evaluación."""
+        """Calcula la confianza penalizando por errores detectados."""
         min_words = rubric.expected_min_words
 
         if word_count < min_words:
@@ -444,8 +338,17 @@ class OpenResponseScorer:
         std_dev = variance ** 0.5
 
         consistency_factor = max(0.2, 1.0 - std_dev)
+        
+        # Penalize if morphosyntax or lexicon is weak (error indicators)
+        error_penalty = 0.0
+        if breakdown.morphosyntax < 0.65:
+            error_penalty += 0.15
+        if breakdown.lexicon < 0.55:
+            error_penalty += 0.10
+        if breakdown.sociolinguistic < 0.55:
+            error_penalty += 0.08
 
-        confidence = length_factor * 0.6 + consistency_factor * 0.4
+        confidence = (length_factor * 0.6 + consistency_factor * 0.4) - error_penalty
         return min(1.0, max(0.1, confidence))
 
     def _build_explanation(

@@ -1,3 +1,10 @@
+"""
+Schemas Pydantic para el sistema de evaluación adaptativa de exámenes DELF & CEFR.
+
+Re-exporta todos los modelos de datos para mantener compatibilidad
+con los imports existentes: ``from .schemas import X``.
+"""
+
 from __future__ import annotations
 
 from datetime import datetime
@@ -6,24 +13,38 @@ from typing import Dict, List, Optional
 
 from pydantic import BaseModel, Field
 
+from .question_type import QuestionType
+
+
+# Enums base
 
 class Language(str, Enum):
-    """Idiomas soportados: 'en' para inglés, 'fr' para francés."""
+    """Idiomas soportados."""
     en = "en"
     fr = "fr"
+
+    @classmethod
+    def _missing_(cls, value):  # type: ignore[override]
+        """
+        Acepta variantes comunes:
+        - "EN", "en", "Eng" -> "en"
+        - "FR", "fr"        -> "fr"
+        """
+        if value is None:
+            return None
+        if isinstance(value, str):
+            s = value.strip().lower()
+            if s.startswith("en"):
+                return cls.en
+            if s.startswith("fr"):
+                return cls.fr
+        return None
 
 
 class LearnerBackground(str, Enum):
     advanced = "advanced"
     normal = "normal"
     none = "none"
-
-
-class QuestionType(str, Enum):
-    mcq = "mcq"
-    short_answer = "short_answer"
-    essay = "essay"
-    open = "open"  # Nuevo tipo para preguntas abiertas
 
 
 class DELFLevel(str, Enum):
@@ -41,11 +62,11 @@ class DELFLevel(str, Enum):
     B2_plus = "B2+"
 
 
-# ============================================================================
 # DELF Rubric and Scoring
-# ============================================================================
+
 class RubricCriteria(BaseModel):
     """Criterios DELF para evaluación de preguntas abiertas."""
+
     task_realisation: float = Field(default=0.25, ge=0, le=1, description="Réalisation de la tâche")
     coherence: float = Field(default=0.20, ge=0, le=1, description="Cohérence/Cohésion")
     sociolinguistic: float = Field(default=0.15, ge=0, le=1, description="Adéquation sociolinguistique")
@@ -53,13 +74,16 @@ class RubricCriteria(BaseModel):
     morphosyntax: float = Field(default=0.20, ge=0, le=1, description="Morphosyntaxe")
 
     def validate_total(self) -> bool:
-        """Asegurar que los pesos sumen 1.0."""
-        total = self.task_realisation + self.coherence + self.sociolinguistic + self.lexicon + self.morphosyntax
+        total = (
+            self.task_realisation + self.coherence
+            + self.sociolinguistic + self.lexicon + self.morphosyntax
+        )
         return abs(total - 1.0) < 0.001
 
 
 class RubricBreakdown(BaseModel):
     """Desglose de puntuaciones por criterio DELF."""
+
     task_realisation: float = Field(ge=0, le=1)
     coherence: float = Field(ge=0, le=1)
     sociolinguistic: float = Field(ge=0, le=1)
@@ -78,10 +102,11 @@ class RubricBreakdown(BaseModel):
 
 
 class OpenQuestionRubric(BaseModel):
-    """Rúbrica DELF para una pregunta abierta."""
+    """Rúbrica DELF para una pregunta de texto libre."""
+
     level: DELFLevel = Field(description="Nivel DELF esperado")
     expected_min_words: int = Field(default=20, ge=1)
-    expected_keywords: List[str] = Field(default_factory=list, description="Palabras clave esperadas")
+    expected_keywords: List[str] = Field(default_factory=list)
     criteria_weights: RubricCriteria = Field(default_factory=RubricCriteria)
 
     class Config:
@@ -103,18 +128,19 @@ class OpenQuestionRubric(BaseModel):
 
 class ExampleAnswer(BaseModel):
     """Ejemplo de respuesta para entrenamiento."""
+
     text: str = Field(min_length=1)
     score: float = Field(ge=0, le=1)
 
 
-# ============================================================================
 # Questions and Exams
-# ============================================================================
+
 class QuestionAttempt(BaseModel):
-    """Attempt de una pregunta durante un examen."""
+    """Intento de respuesta durante un examen (legacy)."""
+
     question_id: Optional[str] = None
     question_type: QuestionType
-    answer_text: str = Field(default="", description="Texto de respuesta del usuario")
+    answer_text: str = Field(default="")
     time_spent_sec: float = Field(ge=0)
     max_points: float = Field(default=1.0, ge=0)
     obtained_points: Optional[float] = Field(default=None, ge=0)
@@ -124,6 +150,7 @@ class QuestionAttempt(BaseModel):
 
 class MCQQuestion(BaseModel):
     """Pregunta de opción múltiple para entrenamiento."""
+
     question_id: str
     text: str
     type: QuestionType = QuestionType.mcq
@@ -134,7 +161,8 @@ class MCQQuestion(BaseModel):
 
 
 class OpenQuestion(BaseModel):
-    """Pregunta abierta para entrenamiento."""
+    """Pregunta de texto libre para entrenamiento."""
+
     question_id: str
     text: str
     type: QuestionType = QuestionType.open
@@ -146,43 +174,88 @@ class OpenQuestion(BaseModel):
 
 
 class QuestionForExam(BaseModel):
-    """Pregunta durante un examen predicción."""
+    """Pregunta durante un examen de predicción."""
+
     question_id: str
     type: QuestionType
     text: str
-    language: Language = Language.fr  # Será detectado automáticamente si no se proporciona
+    language: Language = Language.fr
+    # Para IMAGE
+    image_url: Optional[str] = Field(default=None, description="URL o referencia de imagen (para IMAGE)")
+    image_description: Optional[str] = Field(
+        default=None,
+        description="Descripción textual de la imagen mostrada al candidato (para IMAGE)",
+    )
+    # Para ORDERING: elementos disponibles en orden aleatorio
+    elements: Optional[List[str]] = Field(default=None, description="Elementos a ordenar (para ORDERING)")
 
 
 class QuestionResponse(BaseModel):
-    """Respuesta a una pregunta."""
+    """Respuesta del candidato a una pregunta."""
+
     question_id: str
     type: QuestionType
-    answer_text: str
+    answer_text: str = Field(default="")
+    # Para ORDERING: lista de elementos en el orden que eligió el candidato
+    answer_list: Optional[List[str]] = Field(
+        default=None,
+        description="Respuesta como lista ordenada (para ORDERING)",
+    )
     time_spent_sec: float = Field(default=0, ge=0)
 
-
-# ============================================================================
 # Training
-# ============================================================================
+
 class TrainSample(BaseModel):
     """Sample de entrenamiento con metadata."""
+
     question_id: str
     text: str
     type: QuestionType
-    language: Language = Language.fr  # Idioma de la pregunta
+    language: Language = Language.fr
     difficulty: int = Field(ge=1, le=5)
     expected_keywords: Optional[List[str]] = None
     rubric: Optional[OpenQuestionRubric] = None
     examples_answers: Optional[List[ExampleAnswer]] = None
-    # Para MCQ
+
+    # Para SINGLE_CHOICE / MCQ / IMAGE
     options: Optional[List[str]] = None
     answer: Optional[str] = None
-    # Metadata
+
+    # Para FILL_BLANK
+    accepted_answers: Optional[List[str]] = Field(
+        default=None,
+        description="Lista de respuestas aceptadas como correctas (para FILL_BLANK)",
+    )
+
+    # Para ORDERING
+    correct_order: Optional[List[str]] = Field(
+        default=None,
+        description="Orden correcto de los elementos (para ORDERING)",
+    )
+    elements: Optional[List[str]] = Field(
+        default=None,
+        description="Elementos disponibles en orden aleatorio (para ORDERING)",
+    )
+
+    # Para IMAGE
+    image_url: Optional[str] = Field(default=None, description="URL o referencia de imagen")
+    image_description: Optional[str] = Field(
+        default=None,
+        description="Descripción de la imagen mostrada al candidato (para IMAGE)",
+    )
+
+    # Para SPEAKING_RECORD
+    audio_recording_ref: Optional[str] = Field(
+        default=None,
+        description="Referencia al archivo de audio del candidato",
+    )
+
     metadata: Optional[Dict[str, str]] = None
 
 
 class TrainRequest(BaseModel):
     """Request para entrenar el modelo."""
+
     train_id: Optional[str] = None
     examples: List[TrainSample] = Field(min_length=1)
     metadata: Optional[Dict[str, str]] = None
@@ -190,12 +263,12 @@ class TrainRequest(BaseModel):
     class Config:
         json_schema_extra = {
             "example": {
-                "train_id": "t2026-03-11-01",
+                "train_id": "t2026-03-16-01",
                 "examples": [
                     {
                         "question_id": "q1",
-                        "text": "Write a short message about your day.",
-                        "type": "open",
+                        "text": "Écrivez un message sur votre journée.",
+                        "type": "writing_text",
                         "difficulty": 2,
                         "expected_keywords": ["aujourd'hui", "bien", "travail"],
                         "rubric": {
@@ -214,11 +287,35 @@ class TrainRequest(BaseModel):
                     },
                     {
                         "question_id": "q2",
-                        "type": "mcq",
+                        "type": "single_choice",
                         "text": "Quelle est la couleur du ciel?",
                         "options": ["bleu", "vert", "rouge"],
                         "answer": "bleu",
                         "difficulty": 1,
+                    },
+                    {
+                        "question_id": "q3",
+                        "type": "fill_blank",
+                        "text": "Le chat est ___ la table.",
+                        "accepted_answers": ["sur", "sous", "devant"],
+                        "difficulty": 1,
+                    },
+                    {
+                        "question_id": "q4",
+                        "type": "ordering",
+                        "text": "Ordena las estaciones del año.",
+                        "elements": ["automne", "hiver", "printemps", "été"],
+                        "correct_order": ["printemps", "été", "automne", "hiver"],
+                        "difficulty": 2,
+                    },
+                    {
+                        "question_id": "q_img_1",
+                        "type": "image",
+                        "text": "What are the people doing in the image?",
+                        "image_description": "A group of students studying together in a university library.",
+                        "options": ["They are studying.", "They are eating.", "They are playing."],
+                        "answer": "They are studying.",
+                        "difficulty": 2,
                     },
                 ],
                 "metadata": {"source": "corpusX", "language": "fr"},
@@ -231,12 +328,11 @@ class TrainResponse(BaseModel):
     total_samples_seen: int
     model_version: str
 
-
-# ============================================================================
 # Prediction and Adaptive Testing
-# ============================================================================
+
 class QuestionScoreDetail(BaseModel):
     """Detalles de puntuación para una pregunta."""
+
     question_id: str
     type: QuestionType
     score: float = Field(ge=0, le=1)
@@ -244,14 +340,15 @@ class QuestionScoreDetail(BaseModel):
     explanation: str = Field(default="")
     confidence: float = Field(ge=0, le=1)
     needs_human_review: bool = Field(default=False)
-    language_detected: Language = Language.fr  # Idioma detectado/usado
-    # Solo para preguntas abiertas
+    language_detected: Language = Language.fr
+    # Solo para WRITING_TEXT / open
     rubric_breakdown: Optional[RubricBreakdown] = None
     human_score: Optional[float] = Field(default=None, ge=0, le=1)
 
 
 class NextQuestionRecommendation(BaseModel):
     """Recomendación de siguiente pregunta para examen adaptativo."""
+
     difficulty: int = Field(ge=1, le=5)
     topic: Optional[str] = None
     reason: str = Field(default="")
@@ -259,9 +356,10 @@ class NextQuestionRecommendation(BaseModel):
 
 class PredictRequest(BaseModel):
     """Request para predicción/evaluación."""
+
     exam_id: str = Field(description="Identificador único del examen")
     candidate_id: Optional[str] = None
-    adaptive: bool = Field(default=False, description="Activar examen adaptativo")
+    adaptive: bool = Field(default=False)
     questions: List[QuestionForExam] = Field(min_length=1)
     answers: List[QuestionResponse] = Field(min_length=1)
 
@@ -272,12 +370,28 @@ class PredictRequest(BaseModel):
                 "candidate_id": "cand-123",
                 "adaptive": True,
                 "questions": [
-                    {"question_id": "q1", "type": "open", "text": "Describe tu día."},
-                    {"question_id": "q2", "type": "mcq", "text": "Qué color es el cielo?"},
+                    {"question_id": "q1", "type": "writing_text", "text": "Décrivez votre journée."},
+                    {"question_id": "q2", "type": "single_choice", "text": "Quelle couleur est le ciel?"},
+                    {"question_id": "q3", "type": "fill_blank", "text": "Le chat est ___ la table."},
+                    {
+                        "question_id": "q4",
+                        "type": "ordering",
+                        "text": "Ordena las estaciones.",
+                        "elements": ["hiver", "printemps", "été", "automne"],
+                    },
+                    {
+                        "question_id": "q_img_1",
+                        "type": "image",
+                        "text": "Describe what is happening in the image.",
+                        "image_description": "A young woman working on a laptop in a coffee shop.",
+                        "language": "en",
+                    },
                 ],
                 "answers": [
-                    {"question_id": "q1", "type": "open", "answer_text": "Hoy fue un buen día.", "time_spent_sec": 120},
-                    {"question_id": "q2", "type": "mcq", "answer_text": "azul", "time_spent_sec": 15},
+                    {"question_id": "q1", "type": "writing_text", "answer_text": "Aujourd'hui j'ai travaillé.", "time_spent_sec": 120},
+                    {"question_id": "q2", "type": "single_choice", "answer_text": "bleu", "time_spent_sec": 15},
+                    {"question_id": "q3", "type": "fill_blank", "answer_text": "sur", "time_spent_sec": 10},
+                    {"question_id": "q4", "type": "ordering", "answer_list": ["printemps", "été", "automne", "hiver"], "time_spent_sec": 30},
                 ],
             }
         }
@@ -285,6 +399,7 @@ class PredictRequest(BaseModel):
 
 class PredictResponse(BaseModel):
     """Response de predicción/evaluación."""
+
     exam_id: str
     candidate_id: Optional[str] = None
     per_question: List[QuestionScoreDetail]
@@ -293,52 +408,47 @@ class PredictResponse(BaseModel):
     next_question_recommendation: Optional[NextQuestionRecommendation] = None
     evaluation_meta: Dict[str, str] = Field(default_factory=dict)
 
-    class Config:
-        json_schema_extra = {
-            "example": {
-                "exam_id": "ex-001",
-                "candidate_id": "cand-123",
-                "per_question": [
-                    {
-                        "question_id": "q1",
-                        "type": "open",
-                        "score": 0.62,
-                        "max_score": 1.0,
-                        "rubric_breakdown": {
-                            "task_realisation": 0.6,
-                            "coherence": 0.7,
-                            "sociolinguistic": 0.5,
-                            "lexicon": 0.6,
-                            "morphosyntax": 0.6,
-                        },
-                        "confidence": 0.58,
-                        "needs_human_review": True,
-                        "explanation": "Falta detalle; hay conectores básicos; vocabulario limitado.",
-                    }
-                ],
-                "estimated_level": "A2",
-                "confidence": 0.72,
-                "next_question_recommendation": {"difficulty": 3, "topic": "habits", "reason": "Score moderado, aumentar dificultad"},
-                "evaluation_meta": {"model_version": "v2.0", "timestamp": "2026-03-11T10:30:00Z"},
-            }
-        }
 
-
-# ============================================================================
 # Legacy Compatibility
-# ============================================================================
+
 class ExamFeatures(BaseModel):
     """Legacy: para mantener compatibilidad con código existente."""
+
     language: Language
     learner_background: LearnerBackground
     questions: List[QuestionAttempt] = Field(min_length=1)
 
-
-# ============================================================================
 # API Status
-# ============================================================================
+
 class HealthResponse(BaseModel):
     status: str
     model_version: str
     trained_samples: int
     initialized: bool
+
+
+# Re-exportación explícita
+__all__ = [
+    "QuestionType",
+    "Language",
+    "LearnerBackground",
+    "DELFLevel",
+    "RubricCriteria",
+    "RubricBreakdown",
+    "OpenQuestionRubric",
+    "ExampleAnswer",
+    "QuestionAttempt",
+    "MCQQuestion",
+    "OpenQuestion",
+    "QuestionForExam",
+    "QuestionResponse",
+    "TrainSample",
+    "TrainRequest",
+    "TrainResponse",
+    "QuestionScoreDetail",
+    "NextQuestionRecommendation",
+    "PredictRequest",
+    "PredictResponse",
+    "ExamFeatures",
+    "HealthResponse",
+]

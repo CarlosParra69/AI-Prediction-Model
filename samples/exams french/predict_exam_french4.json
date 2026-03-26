@@ -1,0 +1,139 @@
+{
+  "exam_id": "ex-french-priority-004",
+  "candidate_id": "cand-fr-004-A2-plus",
+  "adaptive": true,
+  "questions": [
+    {
+      "question_id": "q_fr_20",
+      "type": "fill_blank",
+      "text": "Tu ___ en retard pour le cours.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_img_5",
+      "type": "image",
+      "text": "Où se trouve cette scène?",
+      "image_description": "Des personnes assises à une terrasse de café en plein air, avec des parasols et des tables.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_1",
+      "type": "writing_text",
+      "text": "Écrivez un message court sur votre journée.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_4",
+      "type": "single_choice",
+      "text": "Quel est le contraire du mot 'grand'?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_30",
+      "type": "ordering",
+      "text": "Remettez les étapes du matin dans l'ordre logique.",
+      "language": "fr",
+      "elements": ["Se lever.", "Prendre le petit-déjeuner.", "Se laver.", "S'habiller."]
+    },
+    {
+      "question_id": "q_fr_2",
+      "type": "writing_text",
+      "text": "Parlez de vos loisirs préférés et pourquoi vous les aimez.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_3",
+      "type": "single_choice",
+      "text": "Quelle est la couleur du ciel lors d'une belle journée?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_16",
+      "type": "ordering",
+      "text": "Remettez ces étapes dans l'ordre correct pour préparer des pâtes.",
+      "language": "fr",
+      "elements": ["Égoutter les pâtes.", "Faire bouillir l'eau.", "Servir dans une assiette.", "Saler l'eau.", "Ajouter les pâtes."]
+    },
+    {
+      "question_id": "q_fr_14",
+      "type": "fill_blank",
+      "text": "Mon chat dort toujours ___ le canapé.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_img_4",
+      "type": "image",
+      "text": "Que fait la personne sur l'image?",
+      "image_description": "Un homme cuisinant dans une cuisine moderne, en train de couper des légumes sur une planche.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_5",
+      "type": "writing_text",
+      "text": "Décrivez un jour important de votre vie en détail.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_7",
+      "type": "writing_text",
+      "text": "Expliquez comment vous préparez votre repas préféré.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_23",
+      "type": "fill_blank",
+      "text": "Vous ___ prêts pour l'examen de français.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_9",
+      "type": "writing_text",
+      "text": "Décrivez votre environnement de travail ou d'études idéal.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_8",
+      "type": "single_choice",
+      "text": "Quel est le plus grand fleuve en France?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_11",
+      "type": "writing_text",
+      "text": "Racontez une expérience de voyage mémorable.",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_6",
+      "type": "single_choice",
+      "text": "Quel temps faut-il pour aller de Paris à Lyon en TGV?",
+      "language": "fr"
+    },
+    {
+      "question_id": "q_fr_18",
+      "type": "speaking_record",
+      "text": "Présentez-vous en quelques phrases : votre prénom, votre âge, votre profession et un loisir que vous aimez.",
+      "language": "fr"
+    }
+  ],
+  "answers": [
+    {"question_id": "q_fr_20", "type": "fill_blank", "answer_text": "es", "time_spent_sec": 7},
+    {"question_id": "q_img_5", "type": "image", "answer_text": "À la terrasse d'un café.", "time_spent_sec": 14},
+    {"question_id": "q_fr_1", "type": "writing_text", "answer_text": "Aujourd'hui j'ai eu une journée normale. Le matin je suis alé à l'université pour deux cours. Après j'ai mangé avec une amie à la cafétéria. Le soir je suis rentré chez moi.", "time_spent_sec": 140},
+    {"question_id": "q_fr_4", "type": "single_choice", "answer_text": "petit", "time_spent_sec": 6},
+    {"question_id": "q_fr_30", "type": "ordering", "answer_list": ["Se lever.", "Se laver.", "S'habiller.", "Prendre le petit-déjeuner."], "time_spent_sec": 28},
+    {"question_id": "q_fr_2", "type": "writing_text", "answer_text": "J'aime écouter la musique et faire du vélo. J'écoute la musique pop parce que c'est joli et ça donne beacoup de énergie. Je fais du vélo le week-end au parc avec mes amis. C'est bon pour la santé.", "time_spent_sec": 155},
+    {"question_id": "q_fr_3", "type": "single_choice", "answer_text": "bleu", "time_spent_sec": 8},
+    {"question_id": "q_fr_16", "type": "ordering", "answer_list": ["Faire bouillir l'eau.", "Ajouter les pâtes.", "Saler l'eau.", "Égoutter les pâtes.", "Servir dans une assiette."], "time_spent_sec": 34},
+    {"question_id": "q_fr_14", "type": "fill_blank", "answer_text": "sur", "time_spent_sec": 7},
+    {"question_id": "q_img_4", "type": "image", "answer_text": "Il cuisine.", "time_spent_sec": 10},
+    {"question_id": "q_fr_5", "type": "writing_text", "answer_text": "Un jour important pour moi c'était quand j'ai eu mon diplôme de lycée. J'étais beacoup content et nerveux. Mes parents était aussi très contents. On a mangé au restaurant pour fêter. C'était très special pour moi.", "time_spent_sec": 175},
+    {"question_id": "q_fr_7", "type": "writing_text", "answer_text": "Pour preparer les pâtes je met de l'eau dans une casserole. Quand c'est chaud j'ajoute le sel et les pâtes. Je fait cuire dix minutes. Pendant ce temps je chauffe la sauce tomate. Après je mélange tout et c'est prêt.", "time_spent_sec": 165},
+    {"question_id": "q_fr_23", "type": "fill_blank", "answer_text": "êtes", "time_spent_sec": 9},
+    {"question_id": "q_fr_9", "type": "writing_text", "answer_text": "Mon lieu ideal pour etudier c'est un endroit calme avec une table et une chaise. J'ai besoin de bonne lumière et pas beacoup de bruit. Je peux pas travailler s'il y a trop de bruit. J'aime aussi avoir des plantes.", "time_spent_sec": 168},
+    {"question_id": "q_fr_8", "type": "single_choice", "answer_text": "La Seine", "time_spent_sec": 9},
+    {"question_id": "q_fr_11", "type": "writing_text", "answer_text": "Un voyage memorable pour moi c'était quand je suis alé à Barcelone avec des amis. Nous avons vu beacoup de choses comme la Sagrada Familia. J'ai aimé la ville et la nourriture. C'était la premiere fois que je voyageais sans mes parents.", "time_spent_sec": 180},
+    {"question_id": "q_fr_6", "type": "single_choice", "answer_text": "3 heures", "time_spent_sec": 10},
+    {"question_id": "q_fr_18", "type": "speaking_record", "answer_text": "Bonjour, je m'appelle Lucas. J'ai vingt-quatre ans et je suis étudiant en économie. J'habite dans une résidence universitaire. Dans mon temps libre j'aime le basket et regarder des films.", "time_spent_sec": 35}
+  ]
+}

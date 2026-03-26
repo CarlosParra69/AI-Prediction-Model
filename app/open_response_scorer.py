@@ -33,9 +33,8 @@ from .english_scorer import (
 )
 
 
-# ============================================================================
 # LANGUAGE DETECTION
-# ============================================================================
+
 def detect_language(text: str) -> Language:
     """
     Detecta el idioma del texto basado en palabras y patrones.

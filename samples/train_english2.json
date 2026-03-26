@@ -1,0 +1,203 @@
+{
+  "train_id": "t2026-03-24-english-grammar-forms",
+  "examples": [
+    {
+      "question_id": "q_en_20",
+      "type": "fill_blank",
+      "text": "I ___ very happy with my progress this month.",
+      "language": "en",
+      "accepted_answers": ["am"],
+      "difficulty": 1
+    },
+    {
+      "question_id": "q_en_21",
+      "type": "fill_blank",
+      "text": "She ___ a doctor; she works at the local clinic.",
+      "language": "en",
+      "accepted_answers": ["is"],
+      "difficulty": 1
+    },
+    {
+      "question_id": "q_en_22",
+      "type": "fill_blank",
+      "text": "We ___ ready to start the listening exercise.",
+      "language": "en",
+      "accepted_answers": ["are"],
+      "difficulty": 1
+    },
+    {
+      "question_id": "q_en_23",
+      "type": "fill_blank",
+      "text": "Last year they ___ complete beginners; now they are intermediate.",
+      "language": "en",
+      "accepted_answers": ["were"],
+      "difficulty": 2
+    },
+    {
+      "question_id": "q_en_24",
+      "type": "fill_blank",
+      "text": "He ___ finished the online module before the deadline.",
+      "language": "en",
+      "accepted_answers": ["has", "'s"],
+      "difficulty": 2
+    },
+    {
+      "question_id": "q_en_25",
+      "type": "fill_blank",
+      "text": "___ you ever spoken English outside the classroom?",
+      "language": "en",
+      "accepted_answers": ["Have"],
+      "difficulty": 2
+    },
+    {
+      "question_id": "q_en_26",
+      "type": "fill_blank",
+      "text": "If the sentence starts with \"There\", complete: There ___ many ways to practise listening.",
+      "language": "en",
+      "accepted_answers": ["are"],
+      "difficulty": 2
+    },
+    {
+      "question_id": "q_en_27",
+      "type": "fill_blank",
+      "text": "She suggested that we ___ the new vocabulary in sentences.",
+      "language": "en",
+      "accepted_answers": ["use", "should use"],
+      "difficulty": 3
+    },
+    {
+      "question_id": "q_en_28",
+      "type": "fill_blank",
+      "text": "The article ___ published on the school blog last Friday.",
+      "language": "en",
+      "accepted_answers": ["was"],
+      "difficulty": 2
+    },
+    {
+      "question_id": "q_en_29",
+      "type": "fill_blank",
+      "text": "Could I have ___ umbrella? It is starting to rain. (one umbrella, first mention)",
+      "language": "en",
+      "accepted_answers": ["an"],
+      "difficulty": 2
+    },
+    {
+      "question_id": "q_en_30",
+      "type": "fill_blank",
+      "text": "Turn left ___ the corner and you will see the language centre.",
+      "language": "en",
+      "accepted_answers": ["at"],
+      "difficulty": 2
+    },
+    {
+      "question_id": "q_en_31",
+      "type": "single_choice",
+      "text": "Which question is formed correctly?",
+      "language": "en",
+      "options": [
+        "Where you live?",
+        "Where do you live?",
+        "Where does you live?",
+        "Where living you?"
+      ],
+      "answer": "Where do you live?",
+      "difficulty": 1
+    },
+    {
+      "question_id": "q_en_32",
+      "type": "single_choice",
+      "text": "Choose the correct comparative: \"This exercise is ___ than the one we did yesterday.\"",
+      "language": "en",
+      "options": ["more easy", "easier", "more easier", "easyer"],
+      "answer": "easier",
+      "difficulty": 2
+    },
+    {
+      "question_id": "q_en_33",
+      "type": "ordering",
+      "text": "Put these classroom instructions in a sensible order for starting a pairwork activity.",
+      "language": "en",
+      "elements": [
+        "Compare your answers with your partner.",
+        "Read the questions silently.",
+        "Work alone for three minutes.",
+        "Listen to the example on the audio."
+      ],
+      "correct_order": [
+        "Listen to the example on the audio.",
+        "Read the questions silently.",
+        "Work alone for three minutes.",
+        "Compare your answers with your partner."
+      ],
+      "difficulty": 2
+    },
+    {
+      "question_id": "q_img_en_4",
+      "type": "image",
+      "text": "What is the person doing in the image?",
+      "image_description": "A person wearing headphones and typing on a keyboard, with a language-learning website visible on the screen.",
+      "language": "en",
+      "options": [
+        "Doing an online English exercise.",
+        "Cooking dinner.",
+        "Playing tennis.",
+        "Painting a wall."
+      ],
+      "answer": "Doing an online English exercise.",
+      "difficulty": 1
+    },
+    {
+      "question_id": "q_img_en_5",
+      "type": "image",
+      "text": "What does this scene show?",
+      "image_description": "Two people face to face, gesturing, with speech bubbles suggesting a conversation in a quiet corner of a bookshop.",
+      "language": "en",
+      "options": [
+        "A conversation between two people.",
+        "A swimming lesson.",
+        "A car repair.",
+        "A weather forecast on TV."
+      ],
+      "answer": "A conversation between two people.",
+      "difficulty": 2
+    },
+    {
+      "question_id": "q_en_34",
+      "type": "writing_text",
+      "text": "You arrived late to your English lesson. Write a very short note (to your teacher) apologising and giving one brief reason.",
+      "language": "en",
+      "difficulty": 2,
+      "expected_keywords": ["sorry", "late", "because", "traffic", "bus"],
+      "rubric": {
+        "level": "A2",
+        "expected_min_words": 20,
+        "expected_keywords": ["sorry", "late"],
+        "criteria_weights": {
+          "task_realisation": 0.28,
+          "coherence": 0.18,
+          "sociolinguistic": 0.22,
+          "lexicon": 0.16,
+          "morphosyntax": 0.16
+        }
+      },
+      "examples_answers": [
+        {
+          "text": "Dear Ms Lee, I am sorry I am late today. My bus was delayed because of traffic. I will catch up on the grammar sheet at home.",
+          "score": 0.78
+        },
+        {
+          "text": "Sorry late. Problem bus. I come now.",
+          "score": 0.45
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "source": "english_grammar_and_functions",
+    "version": "1.0.0",
+    "language": "en",
+    "includes_errors": "true",
+    "question_types": "fill_blank, single_choice, ordering, image, writing_text",
+    "rubric_note": "Short functional writing uses slightly higher sociolinguistic weight (register: apology to teacher)."
+  }
+}

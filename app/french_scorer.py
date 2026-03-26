@@ -5,9 +5,9 @@ from __future__ import annotations
 import re
 from typing import List
 
-# ============================================================================
+
 # FRENCH CONNECTORS AND LINGUISTIC FEATURES
-# ============================================================================
+
 FRENCH_CONNECTORS_BY_LEVEL = {
     "A1": {"et", "mais", "parce que", "alors"},
     "A1+": {"et", "mais", "parce que", "alors", "aussi", "car"},

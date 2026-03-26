@@ -1,5 +1,5 @@
 """
-Schemas Pydantic para el sistema de evaluación adaptativa de exámenes DELF.
+Schemas Pydantic para el sistema de evaluación adaptativa de exámenes DELF & CEFR.
 
 Re-exporta todos los modelos de datos para mantener compatibilidad
 con los imports existentes: ``from .schemas import X``.
@@ -16,14 +16,29 @@ from pydantic import BaseModel, Field
 from .question_type import QuestionType
 
 
-# ============================================================================
 # Enums base
-# ============================================================================
 
 class Language(str, Enum):
     """Idiomas soportados."""
     en = "en"
     fr = "fr"
+
+    @classmethod
+    def _missing_(cls, value):  # type: ignore[override]
+        """
+        Acepta variantes comunes:
+        - "EN", "en", "Eng" -> "en"
+        - "FR", "fr"        -> "fr"
+        """
+        if value is None:
+            return None
+        if isinstance(value, str):
+            s = value.strip().lower()
+            if s.startswith("en"):
+                return cls.en
+            if s.startswith("fr"):
+                return cls.fr
+        return None
 
 
 class LearnerBackground(str, Enum):
@@ -47,9 +62,7 @@ class DELFLevel(str, Enum):
     B2_plus = "B2+"
 
 
-# ============================================================================
 # DELF Rubric and Scoring
-# ============================================================================
 
 class RubricCriteria(BaseModel):
     """Criterios DELF para evaluación de preguntas abiertas."""
@@ -120,9 +133,7 @@ class ExampleAnswer(BaseModel):
     score: float = Field(ge=0, le=1)
 
 
-# ============================================================================
 # Questions and Exams
-# ============================================================================
 
 class QuestionAttempt(BaseModel):
     """Intento de respuesta durante un examen (legacy)."""
@@ -192,10 +203,7 @@ class QuestionResponse(BaseModel):
     )
     time_spent_sec: float = Field(default=0, ge=0)
 
-
-# ============================================================================
 # Training
-# ============================================================================
 
 class TrainSample(BaseModel):
     """Sample de entrenamiento con metadata."""
@@ -320,10 +328,7 @@ class TrainResponse(BaseModel):
     total_samples_seen: int
     model_version: str
 
-
-# ============================================================================
 # Prediction and Adaptive Testing
-# ============================================================================
 
 class QuestionScoreDetail(BaseModel):
     """Detalles de puntuación para una pregunta."""
@@ -404,9 +409,7 @@ class PredictResponse(BaseModel):
     evaluation_meta: Dict[str, str] = Field(default_factory=dict)
 
 
-# ============================================================================
 # Legacy Compatibility
-# ============================================================================
 
 class ExamFeatures(BaseModel):
     """Legacy: para mantener compatibilidad con código existente."""
@@ -415,10 +418,7 @@ class ExamFeatures(BaseModel):
     learner_background: LearnerBackground
     questions: List[QuestionAttempt] = Field(min_length=1)
 
-
-# ============================================================================
 # API Status
-# ============================================================================
 
 class HealthResponse(BaseModel):
     status: str
@@ -427,7 +427,7 @@ class HealthResponse(BaseModel):
     initialized: bool
 
 
-# ── Re-exportación explícita ─────────────────────────────────────────────────
+# Re-exportación explícita
 __all__ = [
     "QuestionType",
     "Language",

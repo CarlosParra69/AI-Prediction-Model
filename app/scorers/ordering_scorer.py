@@ -47,14 +47,14 @@ def score_ordering(
     answer_norm = [a.strip().lower() for a in answer_list]
     correct_norm = [c.strip().lower() for c in correct_order]
 
-    # ── Componente 1: posiciones correctas ───────────────────────────────────
+    # Componente 1: posiciones correctas
     position_hits = sum(
         1 for i, item in enumerate(answer_norm)
         if i < n and item == correct_norm[i]
     )
     position_score = position_hits / n if n > 0 else 0.0
 
-    # ── Componente 2: pares adyacentes en orden correcto ─────────────────────
+    # Componente 2: pares adyacentes en orden correcto
     if n > 1:
         correct_pairs = set(zip(correct_norm[:-1], correct_norm[1:]))
         answer_pairs = set(zip(answer_norm[:-1], answer_norm[1:]))

@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import json
+import logging
+
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 
@@ -14,9 +17,10 @@ from .schemas import (
 
 app = FastAPI(
     title="Language Exam Online Trainer (Adaptive)",
-    version="2.0.0",
+    version="1.0.0",
     description="API para evaluación adaptativa de exámenes DELF con preguntas abiertas y cerradas.",
 )
+logger = logging.getLogger(__name__)
 model = OnlineExamModel()
 model.load()
 
@@ -69,6 +73,11 @@ def predict(payload: PredictRequest) -> PredictResponse:
     """
     try:
         response = model.predict_adaptive(payload)
+        response_summary = response.model_dump(mode="json", exclude={"per_question"})
+        logger.info(
+            "RESPONSE OF POST: http://127.0.0.1:8000/predict :\n%s",
+            json.dumps(response_summary, ensure_ascii=False, indent=4),
+        )
         return response
     except Exception as exc:
         raise HTTPException(

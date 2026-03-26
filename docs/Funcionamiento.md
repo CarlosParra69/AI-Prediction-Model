@@ -1,11 +1,11 @@
-# 📊 Sistema de Evaluación de Proficiencia Lingüística Python
+# 📊 Sistema de Evaluación IA de Proficiencia Lingüística Hecha en Python
 ## Presentación del Proyecto
 
 ---
 
 ## 🎯 ¿Qué Hace Este Sistema?
 
-El sistema **evalúa automáticamente el nivel de proficiencia lingüística** de candidatos en **francés e inglés** usando un estándar internacional reconocido (CEFR).
+El sistema **evalúa automáticamente el nivel de proficiencia lingüística** de candidatos en **francés e inglés** usando un estándar internacional reconocido (CEFR & DELF).
 
 **En simple**: Recibe respuestas de un candidato, las analiza y dice qué nivel tiene (A1, A2, B1, B2, etc.).
 
@@ -151,12 +151,12 @@ Ejemplo Incorrecto: "Ayer voy al parque"
 ### 1. **Detección Automática de Idioma**
 ```
 Entrada: "Bonjour, je suis heureux"
-→ Detecta: Francés ✅
+→ Detecta: Francés 
 ```
 
 ```
 Entrada: "Hello, I am very happy"
-→ Detecta: Inglés ✅
+→ Detecta: Inglés 
 ```
 
 **Beneficio**: Los candidatos no necesitan indicar qué idioma usan.
@@ -482,7 +482,7 @@ Tasa de falsos positivos: <5%
 
 ## 🚀 Próximos Pasos
 
-### Para implementar este sistema en tu institución:
+### Para implementar este sistema:
 
 1. **Recopilar datos de entrenamiento**
    - Ejemplos de buenas respuestas para cada nivel
@@ -508,7 +508,7 @@ Tasa de falsos positivos: <5%
 
 ## 📞 Resumen Ejecutivo
 
-**¿Qué es?** Un sistema de evaluación automática de proficiencia lingüística en francés e inglés.
+**¿Qué es?** Un sistema de evaluación IA automática de proficiencia lingüística en francés e inglés.
 
 **¿Cómo funciona?** Analiza respuestas abiertas y de opción múltiple usando 5 criterios lingüísticos.
 
@@ -520,5 +520,5 @@ Tasa de falsos positivos: <5%
 
 ---
 
-**Sistema listo para usar. Contacte para demostración.** 🎯
+**Ready for production.**
 

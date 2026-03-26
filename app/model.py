@@ -103,12 +103,11 @@ class OnlineExamModel:
         # Estado
         self.initialized = False
         self.trained_samples = 0
-        self.version = "v2.0"  # Nueva versión con soporte adaptativo
+        self.version = "v1.0"  # Nueva versión con soporte adaptativo
         self._rng_seed = 42
 
-    # ========================================================================
+    
     # Legacy Methods (Compatibilidad)
-    # ========================================================================
 
     def _encode_background(self, background: LearnerBackground) -> List[float]:
         levels = [LearnerBackground.none, LearnerBackground.normal, LearnerBackground.advanced]
@@ -237,9 +236,7 @@ class OnlineExamModel:
         else:  # B2 solo con scores muy altos
             return "B2"
 
-    # ========================================================================
     # New Methods (Adaptive Testing)
-    # ========================================================================
 
     def predict_adaptive(self, request: PredictRequest) -> PredictResponse:
         """
@@ -289,7 +286,8 @@ class OnlineExamModel:
                         ability_state, score_detail.score
                     )
 
-            # ── Estimación de nivel: writing-focused ─────────────────────────────
+            # Estimación de nivel: writing-focused
+
             # Los tipos de texto libre (writing_text, speaking_record) son los más
             # discriminativos del nivel DELF. Las preguntas binarias (single_choice,
             # fill_blank, ordering) informan sobre precisión pero no sobre nivel
@@ -387,37 +385,37 @@ class OnlineExamModel:
         Returns:
             QuestionScoreDetail con puntuación y feedback.
         """
-        # ── Texto libre (WRITING_TEXT / open / short_answer / essay) ─────────
+        # Texto libre (WRITING_TEXT / open / short_answer / essay)
         if question_type.is_open_text():
             return self._evaluate_open_text(
                 question_id, question_type, answer_text, language
             )
 
-        # ── Opción múltiple (SINGLE_CHOICE / mcq / IMAGE) ────────────────────
+        # Opción múltiple (SINGLE_CHOICE / mcq / IMAGE)
         if question_type.is_choice_based():
             return self._evaluate_choice(
                 question_id, question_type, answer_text, language
             )
 
-        # ── Rellenar hueco (FILL_BLANK) ───────────────────────────────────────
+        # Rellenar espacios en blanco (FILL_BLANK)
         if question_type.is_fill_blank():
             return self._evaluate_fill_blank(
                 question_id, question_type, answer_text, language
             )
 
-        # ── Ordenar elementos (ORDERING) ──────────────────────────────────────
+        # Ordenar elementos (ORDERING)
         if question_type.is_ordering():
             return self._evaluate_ordering(
                 question_id, question_type, answer_list or [], language
             )
 
-        # ── Grabación de voz (SPEAKING_RECORD) ───────────────────────────────
+        # Grabación de voz (SPEAKING_RECORD)
         if question_type.is_speaking():
             return self._evaluate_speaking_record(
                 question_id, question_type, answer_text, language
             )
 
-        # ── Tipos futuros (AUDIO / VIDEO) → revisión humana ──────────────────
+        # Tipos futuros (AUDIO / VIDEO) → posible revisión
         if question_type.requires_human_review_by_default():
             msg = (
                 f"Question type '{question_type.value}' is not yet scored automatically. "
@@ -437,7 +435,7 @@ class OnlineExamModel:
                 language_detected=language,
             )
 
-        # ── Fallback genérico ─────────────────────────────────────────────────
+        # Fallback genérico
         return QuestionScoreDetail(
             question_id=question_id,
             type=question_type,
@@ -449,7 +447,7 @@ class OnlineExamModel:
             language_detected=language,
         )
 
-    # ── Helpers de evaluación por tipo ───────────────────────────────────────
+    # Helpers de evaluación por tipo
 
     def _evaluate_open_text(
         self,
@@ -627,9 +625,7 @@ class OnlineExamModel:
             language_detected=language,
         )
 
-    # ========================================================================
     # Training
-    # ========================================================================
 
     def train_from_request(self, request: TrainRequest) -> TrainResponse:
         """
@@ -689,9 +685,7 @@ class OnlineExamModel:
             self.trained_samples += len(samples)
             self.version = f"v{self.trained_samples}"
 
-    # ========================================================================
     # Legacy predict (compatibilidad)
-    # ========================================================================
 
     def predict(self, sample: ExamFeatures) -> PredictArtifacts:
         """Legacy: Predice con modelo legacy."""
@@ -744,9 +738,7 @@ class OnlineExamModel:
         text = self.vectorizer.transform(texts)
         return hstack([numeric, text], format="csr")
 
-    # ========================================================================
     # Persistence
-    # ========================================================================
 
     def reset(self) -> None:
         """Reset del modelo."""

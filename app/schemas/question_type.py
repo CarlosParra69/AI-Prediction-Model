@@ -24,14 +24,14 @@ class QuestionType(str, Enum):
         AUDIO           - Comprensión auditiva
         VIDEO           - Comprensión visual
 
-    Valores legacy (compatibilidad hacia atrás):
+    Valores legacy:
         mcq             - Alias de SINGLE_CHOICE
         open            - Alias de WRITING_TEXT
         short_answer    - Alias de WRITING_TEXT
         essay           - Alias de WRITING_TEXT
     """
 
-    # ── Tipos activos ────────────────────────────────────────────────────────
+    # Tipos activos 
     FILL_BLANK = "fill_blank"
     SINGLE_CHOICE = "single_choice"
     ORDERING = "ordering"
@@ -39,17 +39,34 @@ class QuestionType(str, Enum):
     WRITING_TEXT = "writing_text"
     SPEAKING_RECORD = "speaking_record"
 
-    # ── Tipos futuros (arquitectura preparada) ───────────────────────────────
-    AUDIO = "audio"
-    VIDEO = "video"
-
-    # ── Legacy (backward compatibility) ─────────────────────────────────────
+    # Legacy 
     mcq = "mcq"
     short_answer = "short_answer"
     essay = "essay"
     open = "open"
 
-    # ── Helpers ──────────────────────────────────────────────────────────────
+    # Tipos futuros (pendientes)
+    AUDIO = "audio"
+    VIDEO = "video"
+
+    @classmethod
+    def _missing_(cls, value):  # type: ignore[override]
+        """
+        Normaliza variantes comunes para compatibilidad:
+        - "SINGLE_CHOICE" -> "single_choice"
+        - "fill-blank"    -> "fill_blank"
+        - "WRITING_TEXT"  -> "writing_text"
+        """
+        if value is None:
+            return None
+        if isinstance(value, str):
+            normalized = value.strip().lower().replace("-", "_")
+            for member in cls:
+                if member.value == normalized:
+                    return member
+        return None
+    
+    # Helpers
 
     def is_choice_based(self) -> bool:
         """Devuelve True si la pregunta requiere seleccionar entre opciones."""

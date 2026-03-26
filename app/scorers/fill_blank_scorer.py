@@ -109,7 +109,7 @@ def score_fill_blank_multi(
     return avg_score, avg_conf, explanation
 
 
-# ── Mensajes de feedback ─────────────────────────────────────────────────────
+# Mensajes de feedback
 
 def _msg(key: str, language: Language, accepted: Optional[List[str]] = None) -> str:
     msgs: dict[str, dict[str, str]] = {

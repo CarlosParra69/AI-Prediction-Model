@@ -11,10 +11,7 @@ from app.schemas import OpenQuestionRubric, DELFLevel, RubricCriteria, Language
 client = TestClient(app)
 
 
-# ============================================================================
-# Tests Legacy (Compatibilidad)
-# ============================================================================
-
+# Tests Legacy
 
 def test_health() -> None:
     """Test endpoint health."""
@@ -35,9 +32,7 @@ def test_version() -> None:
     assert "api_version" in body
 
 
-# ============================================================================
 # Tests Adaptive Endpoints
-# ============================================================================
 
 
 def test_predict_open_question() -> None:
@@ -231,9 +226,7 @@ def test_predict_adaptive() -> None:
         assert 1 <= rec["difficulty"] <= 5
 
 
-# ============================================================================
 # Tests Open Response Scorer
-# ============================================================================
 
 
 def test_open_response_scorer_basic() -> None:
@@ -310,9 +303,7 @@ def test_open_response_scorer_reconcile() -> None:
     assert 0.83 < reconciled < 0.85
 
 
-# ============================================================================
 # Tests Adaptive Selector
-# ============================================================================
 
 
 def test_adaptive_selector_basic() -> None:
@@ -366,9 +357,7 @@ def test_adaptive_selector_delf_mapping() -> None:
     assert selector.estimate_delf_level(0.95) == "B2"  # Entre 0.90 y 1.0
 
 
-# ============================================================================
 # Tests Bias Checker
-# ============================================================================
 
 
 def test_bias_checker_basic() -> None:
@@ -425,9 +414,7 @@ def test_bias_checker_group_analysis() -> None:
     assert len(report.suspicious_deviations) > 0 or len(report.group_statistics) > 0
 
 
-# ============================================================================
 # Integration Tests
-# ============================================================================
 
 
 def test_full_exam_flow() -> None:
@@ -519,9 +506,7 @@ def test_full_exam_flow() -> None:
     assert body["per_question"][1]["confidence"] > 0.9
 
 
-# ============================================================================
 # Tests Multiidioma (French + English)
-# ============================================================================
 
 
 def test_open_response_scorer_french() -> None:

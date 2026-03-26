@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import re
 
-# ============================================================================
+
 # ENGLISH CONNECTORS AND LINGUISTIC FEATURES
-# ============================================================================
+
 ENGLISH_CONNECTORS_BY_LEVEL = {
     "A1": {"and", "but", "because", "so", "then"},
     "A1+": {"and", "but", "because", "so", "then", "also", "after", "before"},

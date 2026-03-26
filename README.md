@@ -1,4 +1,4 @@
-# PLACEMENT TEST AI Prediction Model - Multilingual DELF/CEFR Exams Evaluation System
+# PIE PLACEMENT TEST AI Prediction Model - Multilingual DELF/CEFR Exams Evaluation System
 
 ---
 
@@ -17,9 +17,7 @@ python -m venv .venv
 
 pip install -r requirements.txt
 
-pytest tests/test_api.py -v
 ```
-
 ### 2. Run the API
 
 ```bash
@@ -39,12 +37,12 @@ curl http://localhost:8000/health
 #### Train the Model
 
 ```bash
-# Entrenar con corpus principal (tipos variados)
+# Ejemplo entrenar frances con json principal (Carpeta Samples)
 curl -X POST http://localhost:8000/train \
   -H "Content-Type: application/json" \
   -d @samples/train_french_priority.json
 
-# Entrenar con corpus adicional (verbo être + IMAGE)
+# Entrenar con json adicional (verbo être + IMAGE)
 curl -X POST http://localhost:8000/train \
   -H "Content-Type: application/json" \
   -d @samples/train_french_priority_2.json
@@ -62,7 +60,6 @@ curl -X POST http://localhost:8000/predict \
 
 ```bash
 pytest tests/test_api.py -v
-# Expected: 23 passed in 1.60s
 ```
 
 ---
@@ -75,7 +72,7 @@ This project has been upgraded to support **both French and English** language a
 
 ## 🎯 What This System Does
 
-Evaluates **language proficiency** in French and/or English exams using CEFR standards.
+Evaluates **language proficiency** in French and/or English exams using DELF & CEFR standards.
 
 ### Input
 
@@ -358,7 +355,7 @@ Multilingual Tests (v2.1 - NEW):
 
 ## ✨ Key Features by Version
 
-### v2.0 (Original)
+### v1.0 (Original)
 
 - French DELF evaluation
 - Open-ended questions
@@ -366,14 +363,14 @@ Multilingual Tests (v2.1 - NEW):
 - Adaptive assessment
 - Level estimation (A1-B2)
 
-### v2.1 (Multilingual)
+### v2.0 (Multilingual)
 
 - English support
 - Automatic language detection
 - Fairness validation
 - Full backward compatibility
 
-### v2.2+ (Current – Tipos extendidos)
+### v3.0+ (Current – Tipos extendidos)
 
 - **FILL_BLANK** con respuestas múltiples aceptadas y tolerancia a acentos
 - **ORDERING** con puntaje parcial (posiciones + pares adyacentes)
@@ -436,9 +433,7 @@ python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
 
 Possible extensions (not in current scope):
 
-- Additional languages (Spanish, German)
-- Machine learning-based language detection
-- Dialect-specific scoring variations
+- Additional languages (German)
 - Performance monitoring dashboard
 - A/B testing framework
 

@@ -1,0 +1,151 @@
+{
+  "exam_id": "ex-english-cefr-001",
+  "candidate_id": "cand-en-001-B1",
+  "adaptive": true,
+  "questions": [
+    {
+      "question_id": "q_img_en_1",
+      "type": "image",
+      "text": "What are the people in the image doing?",
+      "image_description": "A group of students studying together with books and laptops in a university library.",
+      "language": "en"
+    },
+    {
+      "question_id": "q_en_1",
+      "type": "writing_text",
+      "text": "Write a short message about your day (what you did and how you felt).",
+      "language": "en"
+    },
+    {
+      "question_id": "q_en_4",
+      "type": "single_choice",
+      "text": "Choose the word that is closest in meaning to \"difficult\" in: \"The exam was very difficult.\"",
+      "language": "en"
+    },
+    {
+      "question_id": "q_en_2",
+      "type": "writing_text",
+      "text": "Describe your favourite hobbies and explain why you enjoy them.",
+      "language": "en"
+    },
+    {
+      "question_id": "q_en_13",
+      "type": "fill_blank",
+      "text": "They ___ in this city since 2020.",
+      "language": "en"
+    },
+    {
+      "question_id": "q_en_17",
+      "type": "ordering",
+      "text": "Order these parts of the day from earliest to latest.",
+      "language": "en",
+      "elements": ["dinner", "breakfast", "lunch", "mid-afternoon snack"]
+    },
+    {
+      "question_id": "q_en_7",
+      "type": "writing_text",
+      "text": "Explain step by step how you make a simple dish you often cook (ingredients and main stages).",
+      "language": "en"
+    },
+    {
+      "question_id": "q_en_10",
+      "type": "single_choice",
+      "text": "Which option correctly completes this second conditional? \"If I ___ more free time, I would practise speaking every day.\"",
+      "language": "en"
+    },
+    {
+      "question_id": "q_en_20",
+      "type": "fill_blank",
+      "text": "I ___ very happy with my progress this month.",
+      "language": "en"
+    },
+    {
+      "question_id": "q_img_en_2",
+      "type": "image",
+      "text": "Which option best describes what you see?",
+      "image_description": "A person working on a laptop at a small table in a café, with a cup of coffee nearby.",
+      "language": "en"
+    },
+    {
+      "question_id": "q_en_5",
+      "type": "writing_text",
+      "text": "Describe an important day in your life and why it mattered to you.",
+      "language": "en"
+    },
+    {
+      "question_id": "q_en_16",
+      "type": "ordering",
+      "text": "Put these steps in a logical order for writing a short formal email in English.",
+      "language": "en",
+      "elements": [
+        "State clearly why you are writing.",
+        "Use an appropriate greeting (e.g. Dear Mr Smith,).",
+        "Sign off politely (e.g. Best regards,).",
+        "Write a clear subject line."
+      ]
+    },
+    {
+      "question_id": "q_en_9",
+      "type": "writing_text",
+      "text": "Describe the study environment where you learn English best (place, noise, tools, routine).",
+      "language": "en"
+    },
+    {
+      "question_id": "q_en_15",
+      "type": "fill_blank",
+      "text": "At the airport, the officer asked: \"Could you ___ me your passport, please?\"",
+      "language": "en"
+    },
+    {
+      "question_id": "q_en_12",
+      "type": "single_choice",
+      "text": "Which collocation is natural in English?",
+      "language": "en"
+    },
+    {
+      "question_id": "q_en_11",
+      "type": "writing_text",
+      "text": "Write about a trip or journey you remember well (where you went, what happened, how you felt).",
+      "language": "en"
+    },
+    {
+      "question_id": "q_en_14",
+      "type": "fill_blank",
+      "text": "This email ___ sent to all students yesterday.",
+      "language": "en"
+    },
+    {
+      "question_id": "q_en_8",
+      "type": "single_choice",
+      "text": "Choose the correct past simple form: \"Yesterday afternoon I ___ English vocabulary for an hour.\"",
+      "language": "en"
+    },
+    {
+      "question_id": "q_en_18",
+      "type": "speaking_record",
+      "text": "Introduce yourself in a few sentences: your name, where you are from, your job or studies, and one thing you like doing in English class or when you practise English.",
+      "language": "en"
+    }
+  ],
+  "answers": [
+    {"question_id": "q_img_en_1", "type": "image", "answer_text": "They are studying.", "time_spent_sec": 11},
+    {"question_id": "q_en_1", "type": "writing_text", "answer_text": "Today I have a difficult day. I worked many hours and I was very tireds. In the night I go sleep early because tomorrow I need study English again for my exam.", "time_spent_sec": 138},
+    {"question_id": "q_en_4", "type": "single_choice", "answer_text": "hard", "time_spent_sec": 6},
+    {"question_id": "q_en_2", "type": "writing_text", "answer_text": "My favourite hobby are play the guitar and watch series. I enjoy it because is very relaxant and I can forget my problems at work. I do this almost every day for one or two hour. It's my big passion.", "time_spent_sec": 149},
+    {"question_id": "q_en_13", "type": "fill_blank", "answer_text": "live", "time_spent_sec": 14},
+    {"question_id": "q_en_17", "type": "ordering", "answer_list": ["breakfast", "lunch", "mid-afternoon snack", "dinner"], "time_spent_sec": 17},
+    {"question_id": "q_en_7", "type": "writing_text", "answer_text": "First I put water in a pot and make it boil. Then I add the pasta and a little salt. After ten minute I drain it and I put the sauce from the jar. Finally I add cheese on top. Is very easy and my family love it.", "time_spent_sec": 162},
+    {"question_id": "q_en_10", "type": "single_choice", "answer_text": "had", "time_spent_sec": 10},
+    {"question_id": "q_en_20", "type": "fill_blank", "answer_text": "am", "time_spent_sec": 7},
+    {"question_id": "q_img_en_2", "type": "image", "answer_text": "Someone working on a laptop in a café.", "time_spent_sec": 14},
+    {"question_id": "q_en_5", "type": "writing_text", "answer_text": "The more important day in my life was when I received my degree. My parents was so happy and proud. We made a big party with all the family and friends. It was a moment I will never forget because it meaned a lot for my future job.", "time_spent_sec": 192},
+    {"question_id": "q_en_16", "type": "ordering", "answer_list": ["Use an appropriate greeting (e.g. Dear Mr Smith,).", "Sign off politely (e.g. Best regards,).", "Write a clear subject line.", "State clearly why you are writing."], "time_spent_sec": 31},
+    {"question_id": "q_en_9", "type": "writing_text", "answer_text": "My ideal place for study English is a room with not too much noise and a big window for natural light. I need my laptop for the lessons and I prefer a comfortable chair. If is too loud I cannot concentrate good. A calm atmosphere is very important for me.", "time_spent_sec": 168},
+    {"question_id": "q_en_15", "type": "fill_blank", "answer_text": "show", "time_spent_sec": 8},
+    {"question_id": "q_en_12", "type": "single_choice", "answer_text": "make a mistake", "time_spent_sec": 7},
+    {"question_id": "q_en_11", "type": "writing_text", "answer_text": "Last summer I travelled to Portugal with my cousin. The journey was long but we had fun on the bus. We visited Lisbon and Porto and the landscapes was amazing. The food was delicious and people was very kind. It was an experience I want repeat someday.", "time_spent_sec": 198},
+    {"question_id": "q_en_14", "type": "fill_blank", "answer_text": "was", "time_spent_sec": 9},
+    {"question_id": "q_en_8", "type": "single_choice", "answer_text": "studied", "time_spent_sec": 6},
+    {"question_id": "q_en_18", "type": "speaking_record", "answer_text": "Hello, my name is Diego and I am from Colombia. I work as a software developer and I take English classes on Tuesday and Thursday. In class I really like doing role-plays because they help me with real conversations.", "time_spent_sec": 45}
+  ]
+}
